@@ -1,0 +1,58 @@
+
+[user]
+    name = Romain Ruetschi
+    email = romain.ruetschi@gmail.com
+
+[alias] 
+    c  = clone
+    st = status
+    ci = commit
+    cm = commit -m 
+    co = checkout
+    w = whatchanged
+    b = branch
+    a = add
+    df = diff
+    pom = push origin master
+    graph = log --oneline --graph
+    changes = log --oneline --reverse
+    
+    # remove files from index
+    unstage = reset HEAD
+    
+    # uncommit the last commit, leaving the files in precommitted state
+    uncommit = reset --soft HEAD^
+    lg = log --color --decorate --graph --pretty --abbrev-commit --oneline
+
+[diff]
+    renames = copy
+
+[color] 
+    diff = auto
+    interactive = auto
+    status = auto
+    branch = auto
+
+[apply]
+    whitespace = fix
+
+[merge]
+     stat = true
+
+[branch "master"]
+    remote = origin
+    merge = refs/heads/master
+    # mergeoptions = --no-commit --no-ff
+    
+[core]
+    pager = less -FXRS -x4
+
+[github]
+    user = romac
+    password = !security 2>&1 >/dev/null find-generic-password -gs github.password | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
+
+[help]
+    autocorrect = 0
+    
+[credential]
+    helper = osxkeychain

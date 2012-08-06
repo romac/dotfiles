@@ -1,0 +1,52 @@
+# Aliases
+
+# Common corrections
+alias hg='nocorrect hg'
+
+# Hub
+eval "$(hub alias -s)"
+
+# Chocolat
+alias mate='choc'
+
+# Commands
+alias _flushdns='dscacheutil -flushcache'
+alias ctime="php -r 'echo time() . \"\\n\";'"
+alias untgz="tar -xzvf"
+
+# https://github.com/mathiasbynens/dotfiles
+
+# Shortcuts
+alias d="cd ~/Dropbox"
+alias p="cd ~/Dropbox/Projects"
+alias g="git"
+alias h="history"
+alias j="jobs"
+alias o="open"
+alias oo="open ."
+
+# OS X has no `md5sum`, so use `md5` as a fallback
+alias md5sum="md5"
+
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+# File size
+alias fs="stat -c \"%s bytes\""
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# URL-encode strings
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+
+# Empty the Trash on all mounted volumes and the main HDD
+# Also, clear Apple’s System Logs to improve shell startup speed
+alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+
+function wman()
+{
+   url="man -w ${1} | sed 's#.*\(${1}.\)\([[:digit:]]\).*\$#http://developer.apple.com/documentation/Darwin/Reference/ManPages/man\2/\1\2.html#'"
+   open `eval $url`
+}
