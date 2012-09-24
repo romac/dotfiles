@@ -1,9 +1,11 @@
 
 # Paths
-export PATH=~/bin:/usr/local/bin:$PATH
+PATH=~/bin:/usr/local/share/npm/bin:/usr/local/rock/bin:/usr/local/bin:$PATH
+PATH=/usr/local/texlive/2012/bin/x86_64-darwin:$PATH
+export PATH
 
 # Editors
-export EDITOR="choc -w"
+export EDITOR="subl"
 export VISUAL=$EDITOR
 export SVN_EDITOR=$EDITOR
 export GIT_EDITOR=$EDITOR
@@ -31,5 +33,11 @@ export LANG=en_US.UTF-8
 # Node
 export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
 
+# Rock
+export ROCK_DIST=/usr/local/rock
+
 # RVM
 source ~/.rvm/scripts/rvm
+
+# Z
+source ~/bin/z.sh

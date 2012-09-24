@@ -56,3 +56,5 @@
     
 [credential]
     helper = osxkeychain
+[git-up "bundler"]
+	check = true
