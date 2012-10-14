@@ -25,7 +25,7 @@ export GIT_EDITOR=$EDITOR
 export GEM_OPEN_EDITOR=$EDITOR
 
 # Command prompt
-#export PROMPT='%{$fg_bold[red]%}λ %{$fg_bold[green]%}%p %{$fg_bold[blue]%}%~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+export PROMPT='%{$fg_bold[red]%}λ %{$fg_bold[green]%}%p %{$fg[cyan]%}%~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 export RPROMPT='%n@%m | %*'
 
 # UTF-8
