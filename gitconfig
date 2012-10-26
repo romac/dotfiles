@@ -39,6 +39,10 @@
 [merge]
      stat = true
 
+[branch]
+    autosetuprebase = always
+
+
 [branch "master"]
     remote = origin
     merge = refs/heads/master
@@ -46,6 +50,8 @@
     
 [core]
     pager = less -FXRS -x4
+    excludesfile = ~/.gitignore
+	editor = subl -w -n
 
 [github]
     user = romac
@@ -56,5 +62,8 @@
     
 [credential]
     helper = osxkeychain
+
 [git-up "bundler"]
 	check = true
+[push]
+	default = current
