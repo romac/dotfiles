@@ -3,12 +3,13 @@
 # Common corrections
 alias hg='nocorrect hg'
 alias subl='nocorrect subl'
+alias pip='nocorrect pip'
 
 # Hub
 eval "$(hub alias -s)"
 
 # Sublime Text
-alias mate='subl'
+# alias mate='subl'
 
 # Commands
 alias _flushdns='dscacheutil -flushcache'
