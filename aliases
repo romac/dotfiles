@@ -1,10 +1,5 @@
 # Aliases
 
-# Common corrections
-alias hg='nocorrect hg'
-alias subl='nocorrect subl'
-alias pip='nocorrect pip'
-
 # Hub
 eval "$(hub alias -s)"
 
