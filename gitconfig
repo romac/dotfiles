@@ -23,6 +23,14 @@
     # uncommit the last commit, leaving the files in precommitted state
     uncommit = reset --soft HEAD^
     lg = log --color --decorate --graph --pretty --abbrev-commit --oneline
+	switch = !legit switch \"$@\"
+	branches = !legit branches
+	sprout = !legit sprout \"$@\"
+	unpublish = !legit unpublish \"$@\"
+	harvest = !legit harvest \"$@\"
+	sync = !legit sync \"$@\"
+	publish = !legit publish \"$@\"
+	graft = !legit graft \"$@\"
 
 [diff]
     renames = copy
