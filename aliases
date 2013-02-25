@@ -1,10 +1,11 @@
 # Aliases
 
 # Hub
-eval "$(hub alias -s)"
+# eval "$(hub alias -s)"
 
 # Sublime Text
-# alias mate='subl'
+alias mate='subl'
+alias s.='subl .'
 
 # Commands
 alias _flushdns='dscacheutil -flushcache'
@@ -40,7 +41,7 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 
 # Empty the Trash on all mounted volumes and the main HDD
 # Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'; echo ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV*"
 
 # PostgreSQL
 alias postgres-start="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
