@@ -1,0 +1,33 @@
+#!/bin/bash
+#set -x
+
+# force a friendly umask
+umask 002
+
+# Runs on Mac OS X
+#################################
+## GMVAULT Distribution home directory
+#################################
+CDIR=`dirname "$0"`
+HERE=$(unset CDPATH; cd "$CDIR"; pwd)
+GMVAULT_HOME=$(unset CDPATH; cd "$HERE/.."; pwd)
+
+
+#################################
+## setup PYTHON_BIN
+#################################
+#look as if it was the packaged binary distribution
+if [ -f "$GMVAULT_HOME/lib/gmv_runner.app/Contents/MacOS/gmv_runner" ]; then
+    GMV_BIN="$GMVAULT_HOME/lib/gmv_runner.app/Contents/MacOS/gmv_runner"
+
+else
+    echo "Error: Cannot find the gmv_runner.app. Please check where the gmv_runner.app is."
+    echo "It should be under $GMVAULT_HOME/lib"
+    exit 1
+fi
+
+##### execute it ##########
+"$GMV_BIN" "$@"
+res="$?"
+
+exit $res
