@@ -75,3 +75,5 @@ export LANG=en_US.UTF-8
 # GRC
 # . "`brew --prefix`/etc/grc.bashrc"
 
+# Disable Homebrew Emoji
+export HOMEBREW_NO_EMOJI=1
