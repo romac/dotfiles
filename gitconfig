@@ -60,6 +60,7 @@
     pager = less -FXRS -x4
     excludesfile = ~/.gitignore
 	editor = subl -w -n
+	autocrlf = input
 
 [github]
     user = romac
