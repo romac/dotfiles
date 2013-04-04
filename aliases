@@ -1,7 +1,7 @@
 # Aliases
 
 # Hub
-# eval "$(hub alias -s)"
+eval "$(hub alias -s)"
 
 # Sublime Text
 alias mate='subl'
