@@ -1,4 +1,5 @@
 # Aliases
+# forked from https://github.com/mathiasbynens/dotfiles
 
 # Hub
 eval "$(hub alias -s)"
@@ -6,6 +7,10 @@ eval "$(hub alias -s)"
 # Sublime Text
 alias mate='subl'
 alias s.='subl .'
+alias s='subl'
+
+# tree
+alias tree='tree -C'
 
 # LÖVE
 alias love='exec /Applications/love.app/Contents/MacOS/love'
@@ -18,10 +23,9 @@ alias untgz="tar -xzvf"
 # Unformat text
 alias unformat='pbpaste | pbcopy'
 
-# https://github.com/mathiasbynens/dotfiles
-
 # Shortcuts
-alias d="cd ~/Dropbox"
+alias md='function f { mkdir -p "$1" && cd "$1" }; f'
+alias d="cd ~/Dev"
 alias p="cd ~/Dropbox/Projects"
 alias g="git"
 alias h="history"
