@@ -26,7 +26,7 @@ source $ZSH/oh-my-zsh.sh
 MY_PATH=~/bin
 MY_PATH=$MY_PATH:/usr/local/share/npm/bin # NPM
 MY_PATH=$MY_PATH:/usr/local/texlive/2012/bin/x86_64-darwin # MacTeX 2012
-MY_PATH=$MY_PATH:/usr/local/rock/bin # Rock
+MY_PATH=$MY_PATH:/usr/local/rock/bin:/usr/local/ooc/bin # ooc
 
 # Homebrew
 MY_PATH=$MY_PATH:/usr/local/bin
