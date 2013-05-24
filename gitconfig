@@ -5,9 +5,10 @@
 
 [alias] 
 	c  = clone
-	st = status
+	st = status -s
 	ci = commit
-	cm = commit -m 
+	cm = commit -m
+	ca = commit -am
 	co = checkout
 	w = whatchanged
 	b = branch
