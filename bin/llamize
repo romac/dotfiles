@@ -1,0 +1,81 @@
+#!/bin/bash
+
+#
+# llamize
+# Stub a llama-standard ooc library/binding.
+#
+
+# Based on a script by wandernauta:
+#   http://oocgaming.org/forum/index.php?topic=31
+#   https://gist.github.com/4144797
+
+# Check if library and author names are given.
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+    echo "Usage: llamize <library name> <directory> <author name> <author email>"
+    exit
+fi
+
+LIBRARY="$1"
+DIRECTORY="$2"
+AUTHOR="$3"
+EMAIL="$4"
+[ -n "$EMAIL" ] && EMAIL=" <${EMAIL}>"
+
+# Check if the destination already exist. Bail if it does.
+if [[ -e $1 ]]; then
+    echo "Error: $1 already exists."
+    exit
+fi
+
+# Find out the name of the project from the destination path.
+n=$(basename $LIBRARY)
+
+# All is good, create directories and file stubs
+mkdir -p "$DIRECTORY"
+cd $DIRECTORY
+mkdir -p "samples"
+mkdir -p "source"
+mkdir -p "source/$n"
+touch "$n.use"
+touch "README.md"
+touch ".gitignore"
+touch ".travis.yml"
+
+# Fill templates
+echo "## $n
+
+### Authors
+
+  * ${AUTHOR}${EMAIL}
+  
+### Links
+
+  *
+" > "README.md"
+
+echo "Name: $n
+Version: 0.1
+Description: 
+Pkgs: 
+Includes: 
+SourcePath: source
+" > "$n.use"
+
+echo ".libs
+rock_tmp
+" > ".gitignore"
+
+echo "before_install:
+  - sudo aptitude -y -q install curl make libgc-dev
+  - git clone --depth=1 git://github.com/nddrylliog/rock.git 
+  - (cd rock && make -s quick-rescue)
+  - export PATH=\$PATH:\$PWD/rock/bin
+
+script:
+  - export OOC_LIBS=\$PWD
+  - cd samples
+# - mkdir -p travis
+# - rock -v example -o=travis/example && travis/example
+" > ".travis.yml"
+
+echo "Done stubbing project $n."
