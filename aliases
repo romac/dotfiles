@@ -32,6 +32,7 @@ alias h="history"
 alias j="jobs"
 alias o="open"
 alias oo="open ."
+alias tac="tail -r"
 
 # OS X has no `md5sum`, so use `md5` as a fallback
 alias md5sum="md5"
