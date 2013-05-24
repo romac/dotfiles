@@ -43,6 +43,7 @@ export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
 
 # Rock distribution path
 export ROCK_DIST=/usr/local/rock
+export OOC_LIBS=/usr/local/ooc
 
 # Editors
 export EDITOR="subl -w -n"
