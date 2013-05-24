@@ -46,7 +46,7 @@ export ROCK_DIST=/usr/local/rock
 export OOC_LIBS=/usr/local/ooc
 
 # Editors
-export EDITOR="subl -w -n"
+export EDITOR="/usr/local/bin/subl -w -n"
 export VISUAL=$EDITOR
 export SVN_EDITOR=$EDITOR
 export GIT_EDITOR=$EDITOR
