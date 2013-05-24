@@ -35,9 +35,6 @@ MY_PATH=$MY_PATH:/usr/local/sbin
 # Python
 MY_PATH=$MY_PATH:/usr/local/share/python
 
-# Add RVM to PATH for scripting
-MY_PATH=$MY_PATH:$HOME/.rvm/bin
-
 # Extend PATH
 export PATH=$MY_PATH:$PATH
 
