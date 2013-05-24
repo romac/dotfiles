@@ -55,7 +55,8 @@ export GEM_OPEN_EDITOR=$EDITOR
 . /usr/local/Cellar/git/1.8.0/etc/bash_completion.d/git-prompt.sh
 
 # Command prompt
-export PROMPT=' %{$fg_bold[red]%}λ %{$fg_bold[green]%}%p %{$fg[cyan]%}%~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+# export PROMPT=' %{$fg_bold[red]%}λ %{$fg_bold[green]%}%p %{$fg[cyan]%}%~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+export PROMPT='  %{$fg_bold[green]%}%p %{$fg[cyan]%}%~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 # export RPROMPT='%n@%m | %*'
 
 # UTF-8
