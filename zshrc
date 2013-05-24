@@ -66,9 +66,6 @@ export LANG=en_US.UTF-8
 # Aliases
 . ~/.aliases
 
-# RVM
-. ~/.rvm/scripts/rvm
-
 # Z
 . `brew --prefix`/etc/profile.d/z.sh
 
