@@ -35,6 +35,9 @@ MY_PATH=$MY_PATH:/usr/local/sbin
 # Python
 MY_PATH=$MY_PATH:/usr/local/share/python
 
+# Ruby
+MY_PATH=$MY_PATH:/usr/local/opt/ruby/bin
+
 # Extend PATH
 export PATH=$MY_PATH:$PATH
 
