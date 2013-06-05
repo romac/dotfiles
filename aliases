@@ -1,6 +1,8 @@
 # Aliases
 # forked from https://github.com/mathiasbynens/dotfiles
 
+alias l='ls -1'
+
 # Hub
 eval "$(hub alias -s)"
 
