@@ -3,7 +3,7 @@
 	name = Romain Ruetschi
 	email = romain.ruetschi@gmail.com
 
-[alias] 
+[alias]
 	c  = clone
 	st = status -s
 	ci = commit
@@ -17,14 +17,15 @@
 	pom = push origin master
 	graph = log --oneline --graph
 	changes = log --oneline --reverse
-	
+
 	# remove files from index
 	unstage = reset HEAD
-	
+
 	# uncommit the last commit, leaving the files in precommitted state
 	uncommit = reset --soft HEAD^
+
 	lg = log --color --decorate --graph --pretty --abbrev-commit --oneline
-	
+
 	switch = !legit switch \"$@\"
 	branches = !legit branches
 	sprout = !legit sprout \"$@\"
@@ -37,7 +38,7 @@
 [diff]
 	renames = copy
 
-[color] 
+[color]
 	diff = auto
 	interactive = auto
 	status = auto
@@ -57,7 +58,7 @@
 	remote = origin
 	merge = refs/heads/master
 	# mergeoptions = --no-commit --no-ff
-	
+
 [core]
 	pager = less -FXRS -x4
 	excludesfile = ~/.gitignore
@@ -70,7 +71,7 @@
 
 [help]
 	autocorrect = 0
-	
+
 [credential]
 	helper = osxkeychain
 
