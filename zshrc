@@ -32,14 +32,20 @@ MY_PATH=$MY_PATH:/usr/local/rock/bin:/usr/local/ooc/bin # ooc
 MY_PATH=$MY_PATH:/usr/local/bin
 MY_PATH=$MY_PATH:/usr/local/sbin
 
-# Python
-MY_PATH=$MY_PATH:/usr/local/share/python
-
 # Ruby
 MY_PATH=$MY_PATH:/usr/local/opt/ruby/bin
 
+# Python
+MY_PATH=$MY_PATH:/usr/local/share/python
+
+# Cabal
+MY_PATH=$MY_PATH:~/.cabal/bin
+
 # Extend PATH
 export PATH=$MY_PATH:$PATH
+
+# RBEnv
+# eval "$(rbenv init -)"
 
 # Node modules path
 export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
