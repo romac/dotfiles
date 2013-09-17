@@ -1,14 +1,11 @@
 # Aliases
 # forked from https://github.com/mathiasbynens/dotfiles
 
-alias l='ls -1'
-
 # Hub
 eval "$(hub alias -s)"
 
 # Sublime Text
 alias mate='subl'
-alias s.='subl .'
 alias s='subl'
 
 # tree
@@ -18,8 +15,8 @@ alias tree='tree -C'
 alias love='exec /Applications/love.app/Contents/MacOS/love'
 
 # Commands
-alias _flushdns='dscacheutil -flushcache'
-alias ctime="php -r 'echo time() . \"\\n\";'"
+alias flushdns='dscacheutil -flushcache'
+alias ctime="date '+%s'"
 alias untgz="tar -xzvf"
 
 # Unformat text
@@ -27,9 +24,7 @@ alias unformat='pbpaste | pbcopy'
 
 # Shortcuts
 alias md='function f { mkdir -p "$1" && cd "$1" }; f'
-alias d="cd ~/Dev"
-alias p="cd ~/Dropbox/Projects"
-alias g="git"
+alias p="cd ~/Projects"
 alias h="history"
 alias j="jobs"
 alias o="open"
