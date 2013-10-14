@@ -1,12 +1,14 @@
 # Aliases
 # forked from https://github.com/mathiasbynens/dotfiles
 
+# Less
+alias -g L=less
+
 # Hub
 eval "$(hub alias -s)"
 
 # Sublime Text
-alias mate='subl'
-alias s='subl'
+alias -g s='subl'
 
 # tree
 alias tree='tree -C'
