@@ -1,6 +1,9 @@
 # Aliases
 # forked from https://github.com/mathiasbynens/dotfiles
 
+# Tmux
+alias tmn='tmux new -s $(basename $(pwd))'
+
 # Less
 alias -g L=less
 
