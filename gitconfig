@@ -18,6 +18,9 @@
 	graph = log --oneline --graph
 	changes = log --oneline --reverse
 
+	# amend a commit
+	amend = commit --amend
+
 	# remove files from index
 	unstage = reset HEAD
 
@@ -78,6 +81,9 @@
 [git-up "bundler"]
 	check = true
 [push]
-	default = simple
+	default = current
 [pull]
 	rebase = true
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
