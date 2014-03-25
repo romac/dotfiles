@@ -37,6 +37,7 @@
 	sync = !legit sync \"$@\"
 	publish = !legit publish \"$@\"
 	graft = !legit graft \"$@\"
+	up = "!git remote update -p; git merge --ff-only @{u}"
 
 [diff]
 	renames = copy
