@@ -86,3 +86,15 @@ function setjdk() {
  function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
  }
+
+function mirror-site() {
+  wget \
+     --recursive \
+     --no-clobber \
+     --page-requisites \
+     --html-extension \
+     --convert-links \
+     --domains $1 \
+     --no-parent \
+     $2
+}
