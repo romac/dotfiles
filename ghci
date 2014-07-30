@@ -1,0 +1,9 @@
+
+:set +m
+
+let ghciEscapeShellArg arg = "'" ++ concatMap  (\c -> if c == '\'' then "'\"'\"'" else [c]) arg ++ "'"
+
+:def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\""
+:def doc \x -> return $ ":!hoogle --info \"" ++ x ++ "\""
+:def pl return . (":! pointfree " ++) .ghciEscapeShellArg
+:def hlint return . (":! hlint " ++) .ghciEscapeShellArg
