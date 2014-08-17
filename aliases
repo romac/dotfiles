@@ -22,9 +22,6 @@ alias latexian='open -a Latexian'
 # LÖVE
 alias love='exec /Applications/love.app/Contents/MacOS/love'
 
-# ViM
-alias vim=/Applications/VimR.app/Contents/Frameworks/MacVimFramework.framework/Versions/A/Vim
-
 # Commands
 alias flushdns='dscacheutil -flushcache'
 alias ctime="date '+%s'"
