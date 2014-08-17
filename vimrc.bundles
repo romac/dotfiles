@@ -1,0 +1,58 @@
+
+set nocompatible
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+" Support bundles
+Bundle 'jgdavey/tslime.vim'
+Bundle 'Shougo/vimproc.vim'
+Bundle 'ervandew/supertab'
+Bundle 'scrooloose/syntastic'
+
+" Git
+Bundle 'tpope/vim-fugitive'
+Bundle 'int3/vim-extradite'
+
+" Bars, panels, and files
+Bundle 'scrooloose/nerdtree'
+Bundle 'bling/vim-airline'
+Bundle 'kien/ctrlp.vim'
+Bundle 'majutsushi/tagbar'
+
+" Text manipulation
+Bundle 'vim-scripts/Align'
+Bundle 'vim-scripts/Gundo'
+Bundle 'tpope/vim-commentary'
+Bundle 'godlygeek/tabular'
+
+" Haskell
+Bundle 'raichoo/haskell-vim'
+" Bundle 'begriffs/vim-haskellConceal'
+Bundle 'eagletmt/ghcmod-vim'
+Bundle 'eagletmt/neco-ghc'
+Bundle 'Twinside/vim-hoogle'
+
+" Idris
+Bundle 'idris-hackers/idris-vim'
+
+" ooc
+Bundle 'nddrylliog/ooc.vim'
+
+" Ag
+Bundle 'rking/ag.vim'
+
+" Javascript & JSON
+Bundle 'pangloss/vim-javascript'
+Bundle 'vim-scripts/JSON.vim'
+
+" HTML
+Bundle 'xenoterracide/html.vim'
+
+" Markdown
+Bundle 'tpope/vim-markdown'
+
+
