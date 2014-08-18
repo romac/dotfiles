@@ -16,6 +16,17 @@ try
   catch
 endtry
 
+" Reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" Make Y behave like other capitals
+nnoremap Y y$
+
+" Map jk to <Esc>
+inoremap jk <Esc>
+
+" Custom leaders
 let mapleader = ","
 let maplocalleader = "_"
 
