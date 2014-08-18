@@ -31,10 +31,10 @@ Bundle 'godlygeek/tabular'
 
 " Haskell
 Bundle 'raichoo/haskell-vim'
-" Bundle 'begriffs/vim-haskellConceal'
 Bundle 'eagletmt/ghcmod-vim'
 Bundle 'eagletmt/neco-ghc'
 Bundle 'Twinside/vim-hoogle'
+" Bundle 'begriffs/vim-haskellConceal'
 
 " Idris
 Bundle 'idris-hackers/idris-vim'
@@ -49,10 +49,14 @@ Bundle 'rking/ag.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'vim-scripts/JSON.vim'
 
+" JSX
+Bundle 'mxw/vim-jsx'
+
 " HTML
 Bundle 'xenoterracide/html.vim'
 
 " Markdown
 Bundle 'tpope/vim-markdown'
 
-
+" Vim sugar for UNIX shell commands
+Bundle 'tpope/vim-eunuch'
