@@ -1,4 +1,7 @@
 
+" See the default vimrc at
+" https://github.com/romac/haskell-vim-now/blob/master/.vimrc
+
 " Font face & size
 set guifont=Source\ Code\ Pro:h16
 
