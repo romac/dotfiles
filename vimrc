@@ -58,9 +58,6 @@ endif
 " (requires the silver searcher (ag) plugin)
 map <Leader>s :Ag <C-R><C-W><CR>
 
-" trailing space left on purpose
-" map <Leader>a :Ag!
-
 if has("gui_macvim")
   " Press Ctrl-Tab to switch between open tabs (like browser tabs) to
   " the right side. Ctrl-Shift-Tab goes the other way.
