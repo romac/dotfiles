@@ -3,7 +3,7 @@
 " https://github.com/romac/haskell-vim-now/blob/master/.vimrc
 
 " Font face & size
-set guifont=Source\ Code\ Pro:h16
+set guifont=DejaVu\ Sans\ Mono:h15
 
 " Highlight current line
 set cursorline
