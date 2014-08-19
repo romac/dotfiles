@@ -60,3 +60,7 @@ Bundle 'tpope/vim-markdown'
 
 " Vim sugar for UNIX shell commands
 Bundle 'tpope/vim-eunuch'
+
+" Colorscheme
+Bundle 'effkay/argonaut.vim'
+
