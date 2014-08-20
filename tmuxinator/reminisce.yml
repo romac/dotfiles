@@ -1,7 +1,7 @@
 # ~/.tmuxinator/reminisce.yml
 
 name: reminisce
-root: ~/Projects/reminisce.me/frontend
+root: ~/Code/reminisce.me/frontend
 
 windows:
   - frontend:
