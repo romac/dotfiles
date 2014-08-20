@@ -12,6 +12,11 @@ set cursorline
 " Don't use folding
 set nofoldenable
 
+" Hide scrollbars and toolbars in MacVim
+set guioptions-=L
+set guioptions-=T
+set guioptions-=r
+
 " Tomorrow-Night ColorScheme
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
