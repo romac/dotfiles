@@ -118,11 +118,3 @@ if has("gui_macvim")
   noremap <D-0> :tablast<CR>
 endif
 
-" Use JSXHint by default
-let g:syntastic_javascript_checkers = ['jsxhint']
-
-" Disable Unicode symbols
-let g:haskell_conceal_wide = 0
-let g:haskell_conceal_enumerations = 0
-
-
