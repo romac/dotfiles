@@ -13,11 +13,45 @@ set cursorline
 set nofoldenable
 
 " Hide scrollbars and toolbars in MacVim
-set guioptions-=L
-set guioptions-=T
-set guioptions-=r
+if has("gui_running")
+  set guioptions-=L
+  set guioptions-=T
+  set guioptions-=r
+endif
 
-" Tomorrow-Night ColorScheme
+" Bundles
+
+" Idris
+Bundle 'idris-hackers/idris-vim'
+
+" ooc
+Bundle 'nddrylliog/ooc.vim'
+
+" Ag
+Bundle 'rking/ag.vim'
+
+" Javascript & JSON
+Bundle 'pangloss/vim-javascript'
+Bundle 'vim-scripts/JSON.vim'
+
+" JSX
+Bundle 'mxw/vim-jsx'
+
+" PureScript
+Bundle 'raichoo/purescript-vim'
+
+" HTML
+Bundle 'xenoterracide/html.vim'
+Bundle 'mattn/emmet-vim'
+
+" Markdown
+Bundle 'tpope/vim-markdown'
+
+" Vim sugar for UNIX shell commands
+Bundle 'tpope/vim-eunuch'
+
+" Colorscheme
+Bundle 'effkay/argonaut.vim'
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 try
@@ -83,3 +117,12 @@ if has("gui_macvim")
   " Command-0 goes to the last tab
   noremap <D-0> :tablast<CR>
 endif
+
+" Use JSXHint by default
+let g:syntastic_javascript_checkers = ['jsxhint']
+
+" Disable Unicode symbols
+let g:haskell_conceal_wide = 0
+let g:haskell_conceal_enumerations = 0
+
+
