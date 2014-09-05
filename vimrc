@@ -4,7 +4,7 @@
 
 " Font face & size
 " set guifont=DejaVu\ Sans\ Mono:h15
-set guifont=Monaco:h15
+set guifont=Monaco\ for\ Powerline:h15
 
 " Highlight current line
 set cursorline
@@ -12,12 +12,18 @@ set cursorline
 " Don't use folding
 set nofoldenable
 
+" Tell MacVim not to load its own colorscheme
+let macvim_skip_colorscheme=1
+
 " Hide scrollbars and toolbars in MacVim
 if has("gui_running")
   set guioptions-=L
   set guioptions-=T
   set guioptions-=r
 endif
+
+" Enable Powerline font in Airline
+let g:airline_powerline_fonts = 1
 
 " Bundles
 
@@ -32,7 +38,8 @@ Bundle 'rking/ag.vim'
 
 " Javascript & JSON
 Bundle 'pangloss/vim-javascript'
-Bundle 'vim-scripts/JSON.vim'
+Bundle 'elzr/vim-json'
+au BufRead,BufNewFile *.json set filetype=json
 
 " JSX
 Bundle 'mxw/vim-jsx'
@@ -53,6 +60,9 @@ Bundle 'tpope/vim-eunuch'
 " Colorscheme
 Bundle 'effkay/argonaut.vim'
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+
+" EditorConfig (http://editorconfig.org)
+Bundle 'editorconfig/editorconfig-vim'
 
 try
   colorscheme Tomorrow-Night
