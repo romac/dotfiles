@@ -14,6 +14,8 @@
 	b = branch
 	a = add
 	df = diff
+  rc = rebase --continue
+  ra = rebase --abort
 	pom = push origin master
 	graph = log --oneline --graph
 	changes = log --oneline --reverse
@@ -88,3 +90,5 @@
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
+[ghi]
+	token = !security find-internet-password -a romac -s github.com -l 'ghi token' -w
