@@ -2,24 +2,25 @@
 " See the default vimrc at
 " https://github.com/romac/haskell-vim-now/blob/master/.vimrc
 
-" Font face & size
-" set guifont=DejaVu\ Sans\ Mono:h15
-set guifont=Monaco\ for\ Powerline:h15
-
 " Highlight current line
 set cursorline
 
 " Don't use folding
 set nofoldenable
 
-" Tell MacVim not to load its own colorscheme
-let macvim_skip_colorscheme=1
-
-" Hide scrollbars and toolbars in MacVim
 if has("gui_running")
+  " Font face & size
+  " set guifont=DejaVu\ Sans\ Mono:h15
+  set guifont=Monaco\ for\ Powerline:h15
+  " set guifont=Inconsolata-g\ for\ Powerline:h16
   set guioptions-=L
+
+  " Hide scrollbars and toolbars in MacVim
   set guioptions-=T
   set guioptions-=r
+
+  " Tell MacVim not to load its own colorscheme
+  let macvim_skip_colorscheme=1
 endif
 
 " Enable Powerline font in Airline
@@ -33,13 +34,17 @@ Bundle 'idris-hackers/idris-vim'
 " ooc
 Bundle 'nddrylliog/ooc.vim'
 
+" Scala
+Bundle 'derekwyatt/vim-scala'
+au BufRead,BufNewFile *.scala setfiletype scala
+
 " Ag
 Bundle 'rking/ag.vim'
 
 " Javascript & JSON
 Bundle 'pangloss/vim-javascript'
 Bundle 'elzr/vim-json'
-au BufRead,BufNewFile *.json set filetype=json
+au BufRead,BufNewFile *.json setfiletype json
 
 " JSX
 Bundle 'mxw/vim-jsx'
@@ -51,11 +56,17 @@ Bundle 'raichoo/purescript-vim'
 Bundle 'xenoterracide/html.vim'
 Bundle 'mattn/emmet-vim'
 
+" CSS
+Bundle 'gorodinskiy/vim-coloresque'
+
 " Markdown
 Bundle 'tpope/vim-markdown'
 
 " Vim sugar for UNIX shell commands
 Bundle 'tpope/vim-eunuch'
+
+" Git
+Bundle 'airblade/vim-gitgutter'
 
 " Colorscheme
 Bundle 'effkay/argonaut.vim'
@@ -63,6 +74,23 @@ Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 " EditorConfig (http://editorconfig.org)
 Bundle 'editorconfig/editorconfig-vim'
+
+" Auto-close quotes, parenthesis, etc.
+Bundle 'Raimondi/delimitMate'
+
+" Rust
+Bundle 'wting/rust.vim'
+au BufRead,BufNewFile *.rs setfiletype rust
+
+" Execute whole/part of editing file and show the result
+Bundle 'thinca/vim-quickrun'
+
+" TOML
+Bundle 'cespare/vim-toml'
+au BufRead,BufNewFile *.toml setfiletype toml
+
+" LLVM
+Bundle 'Superbil/llvm.vim'
 
 try
   colorscheme Tomorrow-Night
@@ -127,4 +155,28 @@ if has("gui_macvim")
   " Command-0 goes to the last tab
   noremap <D-0> :tablast<CR>
 endif
+
+" Run a given vim command on the results of fuzzy selecting from a given shell
+" command. See usage below.
+function! SelectaCommand(choice_command, selecta_args, vim_command)
+  try
+    silent let selection = system(a:choice_command . " | selecta " . a:selecta_args)
+  catch /Vim:Interrupt/
+    " Swallow the ^C so that the redraw below happens; otherwise there will be
+    " leftovers from selecta on the screen
+    redraw!
+    return
+  endtry
+  redraw!
+  exec a:vim_command . " " . selection
+endfunction
+
+" Find all files in all non-dot directories starting in the working directory.
+" Fuzzy select one of those. Open the selected file with :e.
+nnoremap <leader>d :call SelectaCommand("find * -type f", "", ":e")<cr>
+
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+imap <c-c> <esc>
+nnoremap <leader><leader> <c-^>
 
