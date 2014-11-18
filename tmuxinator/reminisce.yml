@@ -1,16 +1,16 @@
 # ~/.tmuxinator/reminisce.yml
 
 name: reminisce
-root: ~/Code/reminisce.me/frontend
+root: ~/Code/reminisce.me
 
 windows:
   - frontend:
       layout: 4c78,238x57,0,0{119x57,0,0,0,118x57,120,0,2}
       panes:
-        - cd app/public; git status
-        - cd app/public
+        - cd webapp; git status
+        - cd webapp
   - backend:
       layout: cc79,238x57,0,0{119x57,0,0,1,118x57,120,0,3}
       panes:
-        - cd app; workon reminisce; git status
-        - cd app; workon reminisce; source ./env.sh; ./manage.py runserver
+        - cd backend/app; workon reminisce; git status
+        - cd backend/app; workon reminisce; source ./env.sh; ./manage.py runserver
