@@ -32,12 +32,14 @@ alias unformat='pbpaste | pbcopy'
 
 # Shortcuts
 alias md='function f { mkdir -p "$1" && cd "$1" }; f'
-alias p="cd ~/Projects"
 alias h="history"
 alias j="jobs"
 alias o="open"
 alias oo="open ."
 alias tac="tail -r"
+
+# Bundler
+alias be='bundle exec'
 
 # OS X has no `md5sum`, so use `md5` as a fallback
 alias md5sum="md5"
