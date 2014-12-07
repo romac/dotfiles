@@ -101,6 +101,9 @@ endtry
 vnoremap < <gv
 vnoremap > >gv
 
+" Paste and re-select
+nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]"
+
 " Make Y behave like other capitals
 nnoremap Y y$
 
