@@ -38,6 +38,9 @@ alias o="open"
 alias oo="open ."
 alias tac="tail -r"
 
+# NPM
+alias npm-update-all-latest='npm outdated | grep -v Package | awk "{print \$1}" | xargs -I% npm install %@latest --save'
+
 # Bundler
 alias be='bundle exec'
 
