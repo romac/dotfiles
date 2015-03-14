@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-SESSIONNAME="default"
+SESSIONNAME=${1:-default}
 tmux has-session -t $SESSIONNAME &> /dev/null
 
 if [ $? != 0 ]

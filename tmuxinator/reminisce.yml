@@ -4,13 +4,13 @@ name: reminisce
 root: ~/Code/reminisce.me
 
 windows:
-  - frontend:
+  - react:
       layout: 4c78,238x57,0,0{119x57,0,0,0,118x57,120,0,2}
       panes:
-        - cd webapp; git status
-        - cd webapp
-  - backend:
+        - cd app/react; clear; git status
+        - cd app/react; clear; make watch
+  - meteor:
       layout: cc79,238x57,0,0{119x57,0,0,1,118x57,120,0,3}
       panes:
-        - cd backend/app; workon reminisce; git status
-        - cd backend/app; workon reminisce; source ./env.sh; ./manage.py runserver
+        - cd app/meteor; clear; git status
+        - cd app/meteor; clear; meteor
