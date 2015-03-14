@@ -92,6 +92,17 @@ au BufRead,BufNewFile *.toml setfiletype toml
 " LLVM
 Bundle 'Superbil/llvm.vim'
 
+" Dracula Theme
+Bundle 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+
+" Processing
+Bundle 'sophacles/vim-processing'
+
+" try
+"   colorscheme Dracula
+"   catch
+" endtry
+
 try
   colorscheme Tomorrow-Night
   catch
@@ -117,6 +128,14 @@ let maplocalleader = "_"
 " Highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=black guibg=black
 autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+let g:syntastic_javascript_checkers = ['jsxhint']
+let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
+let g:syntastic_python_python_exec = '/usr/local/bin/python3'
+
+let g:syntastic_mode_map = { "mode": "active",
+                           \ "active_filetypes": [],
+                           \ "passive_filetypes": ["scala"] }
 
 " Tabularize
 if exists(":Tabularize")
