@@ -26,78 +26,6 @@ endif
 " Enable Powerline font in Airline
 let g:airline_powerline_fonts = 1
 
-" Bundles
-
-" Idris
-Bundle 'idris-hackers/idris-vim'
-
-" ooc
-Bundle 'nddrylliog/ooc.vim'
-
-" Scala
-Bundle 'derekwyatt/vim-scala'
-au BufRead,BufNewFile *.scala setfiletype scala
-
-" Ag
-Bundle 'rking/ag.vim'
-
-" Javascript & JSON
-Bundle 'pangloss/vim-javascript'
-Bundle 'elzr/vim-json'
-au BufRead,BufNewFile *.json setfiletype json
-
-" JSX
-Bundle 'mxw/vim-jsx'
-
-" PureScript
-Bundle 'raichoo/purescript-vim'
-
-" HTML
-Bundle 'xenoterracide/html.vim'
-Bundle 'mattn/emmet-vim'
-
-" CSS
-Bundle 'gorodinskiy/vim-coloresque'
-
-" Markdown
-Bundle 'tpope/vim-markdown'
-
-" Vim sugar for UNIX shell commands
-Bundle 'tpope/vim-eunuch'
-
-" Git
-Bundle 'airblade/vim-gitgutter'
-
-" Colorscheme
-Bundle 'effkay/argonaut.vim'
-Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-
-" EditorConfig (http://editorconfig.org)
-Bundle 'editorconfig/editorconfig-vim'
-
-" Auto-close quotes, parenthesis, etc.
-Bundle 'Raimondi/delimitMate'
-
-" Rust
-Bundle 'wting/rust.vim'
-au BufRead,BufNewFile *.rs setfiletype rust
-
-" Execute whole/part of editing file and show the result
-Bundle 'thinca/vim-quickrun'
-
-" TOML
-Bundle 'cespare/vim-toml'
-au BufRead,BufNewFile *.toml setfiletype toml
-
-" LLVM
-Bundle 'Superbil/llvm.vim'
-
-" Dracula Theme
-Bundle 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-
-" Processing
-Bundle 'sophacles/vim-processing'
-
 " try
 "   colorscheme Dracula
 "   catch
@@ -107,6 +35,9 @@ try
   colorscheme Tomorrow-Night
   catch
 endtry
+
+" . is not part of identifiers
+set iskeyword-=.
 
 " Reselect visual block after indent/outdent
 vnoremap < <gv
@@ -201,4 +132,18 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 imap <c-c> <esc>
 nnoremap <leader><leader> <c-^>
+
+nnoremap <silent><leader>n :set rnu! rnu? <cr>
+
+:au FocusLost * :set nornu
+:au FocusGained * :set rnu
+
+autocmd InsertEnter * :set nornu
+autocmd InsertLeave * :set rnu
+
+if has('nvim')
+  if filereadable(expand("~/.nvimrc.local"))
+    source ~/.nvimrc.local
+  endif
+endif
 
