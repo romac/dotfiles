@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+rm -rf $TMPDIR/SCALAZ3*
+scala -cp ./unmanaged/64/scalaz3_2.11-2.1.jar
+
