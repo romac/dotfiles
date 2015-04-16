@@ -14,6 +14,7 @@
 	b = branch
 	a = add
 	df = diff
+  dc = diff --cached
   rc = rebase --continue
   ra = rebase --abort
 	pom = push origin master
