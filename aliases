@@ -64,6 +64,12 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 # Also, clear Apple’s System Logs to improve shell startup speed
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl;"
 
+# http://stackoverflow.com/questions/4422491/how-do-i-trim-lines-read-from-standard-input-on-bash
+trim () { read -r line; echo "$line"; }
+
+# AnyBar
+function anybar { echo -n $1 | nc -4u -w0 localhost ${2:-1738}; }
+
 # sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent';
 # echo ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV*
 
