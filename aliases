@@ -1,6 +1,9 @@
 # Aliases
 # forked from https://github.com/mathiasbynens/dotfiles
 
+# Scala
+alias scala='scala -Dscala.color'
+
 # Tmux
 alias tmn='tmux new -s $(basename $(pwd))'
 
