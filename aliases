@@ -13,9 +13,6 @@ alias -g L=less
 # Hub
 eval "$(hub alias -s)"
 
-# Sublime Text
-alias -g s='subl'
-
 # tree
 alias tree='tree -C'
 
