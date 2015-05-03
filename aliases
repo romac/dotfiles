@@ -10,6 +10,15 @@ alias tmn='tmux new -s $(basename $(pwd))'
 # Less
 alias -g L=less
 
+# Update all dependencies to their latest version
+npm-update-deps() {
+  if [[ $1 == "--dev" ]]; then
+    jq -r '.devDependencies|keys|.[]' package.json | xargs -I% npm install %@latest --save-dev
+  else
+    jq -r '.dependencies|keys|.[]' package.json | xargs -I% npm install %@latest --save
+  fi
+}
+
 # Hub
 eval "$(hub alias -s)"
 
@@ -38,8 +47,8 @@ alias o="open"
 alias oo="open ."
 alias tac="tail -r"
 
-# NPM
-alias npm-update-all-latest='npm outdated | grep -v Package | awk "{print \$1}" | xargs -I% npm install %@latest --save'
+# Postgres
+alias psql='/Applications/Postgres.app/Contents/Versions/9.4/bin'/psql -p5432
 
 # Bundler
 alias be='bundle exec'
@@ -109,3 +118,4 @@ function mirror-site() {
      --no-parent \
      $2
 }
+
