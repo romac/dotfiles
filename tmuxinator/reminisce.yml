@@ -12,5 +12,5 @@ windows:
   - meteor:
       layout: cc79,238x57,0,0{119x57,0,0,1,118x57,120,0,3}
       panes:
-        - cd app/meteor; source env.sh; clear; git status
-        - cd app/meteor; source env.sh; clear; meteor
+        - cd app/meteor; clear; git status
+        - cd app/meteor; clear; meteor --settings settings.json
