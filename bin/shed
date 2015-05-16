@@ -1,0 +1,40 @@
+#!/bin/bash -e
+#
+# POSIX shell script equivalent of:
+# <https://github.com/mplewis/shed>
+#
+# Executes stdin after you edit it.
+# If $EDITOR is unset, uses $PAGER.
+# If $PAGER  is unset, uses cat(1).
+#
+# To execute stdin with OTHER shell:
+#
+#     ln -s shed OTHERed
+#     ln -s shed fished # fish shell
+#     ln -s shed bashed # bash shell
+#     ln -s shed zshed  # zsh shell
+#     ln -s shed kshed  # ksh shell
+#     ln -s shed cshed  # csh shell
+#
+# Written in 2015 by Suraj N. Kurapati <http://github.com/sunaku>
+
+# write stdin to a temporary file
+temp=$(mktemp -t shed)
+trap "rm -f $temp" EXIT
+trap 'exit' TERM INT
+cat > $temp
+exec 0</dev/tty
+
+# edit or view the temporary file
+${EDITOR:-${PAGER:-cat}} $temp
+
+# confirm temporary file execution
+echo -n 'Do you still want to execute this script? [Y/n]: '
+until read REPLY && echo "$REPLY" | egrep -iq '^yes$|^$'; do
+  echo "$REPLY" | grep -iq '^no$' && exit
+  echo -n 'Please respond with "yes" or "no" [Y/n]: '
+done
+
+# execute the temporary file
+shell=$(basename "$0")
+${shell%ed} $temp
