@@ -25,6 +25,9 @@ eval "$(hub alias -s)"
 # tree
 alias tree='tree -C'
 
+# Syntax highlight
+alias -g ccat='pygmentize -g'
+
 # Latexian
 alias latexian='open -a Latexian'
 
