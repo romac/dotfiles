@@ -139,6 +139,11 @@ nnoremap <silent><leader>n :set rnu! rnu? <cr>
 autocmd InsertEnter * :set nornu
 autocmd InsertLeave * :set rnu
 
+if has("persistent_undo")
+    set undodir='~/.undodir/'
+    set undofile
+endif
+
 if has('nvim')
   if filereadable(expand("~/.nvimrc.local"))
     source ~/.nvimrc.local
