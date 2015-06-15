@@ -43,12 +43,13 @@ alias untgz="tar -xzvf"
 alias unformat='pbpaste | pbcopy'
 
 # Shortcuts
-alias md='function f { mkdir -p "$1" && cd "$1" }; f'
 alias h="history"
 alias j="jobs"
 alias o="open"
 alias oo="open ."
 alias tac="tail -r"
+
+function md { mkdir -p "$1" && cd "$1" }
 
 # Postgres
 alias psql='/Applications/Postgres.app/Contents/Versions/9.4/bin'/psql -p5432
