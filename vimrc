@@ -10,9 +10,14 @@ set nofoldenable
 
 if has("gui_running")
   " Font face & size
-  " set guifont=DejaVu\ Sans\ Mono:h15
-  set guifont=Monaco\ for\ Powerline:h15
-  " set guifont=Inconsolata-g\ for\ Powerline:h16
+  set guifont=Source\ Code\ Pro\ for\ Powerline:h16
+  " set guifont=Monaco\ for\ Powerline:h16
+  " set guifont=Inconsolata-dz\ for\ Powerline:h16
+  " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h16
+  " set guifont=Droid\ Sans\ Mono\ for\ Powerline:h16
+  " set guifont=Ubuntu\ Mono\ derivative\ Powerline:h18
+  " set guifont=Meslo\ LG\ L\ Regular\ for\ Powerline:h16
+
   set guioptions-=L
 
   " Hide scrollbars and toolbars in MacVim
