@@ -34,7 +34,6 @@
      purescript
      rust
      extra-langs
-     editorconfig
      ;; themes-megapack
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
@@ -156,6 +155,11 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+
+  (setq dotspacemacs-additional-packages
+    '(
+      editorconfig
+     ))
 
   ;; Show only files tracked by git in helm-projectile
   (setq projectile-git-command "git ls-files -zc --exclude-standard")
