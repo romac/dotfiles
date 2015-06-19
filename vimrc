@@ -48,6 +48,9 @@ set iskeyword-=.
 vnoremap < <gv
 vnoremap > >gv
 
+" Use system clipboard
+:set clipboard^=unnamedplus
+
 " Paste and re-select
 nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]"
 
