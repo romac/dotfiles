@@ -29,10 +29,12 @@
      c-c++
      html
      javascript
+     jsx
      scala
      purescript
      rust
      extra-langs
+     editorconfig
      ;; themes-megapack
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
