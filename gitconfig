@@ -65,6 +65,7 @@
 	excludesfile = ~/.gitignore
 	editor = /usr/local/bin/vim
 	autocrlf = input
+  whitespace = -blank-at-eof
 
 [github]
 	user = romac
