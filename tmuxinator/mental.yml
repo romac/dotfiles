@@ -1,0 +1,20 @@
+# ~/.tmuxinator/mental.yml
+
+name: mental
+root: ~/Code/mental
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - left:
+          - vim README.md
+  - shell:
+      layout: main-vertical
+      panes:
+        - left:
+          - clear
+          - git status
+        - right:
+          - clear
+          - stack test --file-watch
