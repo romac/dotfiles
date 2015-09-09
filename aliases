@@ -63,6 +63,9 @@ alias md5sum="md5"
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
+# Top
+alias top="top -o cpu"
+
 # File size
 alias fs="stat -c \"%s bytes\""
 
