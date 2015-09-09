@@ -10,8 +10,8 @@ set nofoldenable
 
 if has("gui_running")
   " Font face & size
-  set guifont=Source\ Code\ Pro\ for\ Powerline:h16
-  " set guifont=Monaco\ for\ Powerline:h16
+  " set guifont=Source\ Code\ Pro\ for\ Powerline:h16
+  set guifont=Monaco\ for\ Powerline:h16
   " set guifont=Inconsolata-dz\ for\ Powerline:h16
   " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h16
   " set guifont=Droid\ Sans\ Mono\ for\ Powerline:h16
@@ -26,10 +26,21 @@ if has("gui_running")
 
   " Tell MacVim not to load its own colorscheme
   let macvim_skip_colorscheme=1
+else
+  " " Powerline
+  " python from powerline.vim import setup as powerline_setup
+  " python powerline_setup()
+  " python del powerline_setup
 endif
 
 " Enable Powerline font in Airline
 let g:airline_powerline_fonts = 1
+
+" Show all buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Disable Syntastic check on quit
+let g:syntastic_check_on_wq = 0
 
 " try
 "   colorscheme Dracula
@@ -49,7 +60,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Use system clipboard
-:set clipboard^=unnamedplus
+" :set clipboard^=unnamedplus
 
 " Paste and re-select
 nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]"
