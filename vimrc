@@ -42,6 +42,19 @@ let g:airline#extensions#tabline#enabled = 1
 " Disable Syntastic check on quit
 let g:syntastic_check_on_wq = 0
 
+" Show errors list
+map <silent> <leader>e :Errors<CR>
+
+" Toggle Syntastic
+map <leader>ss :SyntasticToggleMode<CR>
+
+" Disable specific HLint errors
+let g:ghcmod_hlint_options = ['--ignore=Reduce duplication']
+
+" Toggle Tagbar, and focus it
+nmap <leader>= :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
+
 " try
 "   colorscheme Dracula
 "   catch
