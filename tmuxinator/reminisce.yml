@@ -4,13 +4,18 @@ name: reminisce
 root: ~/Code/reminisce.me
 
 windows:
-  - react:
-      layout: 4c78,238x57,0,0{119x57,0,0,0,118x57,120,0,2}
+  - client:
+      layout: main-vertical
       panes:
-        - cd app/react; clear; git status
-        - cd app/react; clear; make watch
-  - meteor:
-      layout: cc79,238x57,0,0{119x57,0,0,1,118x57,120,0,3}
+        - cd app/client/; clear; git status
+        - cd app/client/; clear; sudo nginx -s stop; sudo nginx
+  - server:
+      layout: main-vertical
       panes:
-        - cd app/meteor; clear; git status
-        - cd app/meteor; clear; meteor --settings settings.json
+        - cd app/server/; clear; git status
+        - cd app/; source env/dev.sh; clear; meteor
+  - game-creator:
+      layout: main-vertical
+      panes:
+        - ./start-game-creator.sh &
+        - clear
