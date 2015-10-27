@@ -129,3 +129,4 @@ function mirror-site() {
      $2
 }
 
+alias 🐱=cat
