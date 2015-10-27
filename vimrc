@@ -5,9 +5,6 @@
 " Highlight current line
 set cursorline
 
-" Don't use folding
-set nofoldenable
-
 if has("gui_running")
   " Font face & size
   " set guifont=Source\ Code\ Pro\ for\ Powerline:h16
@@ -36,8 +33,8 @@ endif
 " Enable Powerline font in Airline
 let g:airline_powerline_fonts = 1
 
-" Show all buffers
-let g:airline#extensions#tabline#enabled = 1
+" Do not show buffers in tab bar
+let g:airline#extensions#tabline#enabled = 0
 
 " Disable Syntastic check on quit
 let g:syntastic_check_on_wq = 0
@@ -55,10 +52,12 @@ let g:ghcmod_hlint_options = ['--ignore=Reduce duplication']
 nmap <leader>= :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
-" try
-"   colorscheme Dracula
-"   catch
-" endtry
+" Space open/closes folds
+nnoremap <space> za
+
+" Move to beginning/end of line
+nnoremap B ^
+nnoremap E $
 
 try
   colorscheme Tomorrow-Night
@@ -88,6 +87,8 @@ inoremap jk <Esc>
 let mapleader = ","
 let maplocalleader = "_"
 
+nnoremap <leader>p :ClearCtrlPCache<CR>
+
 " Highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=black guibg=black
 autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
@@ -112,12 +113,20 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 endif
+
+" CtrlP settings
+" let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
 
 " Search for word under the cursor in the entire project
 " (requires the silver searcher (ag) plugin)
 map <Leader>s :Ag <C-R><C-W><CR>
+
+" Search with Ag
+nnoremap <Leader>a :Ag 
 
 if has("gui_macvim")
   " Press Ctrl-Tab to switch between open tabs (like browser tabs) to
@@ -163,13 +172,14 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 imap <c-c> <esc>
 nnoremap <leader><leader> <c-^>
 
+" Toggle relative line numbers
 nnoremap <silent><leader>n :set rnu! rnu? <cr>
 
-:au FocusLost * :set nornu
-:au FocusGained * :set rnu
+" :au FocusLost * :set nornu
+" :au FocusGained * :set rnu
 
-autocmd InsertEnter * :set nornu
-autocmd InsertLeave * :set rnu
+" autocmd InsertEnter * :set nornu
+" autocmd InsertLeave * :set rnu
 
 if has("persistent_undo")
     set undodir='~/.undodir/'
