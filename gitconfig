@@ -1,90 +1,90 @@
 
 [user]
-	name = Romain Ruetschi
-	email = romain.ruetschi@gmail.com
+  name = Romain Ruetschi
+  email = romain.ruetschi@gmail.com
 
 [alias]
-	c  = clone
-	st = status -s
-	ci = commit
-	cm = commit -m
-	ca = commit -am
-	co = checkout
-	w = whatchanged
-	b = branch
-	a = add
-	df = diff
+  c  = clone
+  st = status -s
+  ci = commit
+  cm = commit -m
+  ca = commit -am
+  co = checkout
+  w = whatchanged
+  b = branch
+  a = add
+  df = diff
   dc = diff --cached
   rc = rebase --continue
   ra = rebase --abort
-	pom = push origin master
-	graph = log --oneline --graph
-	changes = log --oneline --reverse
+  pom = push origin master
+  graph = log --oneline --graph
+  changes = log --oneline --reverse
 
-	# amend a commit
-	amend = commit --amend
+  # amend a commit
+  amend = commit --amend
 
-	# remove files from index
-	unstage = reset HEAD
+  # remove files from index
+  unstage = reset HEAD
 
-	# uncommit the last commit, leaving the files in precommitted state
-	uncommit = reset --soft HEAD^
+  # uncommit the last commit, leaving the files in precommitted state
+  uncommit = reset --soft HEAD^
 
-	lg = log --color --decorate --graph --pretty --abbrev-commit --oneline
+  lg = log --color --decorate --graph --pretty --abbrev-commit --oneline
 
-	switch = !legit switch \"$@\"
-	branches = !legit branches
-	sprout = !legit sprout \"$@\"
-	unpublish = !legit unpublish \"$@\"
-	harvest = !legit harvest \"$@\"
-	sync = !legit sync \"$@\"
-	publish = !legit publish \"$@\"
-	graft = !legit graft \"$@\"
-	up = "!git remote update -p; git merge --ff-only @{u}"
+  switch = !legit switch \"$@\"
+  branches = !legit branches
+  sprout = !legit sprout \"$@\"
+  unpublish = !legit unpublish \"$@\"
+  harvest = !legit harvest \"$@\"
+  sync = !legit sync \"$@\"
+  publish = !legit publish \"$@\"
+  graft = !legit graft \"$@\"
+  up = "!git remote update -p; git merge --ff-only @{u}"
 
 [diff]
-	renames = copy
+  renames = copy
 
 [color]
-	diff = auto
-	interactive = auto
-	status = auto
-	branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  branch = auto
 
 [apply]
-	whitespace = fix
+  whitespace = fix
 
 [merge]
-	 stat = true
+   stat = true
 
 [branch]
-	autosetuprebase = always
+  autosetuprebase = always
 
 [core]
-	pager = less -FXRS -x4
-	excludesfile = ~/.gitignore
-	editor = /usr/local/bin/vim
-	autocrlf = input
+  pager = less -FXRS -x4
+  excludesfile = ~/.gitignore
+  editor = /usr/local/bin/vim
+  autocrlf = input
   whitespace = -blank-at-eof
 
 [github]
-	user = romac
-	password = !security 2>&1 >/dev/null find-generic-password -gs github.password | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
+  user = romac
+  password = !security 2>&1 >/dev/null find-generic-password -gs github.password | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
 
 [help]
-	autocorrect = 0
+  autocorrect = 0
 
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
 
 [git-up "bundler"]
-	check = true
+  check = true
 [push]
-	default = current
+  default = current
 [pull]
-	rebase = true
+  rebase = true
 [filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
 [ghi]
-	token = !security find-internet-password -a romac -s github.com -l 'ghi token' -w
+  token = !security find-internet-password -a romac -s github.com -l 'ghi token' -w
