@@ -23,6 +23,7 @@
 
   # amend a commit
   amend = commit --amend
+  a = amend
 
   # remove files from index
   unstage = reset HEAD
