@@ -7,12 +7,12 @@ windows:
   - client:
       layout: main-vertical
       panes:
-        - cd app/client/; clear; git status
-        - cd app/client/; clear; sudo nginx -s stop; sudo nginx
+        - cd app/; clear; git status;
+        - cd app/; clear; sudo nginx -s stop; sudo nginx
   - server:
       layout: main-vertical
       panes:
-        - cd app/server/; clear; git status
+        - cd app/; clear; git status
         - cd app/; source env/dev.sh; clear; meteor
   - game-creator:
       layout: main-vertical
