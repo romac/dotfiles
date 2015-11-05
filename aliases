@@ -10,6 +10,20 @@ alias tmn='tmux new -s $(basename $(pwd))'
 # Less
 alias -g L=less
 
+# Timelog
+export TIMELOG=~/Dropbox/EPFL/LARA/LARA.timelog
+
+ti() {
+  echo i $(date '+%Y-%m-%d %H:%M:%S') $* | tee -a $TIMELOG
+}
+
+to() {
+  echo o $(date '+%Y-%m-%d %H:%M:%S') | tee -a $TIMELOG
+}
+
+alias tm="hledger -f $TIMELOG register -p 'this month' --depth 1 --empty"
+alias tw="hledger -f $TIMELOG register -p 'this week' --depth 1 --empty"
+
 # Update all dependencies to their latest version
 npm-update-deps() {
   if [[ $1 == "--dev" ]]; then
