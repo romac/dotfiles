@@ -11,7 +11,7 @@ alias tmn='tmux new -s $(basename $(pwd))'
 alias -g L=less
 
 # Timelog
-export TIMELOG=~/Dropbox/EPFL/LARA/LARA.timelog
+export TIMELOG=~/Dropbox/EPFL/LARA/LARA-`date '+%Y-%m'`.timelog
 
 ti() {
   echo i $(date '+%Y-%m-%d %H:%M:%S') $* | tee -a $TIMELOG
@@ -23,6 +23,7 @@ to() {
 
 alias tm="hledger -f $TIMELOG register -p 'this month' --depth 1 --empty"
 alias tw="hledger -f $TIMELOG register -p 'this week' --depth 1 --empty"
+alias tt="hledger -f $TIMELOG register -p 'today' --depth 1 --empty"
 
 # Update all dependencies to their latest version
 npm-update-deps() {
@@ -100,6 +101,15 @@ trim () { read -r line; echo "$line"; }
 # AnyBar
 function anybar { echo -n $1 | nc -4u -w0 localhost ${2:-1738}; }
 
+# Meow
+alias 🐱=cat
+
+# https://gist.github.com/rickycodes/49b300476ed8532e910d
+idk() {
+  local shrug='¯\_(ツ)_/¯'
+  pbcopy <<< $shrug && echo "${shrug} copied to clipboard"
+}
+
 # sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent';
 # echo ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV*
 
@@ -143,4 +153,3 @@ function mirror-site() {
      $2
 }
 
-alias 🐱=cat
