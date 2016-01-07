@@ -7,8 +7,8 @@ windows:
   - client:
       layout: main-vertical
       panes:
-        - cd app/; clear; git status;
-        - cd app/; clear; sudo nginx -s stop; sudo nginx
+        - cd app/; clear; vim .
+        - cd app/; clear; git status
   - server:
       layout: main-vertical
       panes:
