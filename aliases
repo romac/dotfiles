@@ -1,6 +1,9 @@
 # Aliases
 # forked from https://github.com/mathiasbynens/dotfiles
 
+# Neovim
+alias -g vim=nvim
+
 # Scala
 alias scala='scala -Dscala.color'
 
