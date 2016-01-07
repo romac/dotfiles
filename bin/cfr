@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+java $JAVA_OPTS -jar "$0_0_108.jar" $*
+
