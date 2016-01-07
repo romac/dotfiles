@@ -128,6 +128,12 @@ map <Leader>s :Ag <C-R><C-W><CR>
 " Search with Ag
 nnoremap <Leader>a :Ag 
 
+" Highlight trailing whitespace as error
+" match ErrorMsg '\s\+$'
+
+" Remove trailing whitespaces
+nnoremap <Leader>rtw :%s/\s\+$//e<CR>
+
 if has("gui_macvim")
   " Press Ctrl-Tab to switch between open tabs (like browser tabs) to
   " the right side. Ctrl-Shift-Tab goes the other way.
