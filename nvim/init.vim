@@ -107,22 +107,17 @@ Plug 'Twinside/vim-hoogle'
 
 " Markdown
 Plug 'tpope/vim-markdown'
-" au! BufRead,BufNewFile *.markdown setfiletype markdown
-" au! BufRead,BufNewFile *.md       setfiletype markdown
 let g:vim_markdown_frontmatter=1
 
 " Rust
 Plug 'rust-lang/rust.vim'
-" au BufRead,BufNewFile *.rs setfiletype rust
 
 " Scala
 Plug 'derekwyatt/vim-scala'
 Plug 'ensime/ensime-vim'
-" au BufRead,BufNewFile *.scala setfiletype scala
 
 " TOML
 Plug 'cespare/vim-toml'
-" au BufRead,BufNewFile *.toml setfiletype toml
 
 " LLVM
 Plug 'Superbil/llvm.vim'
@@ -144,13 +139,8 @@ Plug 'elzr/vim-json'
 " Allow JSX in normal JS files
 let g:jsx_ext_required = 0
 
-" au! BufRead,BufNewFile *.js setfiletype javascript
-" au! BufRead,BufNewFile *.jsx setfiletype javascript
-" au! BufRead,BufNewFile *.json setfiletype json
-
 " PureScript
 Plug 'raichoo/purescript-vim'
-" au BufRead,BufNewFile *.purs setfiletype purescript
 
 " TypeScript
 Plug 'leafgarland/typescript-vim'
