@@ -141,6 +141,7 @@ let g:jsx_ext_required = 0
 
 " PureScript
 Plug 'raichoo/purescript-vim'
+Plug 'frigoeu/psc-ide-vim'
 
 " TypeScript
 Plug 'leafgarland/typescript-vim'
