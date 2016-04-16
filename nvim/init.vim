@@ -145,7 +145,7 @@ Plug 'frigoeu/psc-ide-vim'
 
 " TypeScript
 Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/tsuquyomi'
+" Plug 'Quramy/tsuquyomi'
 
 " Idris
 Plug 'idris-hackers/idris-vim'
