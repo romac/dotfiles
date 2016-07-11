@@ -1,0 +1,13 @@
+[ui]
+username = Romain R. <ruetschi@prediggo.com>
+
+[pager]
+pager = less
+
+[extensions]
+strip = 
+rebase = 
+color =
+histedit = 
+shelve =
+pager = 
