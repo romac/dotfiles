@@ -1,0 +1,11 @@
+# ~/.tmuxinator/prediggo.yml
+
+name: prediggo
+root: ~/Code/Prediggo/backofficewebapp4
+
+windows:
+  - client:
+      layout: main-vertical
+      panes:
+        - clear; sbt -Dconfig.file=conf/local.conf -jvm-debug 9999
+        - clear; hg status

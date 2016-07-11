@@ -1,0 +1,15 @@
+# ~/.tmuxinator/leon-web.yml
+
+name: leon-web
+root: ~/Code/EPFL/LARA/leon-web
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - vim .
+  - server:
+      layout: main-vertical
+      panes:
+        - clear; ./start.sh
+        - clear; git status
