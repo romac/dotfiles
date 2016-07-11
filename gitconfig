@@ -62,7 +62,8 @@
   autosetuprebase = always
 
 [core]
-  pager = less -FXRS -x4
+  # pager = less -FXRS -x4
+  pager = diff-so-fancy | less --tabs=4 -RFX
   excludesfile = ~/.gitignore
   editor = /usr/local/bin/vim
   autocrlf = input
@@ -89,3 +90,9 @@
   smudge = git-media-smudge %f
 [ghi]
   token = !security find-internet-password -a romac -s github.com -l 'ghi token' -w
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+[interactive]
+	diffFilter = diff-so-fancy
