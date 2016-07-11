@@ -46,6 +46,7 @@ Plug 'effkay/argonaut.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
 Plug 'w0ng/vim-hybrid'
+Plug 'altercation/vim-colors-solarized'
 
 " Support bundles
 Plug 'jgdavey/tslime.vim'
@@ -62,7 +63,8 @@ Plug 'kassio/neoterm'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'int3/vim-extradite'
-Plug 'airblade/vim-gitgutter'
+Plug 'sgur/vim-lazygutter'
+" Plug 'airblade/vim-gitgutter'
 
 " Vim sugar for UNIX shell commands
 Plug 'tpope/vim-eunuch'
@@ -107,14 +109,16 @@ Plug 'Twinside/vim-hoogle'
 
 " Markdown
 Plug 'tpope/vim-markdown'
-let g:vim_markdown_frontmatter=1
 
 " Rust
 Plug 'rust-lang/rust.vim'
 
 " Scala
 Plug 'derekwyatt/vim-scala'
-Plug 'ensime/ensime-vim'
+" Plug 'ensime/ensime-vim'
+
+" Elixir
+Plug 'elixir-lang/vim-elixir'
 
 " TOML
 Plug 'cespare/vim-toml'
@@ -136,16 +140,13 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
 
-" Allow JSX in normal JS files
-let g:jsx_ext_required = 0
-
 " PureScript
 Plug 'raichoo/purescript-vim'
 Plug 'frigoeu/psc-ide-vim'
 
 " TypeScript
 Plug 'leafgarland/typescript-vim'
-" Plug 'Quramy/tsuquyomi'
+Plug 'Quramy/tsuquyomi'
 
 " Idris
 Plug 'idris-hackers/idris-vim'
@@ -158,6 +159,21 @@ call plug#end()
 
 " }}}
 
+" Bundle config {{{
+
+" Markdown
+let g:vim_markdown_frontmatter=1
+
+" JSX
+
+" Allow JSX in normal JS files
+let g:jsx_ext_required = 0
+
+" TypeScript
+let g:neomake_typescript_enabled_makers = []
+
+" }}}
+
 " Colors and Fonts {{{
 
 " Enable syntax highlighting
@@ -166,11 +182,11 @@ syntax enable
 " Enable True Color
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-let my_colorscheme="Tomorrow-Night"
+let my_colorscheme="hybrid"
 
 " Color scheme
-exe 'colorscheme ' . my_colorscheme
 set background=dark
+exe 'colorscheme ' . my_colorscheme
 
 " Re-apply color scheme to fix wrong colors and missing airline theme
 exe 'autocmd VimEnter * colorscheme ' . my_colorscheme
@@ -523,5 +539,5 @@ map <leader>ap :Align
 " Enable some tabular presets for Haskell
 let g:haskell_tabular = 1
 
-" }}}
+" }}
 
