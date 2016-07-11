@@ -40,6 +40,9 @@ npm-update-deps() {
 # Hub
 eval "$(hub alias -s)"
 
+# Git
+alias gpf='git push --force-with-lease'
+
 # tree
 alias tree='tree -C'
 
