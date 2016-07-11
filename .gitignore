@@ -10,3 +10,4 @@ bin/toolc
 bin/edx-dl
 *.jar
 bin/amm
+bin/caddy
