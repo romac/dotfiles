@@ -9,3 +9,4 @@ windows:
       panes:
         - clear; sbt -Dconfig.file=conf/local.conf -jvm-debug 9999
         - clear; hg status
+
