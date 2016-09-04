@@ -1,8 +1,9 @@
 [ui]
-username = Romain R. <ruetschi@prediggo.com>
+username = Romain Ruetschi <romain.ruetschi@gmail.com>
 
 [pager]
-pager = less
+pager = LESS='FSRX' less
+ignore = version, help, update, serve, record
 
 [extensions]
 strip = 
@@ -11,3 +12,13 @@ color =
 histedit = 
 shelve =
 pager = 
+purge =
+churn =
+
+[ui]
+merge = vimdiff
+
+[merge-tools]
+vimdiff.executable = vim
+vimdiff.args = -d $base $local $output $other +close +close
+
