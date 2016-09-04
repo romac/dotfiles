@@ -7,6 +7,10 @@ alias -g vim=nvim
 # Scala
 alias scala='scala -Dscala.color'
 
+# SBT
+alias sbt_out='mv ~/.sbt/{credentials,repositories} ~/Code/sbt_config/'
+alias sbt_in='mv ~/Code/sbt_config/{credentials,repositories} ~/.sbt/'
+
 # Tmux
 alias tmn='tmux new -s $(basename $(pwd))'
 
@@ -73,7 +77,7 @@ alias tac="tail -r"
 function md { mkdir -p "$1" && cd "$1" }
 
 # Postgres
-alias psql='/Applications/Postgres.app/Contents/Versions/9.4/bin'/psql -p5432
+alias psql='/Applications/Postgres.app/Contents/Versions/latest/bin'/psql -p5432
 
 # Bundler
 alias be='bundle exec'
@@ -97,9 +101,9 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
-# Empty the Trash on all mounted volumes and the main HDD
+# Empty the Trash main HDD
 # Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl;"
+alias emptytrash="sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl;"
 
 # http://stackoverflow.com/questions/4422491/how-do-i-trim-lines-read-from-standard-input-on-bash
 trim () { read -r line; echo "$line"; }
