@@ -300,6 +300,12 @@ nnoremap <leader>mo :set mouse=<cr>
 set mouse=a
 " }}}
 
+" Terminal {{{
+
+tnoremap <Esc> <C-\><C-n>
+
+" }}}
+
 " Files, backups and undo {{{
 
 " Turn backup off, since most stuff is in Git anyway...
@@ -341,11 +347,13 @@ let g:ctrlp_working_path_mode = 0
 
 " Search for word under the cursor in the entire project
 " (requires the silver searcher (ag) plugin)
-map <Leader>s :Ag <C-R><C-W><CR>
+nmap <Leader>s :Ag <C-R><C-W><CR>
 
 " Search with Ag
 nnoremap <Leader>a :Ag 
 
+" Execute current file
+nmap <leader>x :!./%<cr>
 
 " }}}
 
@@ -402,10 +410,15 @@ nnoremap E $
 nnoremap j gj
 nnoremap k gk
 
-noremap <c-h> <c-w>h
-noremap <c-k> <c-w>k
-noremap <c-j> <c-w>j
-noremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
+nnoremap <c-k> <c-w>k
+nnoremap <c-j> <c-w>j
+nnoremap <c-l> <c-w>l
+
+tnoremap <c-h> <c-\><c-n><c-w>h
+tnoremap <c-k> <c-\><c-n><c-w>k
+tnoremap <c-j> <c-\><c-n><c-w>j
+tnoremap <c-l> <c-\><c-n><c-w>l
 
 " https://github.com/neovim/neovim/issues/2048#issuecomment-78534227
 " nmap <BS> <c-w>h
