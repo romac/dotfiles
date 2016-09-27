@@ -181,7 +181,8 @@ let g:neomake_typescript_enabled_makers = []
 syntax enable
 
 " Enable True Color
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 let my_colorscheme="hybrid"
 
