@@ -103,9 +103,10 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " Haskell
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'eagletmt/ghcmod-vim'
-Plug 'eagletmt/neco-ghc'
-Plug 'Twinside/vim-hoogle'
+Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
+Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
+Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim', 'for': 'haskell' }
 
 " Markdown
 Plug 'tpope/vim-markdown'
