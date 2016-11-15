@@ -6,7 +6,7 @@
 " General {{{
 
 " use indentation for folds
-set foldmethod=indent
+set foldmethod=manual
 set foldnestmax=5
 set foldlevelstart=99
 set foldcolumn=0
@@ -24,6 +24,9 @@ set autoread
 " like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
+
+let localleader = "_"
+let g:localleader = "_"
 
 " Leader key timeout
 set tm=2000
@@ -47,11 +50,13 @@ Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
 Plug 'w0ng/vim-hybrid'
 Plug 'altercation/vim-colors-solarized'
+Plug 'raichoo/monodark'
 
 " Support bundles
 Plug 'jgdavey/tslime.vim'
 Plug 'Shougo/vimproc.vim'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'benekastah/neomake'
 Plug 'moll/vim-bbye'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -103,7 +108,8 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " Haskell
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+" Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim', 'for': 'haskell' }
@@ -147,7 +153,7 @@ Plug 'frigoeu/psc-ide-vim'
 
 " TypeScript
 Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/tsuquyomi'
+" Plug 'Quramy/tsuquyomi'
 
 " Idris
 Plug 'idris-hackers/idris-vim'
@@ -155,12 +161,29 @@ Plug 'idris-hackers/idris-vim'
 " ooc
 Plug 'nddrylliog/ooc.vim'
 
+" SMT-LIB
+Plug 'raichoo/smt-vim'
+
 " Add plugins to &runtimepath
 call plug#end()
 
 " }}}
 
 " Bundle config {{{
+
+" Deoplete
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#disable_auto_complete = 1
+
+imap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ deoplete#mappings#manual_complete()
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
 
 " Markdown
 let g:vim_markdown_frontmatter=1
@@ -184,7 +207,8 @@ syntax enable
 set termguicolors
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-let my_colorscheme="hybrid"
+let my_colorscheme="monodark"
+" let my_colorscheme="hybrid"
 
 " Color scheme
 set background=dark
@@ -225,7 +249,7 @@ set guicursor+=n-v-c:blinkon0
 let g:airline_powerline_fonts = 1
 
 " Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
+" set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -359,7 +383,7 @@ nmap <leader>x :!./%<cr>
 
 " Neomake {{{
 
-autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * Neomake
 
 " Show errors list
 map <silent> <leader>e :lopen<CR>
@@ -568,17 +592,47 @@ let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 
-augroup haskell
-  autocmd!
-  autocmd FileType haskell map <silent> <leader><cr> :noh<cr>:GhcModTypeClear<cr>
-  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-augroup END
+" Intero
+
+" Process management:
+nnoremap <Leader>hio :InteroOpen<CR>
+nnoremap <Leader>hik :InteroKill<CR>
+nnoremap <Leader>hic :InteroHide<CR>
+nnoremap <Leader>hil :InteroLoadCurrentModule<CR>
+
+" REPL commands
+nnoremap <Leader>hie :InteroEval<CR>
+nnoremap <Leader>hit :InteroGenericType<CR>
+nnoremap <Leader>hiT :InteroType<CR>
+nnoremap <Leader>hii :InteroInfo<CR>
+nnoremap <Leader>hiI :InteroTypeInsert<CR>
+
+" Go to definition:
+nnoremap <Leader>hid :InteroGoToDef<CR>
+
+" Highlight uses of identifier:
+nnoremap <Leader>hiu :InteroUses<CR>
+
+" Reload the file in Intero after saving
+autocmd! BufWritePost *.hs InteroReload
+
+let g:haskellmode_completion_ghc = 0
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+" GHC Mod
+" augroup haskell
+"   autocmd!
+  " autocmd FileType haskell map <silent> <leader><cr> :noh<cr>:GhcModTypeClear<cr>
+  " autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+" augroup END
 
 " Type of expression under cursor
-nmap <silent> <leader>ht :GhcModType<CR>
+" nmap <silent> <leader>ht :GhcModType<CR>
+
 " Insert type of expression under cursor
-nmap <silent> <leader>hT :GhcModTypeInsert<CR>
+" nmap <silent> <leader>hT :GhcModTypeInsert<CR>
+
 " GHC errors and warnings
-nmap <silent> <leader>hc :Neomake ghcmod<CR>
+" nmap <silent> <leader>hc :Neomake ghcmod<CR>
 
 " }}}
