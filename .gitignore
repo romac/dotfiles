@@ -11,3 +11,6 @@ bin/edx-dl
 *.jar
 bin/amm
 bin/caddy
+bin/joe
+bin/meteor
+
