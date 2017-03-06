@@ -163,3 +163,5 @@ function mirror-site() {
      $2
 }
 
+alias ghci-core="stack ghci --ghci-options '-ddump-simpl -dsuppress-idinfo -dsuppress-coercions -dsuppress-type-applications -dsuppress-uniques -dsuppress-module-prefixes'"
+
