@@ -1,0 +1,4 @@
+#!/bin/bash --posix
+
+ng stainless.Main "$@"
+
