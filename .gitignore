@@ -14,3 +14,4 @@ bin/caddy
 bin/joe
 bin/meteor
 
+bin/protoc

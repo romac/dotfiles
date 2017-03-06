@@ -62,12 +62,12 @@
   autosetuprebase = always
 
 [core]
-  # pager = less -FXRS -x4
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = less --tabs=4 -XRS 
+  ; pager = diff-so-fancy | less --tabs=4 -RFX
   excludesfile = ~/.gitignore
-  editor = /usr/local/bin/vim
+  editor = /usr/local/bin/nvim
   autocrlf = input
-  whitespace = -blank-at-eof
+  ; whitespace = -blank-at-eof
 
 [github]
   user = romac
@@ -94,5 +94,5 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
-[interactive]
-	diffFilter = diff-so-fancy
+[transfer]
+	fsckobjects = true
