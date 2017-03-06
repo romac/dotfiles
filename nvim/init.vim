@@ -62,6 +62,9 @@ Plug 'moll/vim-bbye'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-scripts/gitignore'
 
+" Plug 'luochen1990/rainbow'
+" let g:rainbow_active = 1
+
 " Terminal emulation
 Plug 'kassio/neoterm'
 
@@ -118,26 +121,37 @@ Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim', 'for': 'haskell' }
 Plug 'tpope/vim-markdown'
 
 " Rust
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " Scala
-Plug 'derekwyatt/vim-scala'
+Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 " Plug 'ensime/ensime-vim'
 
 " Elixir
-Plug 'elixir-lang/vim-elixir'
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 
 " TOML
-Plug 'cespare/vim-toml'
+Plug 'cespare/vim-toml', { 'for': 'toml' }
 
 " LLVM
 Plug 'Superbil/llvm.vim'
+
+" Dafny
+Plug 'mlr-msft/vim-loves-dafny', { 'for': 'dafny' }
+
+let g:neomake_dafny_dafny_maker = {
+    \ 'exe': 'mono',
+    \ 'args': ['/usr/local/dafny/Dafny.exe', '-timeLimit:10', '-compile:0'],
+    \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
+    \ }
+
+let g:neomake_dafny_enabled_makers = ['dafny']
 
 " CSS
 " Plug 'gorodinskiy/vim-coloresque'
 
 " HTML
-Plug 'xenoterracide/html.vim'
+Plug 'xenoterracide/html.vim', { 'for': 'elixir' }
 Plug 'mattn/emmet-vim'
 
 " Javascript & JSON
@@ -148,18 +162,18 @@ Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
 
 " PureScript
-Plug 'raichoo/purescript-vim'
-Plug 'frigoeu/psc-ide-vim'
+Plug 'raichoo/purescript-vim', { 'for': 'purescript' }
+Plug 'frigoeu/psc-ide-vim', { 'for': 'purescript' }
 
 " TypeScript
-Plug 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 " Plug 'Quramy/tsuquyomi'
 
 " Idris
-Plug 'idris-hackers/idris-vim'
+Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 
 " ooc
-Plug 'nddrylliog/ooc.vim'
+Plug 'nddrylliog/ooc.vim', { 'for': 'ooc' }
 
 " SMT-LIB
 Plug 'raichoo/smt-vim'
