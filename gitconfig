@@ -2,6 +2,7 @@
 [user]
   name = Romain Ruetschi
   email = romain.ruetschi@gmail.com
+	signingkey = 2586FECF
 
 [alias]
   c  = clone
