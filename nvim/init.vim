@@ -112,13 +112,15 @@ Plug 'christoomey/vim-tmux-navigator'
 " Haskell
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 " Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
-Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
+" Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim', 'for': 'haskell' }
 
 " Markdown
 Plug 'tpope/vim-markdown'
+" Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc-syntax' 
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -126,6 +128,10 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Scala
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 " Plug 'ensime/ensime-vim'
+
+augroup filetypedetect
+    au BufRead,BufNewFile *.sbt set filetype=scala
+augroup END
 
 " Elixir
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
@@ -515,6 +521,9 @@ let g:airline#extensions#tabline#enabled = 0
 
 " Editing mappings {{{
 
+" Search for visual selection
+vnoremap // y/<C-R>"<CR>
+
 " Delete trailing white space on save
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -606,6 +615,8 @@ let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 
+
+
 " Intero
 
 " Process management:
@@ -628,7 +639,7 @@ nnoremap <Leader>hid :InteroGoToDef<CR>
 nnoremap <Leader>hiu :InteroUses<CR>
 
 " Reload the file in Intero after saving
-autocmd! BufWritePost *.hs InteroReload
+" autocmd! BufWritePost *.hs InteroReload
 
 let g:haskellmode_completion_ghc = 0
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
