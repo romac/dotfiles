@@ -3,6 +3,8 @@
 
 # Neovim
 alias -g vim=nvim
+alias -g v=nvim
+alias -g n=nvim
 
 # Scala
 alias scala='scala -Dscala.color'
@@ -40,9 +42,6 @@ npm-update-deps() {
     jq -r '.dependencies|keys|.[]' package.json | xargs -I% npm install %@latest --save
   fi
 }
-
-# Hub
-eval "$(hub alias -s)"
 
 # Git
 alias gpf='git push --force-with-lease'
@@ -94,12 +93,17 @@ alias top="top -o cpu"
 # File size
 alias fs="stat -c \"%s bytes\""
 
+# Watch files
+# watch () { path="$1"; shift; /usr/local/bin/fswatch -o "$path" | /usr/bin/xargs -n1 -I{} "$@"; }
+
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+
+# if [ -f /usr/local/bin/trash ]; then alias rm="/usr/local/bin/trash"; fi
 
 # Empty the Trash main HDD
 # Also, clear Apple’s System Logs to improve shell startup speed

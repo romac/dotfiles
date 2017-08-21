@@ -2,7 +2,7 @@
 [user]
   name = Romain Ruetschi
   email = romain.ruetschi@gmail.com
-	signingkey = 2586FECF
+	signingkey = C81484B9
 
 [alias]
   c  = clone
@@ -82,18 +82,24 @@
 
 [git-up "bundler"]
   check = true
+
 [push]
   default = current
+
 [pull]
   rebase = true
+
 [filter "media"]
   clean = git-media-clean %f
   smudge = git-media-smudge %f
+
 [ghi]
-  token = !security find-internet-password -a romac -s github.com -l 'ghi token' -w
+	token = !security find-internet-password -a romac -s github.com -l 'ghi token' -w
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
+
 [transfer]
 	fsckobjects = true
