@@ -4,6 +4,10 @@
 " Licensed under the MIT license
 
 " General {{{
+"
+if &shell =~# 'fish$'
+    set shell=bash
+endif
 
 " use indentation for folds
 set foldmethod=manual
@@ -36,6 +40,11 @@ noremap ,, ,
 
 " Use par for prettier line formatting
 set formatprg="PARINIT='rTbgqR B=.,?_A_a Q=_s>|' par\ -w72"
+
+" Open a new window when using as visual editor
+if has('nvim')
+  let $VISUAL = 'nvr -cc split --remote-wait'
+endif
 
 " }}}
 
@@ -86,6 +95,7 @@ Plug 'bling/vim-airline'
 Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'rking/ag.vim'
+Plug 'dkprice/vim-easygrep'
 
 " Text manipulation
 Plug 'vim-scripts/Align'
@@ -122,8 +132,21 @@ Plug 'tpope/vim-markdown'
 " Plug 'vim-pandoc/vim-pandoc'
 " Plug 'vim-pandoc/vim-pandoc-syntax' 
 
+" Swift
+Plug 'keith/swift.vim'
+
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+
+let g:racer_cmd = "/Users/romac/.cargo/bin/racer"
+let g:racer_experimental_completer = 1
+let g:rustfmt_autosave = 1
+
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 " Scala
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
@@ -138,6 +161,9 @@ Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 
 " TOML
 Plug 'cespare/vim-toml', { 'for': 'toml' }
+
+" Fish
+Plug 'dag/vim-fish', { 'for': 'fish' }
 
 " LLVM
 Plug 'Superbil/llvm.vim'
@@ -189,6 +215,14 @@ call plug#end()
 
 " }}}
 
+" Java decompiler
+
+augroup filetypedetect
+au bufreadpost,filereadpost *.class silent %!cfr %
+au bufreadpost,filereadpost *.class silent normal gg=G
+au bufread,bufnewfile *.class setfiletype class
+augroup END
+
 " Bundle config {{{
 
 " Deoplete
@@ -227,8 +261,8 @@ syntax enable
 set termguicolors
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-let my_colorscheme="monodark"
-" let my_colorscheme="hybrid"
+" let my_colorscheme="monodark"
+let my_colorscheme="hybrid"
 
 " Color scheme
 set background=dark
@@ -269,7 +303,7 @@ set guicursor+=n-v-c:blinkon0
 let g:airline_powerline_fonts = 1
 
 " Set utf8 as standard encoding and en_US as the standard language
-" set encoding=utf8
+set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -396,6 +430,9 @@ nmap <Leader>s :Ag <C-R><C-W><CR>
 " Search with Ag
 nnoremap <Leader>a :Ag 
 
+" Show all TODO in the project
+command Todo Ag TODO\|FIXME
+
 " Execute current file
 nmap <leader>x :!./%<cr>
 
@@ -403,7 +440,7 @@ nmap <leader>x :!./%<cr>
 
 " Neomake {{{
 
-" autocmd! BufWritePost * Neomake
+autocmd! BufWritePost * Neomake
 
 " Show errors list
 map <silent> <leader>e :lopen<CR>
@@ -434,7 +471,7 @@ set si "Smart indent
 set wrap "Wrap lines
 
 " Use system clipboard
-" :set clipboard^=unnamedplus
+:set clipboard^=unnamedplus
 
 " Paste and re-select
 nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]"
@@ -465,7 +502,7 @@ tnoremap <c-j> <c-\><c-n><c-w>j
 tnoremap <c-l> <c-\><c-n><c-w>l
 
 " https://github.com/neovim/neovim/issues/2048#issuecomment-78534227
-" nmap <BS> <c-w>h
+  " nmap <BS> <c-w>h
 
 " Disable highlight when <leader><cr> is pressed
 " but preserve cursor coloring
@@ -659,5 +696,16 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 " GHC errors and warnings
 " nmap <silent> <leader>hc :Neomake ghcmod<CR>
+
+" }}}
+
+
+" Tamarin Prover {{{
+
+" autocommand to detect .spthy and .sapic files
+augroup filetypedetect
+au BufNewFile,BufRead *.spthy	setf spthy
+au BufNewFile,BufRead *.sapic	setf sapic
+augroup END
 
 " }}}
