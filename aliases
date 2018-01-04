@@ -75,9 +75,6 @@ alias tac="tail -r"
 
 function md { mkdir -p "$1" && cd "$1" }
 
-# Postgres
-alias psql='/Applications/Postgres.app/Contents/Versions/latest/bin'/psql -p5432
-
 # Bundler
 alias be='bundle exec'
 

@@ -66,18 +66,18 @@ set -g visual-activity off
 set -g status-bg black
 set -g status-fg white
 set -g status-left '#[fg=green]#H'
-set -g status-utf8 on
+# set -g status-utf8 on
 setw -g window-status-current-bg red
 setw -g automatic-rename
 
 # List of plugins
 # Supports `github_username/repo` or full git URLs
-set -g @tpm_plugins "              \
-  tmux-plugins/tpm                 \
-  tmux-plugins/tmux-sensible       \
-  tmux-plugins/tmux-pain-control   \
-  tmux-plugins/tmux-resurrect      \
-"
+# set -g @tpm_plugins "              \
+#   tmux-plugins/tpm                 \
+#   tmux-plugins/tmux-sensible       \
+#   tmux-plugins/tmux-pain-control   \
+#   tmux-plugins/tmux-resurrect      \
+# "
 
 # Other examples:
 # github_username/plugin_name    \
@@ -85,7 +85,7 @@ set -g @tpm_plugins "              \
 # git@bitbucket.com/user/plugin  \
 
 # initializes TMUX plugin manager
-run-shell ~/.tmux/plugins/tpm/tpm
+# run-shell ~/.tmux/plugins/tpm/tpm
 
 # Smart pane switching with awareness of vim splits
 bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|n?vim?)(diff)?$' && tmux send-keys C-h) || tmux select-pane -L || exit 0"
@@ -94,6 +94,6 @@ bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE 
 bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|n?vim?)(diff)?$' && tmux send-keys C-l) || tmux select-pane -R || exit 0"
 bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|n?vim?)(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l || exit 0"
 
-run-shell "powerline-daemon -q"
-source "/usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf"
+# run-shell "powerline-daemon -q"
+# source "/usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf"
 

@@ -66,10 +66,12 @@ Plug 'jgdavey/tslime.vim'
 Plug 'Shougo/vimproc.vim'
 " Plug 'ervandew/supertab'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ervandew/supertab'
 Plug 'benekastah/neomake'
 Plug 'moll/vim-bbye'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-scripts/gitignore'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
 " Plug 'luochen1990/rainbow'
 " let g:rainbow_active = 1
@@ -91,11 +93,14 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Bars, panels, and files
 Plug 'scrooloose/nerdtree' " , { 'on':  'NERDTreeToggle' }
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline', { 'commit': 'f0a508b1216215c01640f06d23889934097924ee' }
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
-Plug 'rking/ag.vim'
+" Plug 'rking/ag.vim'
 Plug 'dkprice/vim-easygrep'
+Plug 'jremmen/vim-ripgrep'
+let g:rg_highlight = 1
 
 " Text manipulation
 Plug 'vim-scripts/Align'
@@ -113,6 +118,12 @@ Plug 'tpope/vim-surround'
 " Display the undo history in a graph
 Plug 'mbbill/undotree'
 
+" Autoformat source files
+Plug 'Chiel92/vim-autoformat'
+
+" Detect modifications in vim buffers
+Plug 'let-def/vimbufsync'
+
 " Execute whole/part of editing file and show the result
 " Plug 'thinca/vim-quickrun'
 
@@ -121,11 +132,16 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " Haskell
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-" Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
-" Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim', 'for': 'haskell' }
+Plug 'nbouscal/vim-stylish-haskell', { 'for': 'haskell' }
+
+" Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+" Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
+
+" Coq
+Plug 'whonore/Coqtail'
 
 " Markdown
 Plug 'tpope/vim-markdown'
@@ -137,24 +153,21 @@ Plug 'keith/swift.vim'
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-
-let g:racer_cmd = "/Users/romac/.cargo/bin/racer"
-let g:racer_experimental_completer = 1
 let g:rustfmt_autosave = 1
+let g:rustfmt_command = 'rustup run nightly rustfmt'
 
-au FileType rust nmap gd <Plug>(rust-def)
-au FileType rust nmap gs <Plug>(rust-def-split)
-au FileType rust nmap gx <Plug>(rust-def-vertical)
-au FileType rust nmap <leader>gd <Plug>(rust-doc)
+" Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+" let g:racer_cmd = "/Users/romac/.cargo/bin/racer"
+" let g:racer_experimental_completer = 1
+
+" au FileType rust nmap gd <Plug>(rust-def)
+" au FileType rust nmap gs <Plug>(rust-def-split)
+" au FileType rust nmap gx <Plug>(rust-def-vertical)
+" au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 " Scala
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 " Plug 'ensime/ensime-vim'
-
-augroup filetypedetect
-    au BufRead,BufNewFile *.sbt set filetype=scala
-augroup END
 
 " Elixir
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
@@ -215,6 +228,19 @@ call plug#end()
 
 " }}}
 
+" Scala {{{
+
+" Scalafmt
+" augroup filetype_scala
+"   au!
+"   au BufRead,BufNewFile *.sbt set filetype=scala
+"   au BufWrite *.scala :Autoformat
+"   let g:formatdef_scalafmt = "'ng scalafmt --stdin'"
+"   let g:formatters_scala = ['scalafmt']
+" augroup END
+
+" }}}
+
 " Java decompiler
 
 augroup filetypedetect
@@ -225,19 +251,32 @@ augroup END
 
 " Bundle config {{{
 
+" Language Server
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient_textDocument_rename()<CR>
+
 " Deoplete
 
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#disable_auto_complete = 1
+" let g:deoplete#disable_auto_complete = 1
 
-imap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ deoplete#mappings#manual_complete()
+inoremap <silent><expr> <TAB>
+\ pumvisible() ? "\<C-n>" :
+\ <SID>check_back_space() ? "\<TAB>" :
+\ deoplete#mappings#manual_complete()
 function! s:check_back_space() abort "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~ '\s'
+endfunction "}}}
 
 " Markdown
 let g:vim_markdown_frontmatter=1
@@ -269,8 +308,8 @@ set background=dark
 exe 'colorscheme ' . my_colorscheme
 
 " Re-apply color scheme to fix wrong colors and missing airline theme
-exe 'autocmd VimEnter * colorscheme ' . my_colorscheme
-autocmd VimEnter * AirlineRefresh
+" exe 'autocmd VimEnter * colorscheme ' . my_colorscheme
+" autocmd VimEnter * AirlineRefresh
 
 " Highlight current line
 set cursorline
@@ -431,7 +470,7 @@ nmap <Leader>s :Ag <C-R><C-W><CR>
 nnoremap <Leader>a :Ag 
 
 " Show all TODO in the project
-command Todo Ag TODO\|FIXME
+command Todo Rg 'TODO\|FIXME'
 
 " Execute current file
 nmap <leader>x :!./%<cr>
@@ -643,6 +682,9 @@ map <leader>ap :Align
 
 " Haskell {{{
 
+" Linters
+let g:neomake_haskell_enabled_makers = ['hdevtools', 'hlint', 'ghcmod']
+
 " Enable some tabular presets for Haskell
 let g:haskell_tabular = 1
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
@@ -651,8 +693,6 @@ let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
 let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-
-
 
 " Intero
 
@@ -675,11 +715,14 @@ nnoremap <Leader>hid :InteroGoToDef<CR>
 " Highlight uses of identifier:
 nnoremap <Leader>hiu :InteroUses<CR>
 
-" Reload the file in Intero after saving
-" autocmd! BufWritePost *.hs InteroReload
+augroup filetype_haskell
+  let g:haskellmode_completion_ghc = 0
+  au FileType haskell setlocal omnifunc=necoghc#omnifunc
 
-let g:haskellmode_completion_ghc = 0
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+  " Reload the file in Intero after saving
+  " autocmd! BufWritePost *.hs InteroReload
+augroup END
+
 
 " GHC Mod
 " augroup haskell
@@ -699,13 +742,12 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 " }}}
 
-
 " Tamarin Prover {{{
 
-" autocommand to detect .spthy and .sapic files
-augroup filetypedetect
-au BufNewFile,BufRead *.spthy	setf spthy
-au BufNewFile,BufRead *.sapic	setf sapic
+augroup filetype_tamaring
+  au!
+  au BufNewFile,BufRead *.spthy	setf spthy
+  au BufNewFile,BufRead *.sapic	setf sapic
 augroup END
 
 " }}}

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+java $JAVA_OPTS -jar "$0-1.12.15.jar" $*
+

@@ -1,7 +1,7 @@
 
 [user]
-  name = Romain Ruetschi
-  email = romain.ruetschi@gmail.com
+	name = Romain Ruetschi
+	email = romain.ruetschi@gmail.com
 	signingkey = C81484B9
 
 [alias]
@@ -100,6 +100,7 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 
 [transfer]
 	fsckobjects = true
