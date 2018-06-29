@@ -19,6 +19,9 @@ alias tmn='tmux new -s $(basename $(pwd))'
 # Less
 alias -g L=less
 
+# Solidity
+# alias solc='docker exec solc-stable solc'
+
 # Timelog
 export TIMELOG=~/Dropbox/EPFL/LARA/LARA-`date '+%Y-%m'`.timelog
 

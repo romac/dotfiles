@@ -60,6 +60,7 @@ Plug 'morhetz/gruvbox'
 Plug 'w0ng/vim-hybrid'
 Plug 'altercation/vim-colors-solarized'
 Plug 'raichoo/monodark'
+Plug 'endel/vim-github-colorscheme'
 
 " Support bundles
 Plug 'jgdavey/tslime.vim'
@@ -72,6 +73,7 @@ Plug 'moll/vim-bbye'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-scripts/gitignore'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'machakann/vim-highlightedyank'
 
 " Plug 'luochen1990/rainbow'
 " let g:rainbow_active = 1
@@ -154,7 +156,7 @@ Plug 'keith/swift.vim'
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 let g:rustfmt_autosave = 1
-let g:rustfmt_command = 'rustup run nightly rustfmt'
+let g:rustfmt_command = 'rustup run stable rustfmt'
 
 " Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 " let g:racer_cmd = "/Users/romac/.cargo/bin/racer"
@@ -196,7 +198,7 @@ let g:neomake_dafny_enabled_makers = ['dafny']
 " Plug 'gorodinskiy/vim-coloresque'
 
 " HTML
-Plug 'xenoterracide/html.vim', { 'for': 'elixir' }
+Plug 'xenoterracide/html.vim'
 Plug 'mattn/emmet-vim'
 
 " Javascript & JSON
@@ -415,6 +417,10 @@ nnoremap <leader>mo :set mouse=<cr>
 
 " Default to mouse mode on
 set mouse=a
+
+" Show live substitutions
+:set inccommand=nosplit
+
 " }}}
 
 " Terminal {{{

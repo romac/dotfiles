@@ -4,6 +4,7 @@
 *~
 
 *.hi
+.stack-work/
 
 *.o
 
@@ -11,3 +12,5 @@ TSWLatexian*
 
 .agignore
 .ignore
+
+.git/
