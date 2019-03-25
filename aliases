@@ -6,12 +6,11 @@ alias -g vim=nvim
 alias -g v=nvim
 alias -g n=nvim
 
+# exa
+alias -g ls=exa
+
 # Scala
 alias scala='scala -Dscala.color'
-
-# SBT
-alias sbt_out='mv ~/.sbt/{credentials,repositories} ~/Code/sbt_config/'
-alias sbt_in='mv ~/Code/sbt_config/{credentials,repositories} ~/.sbt/'
 
 # Tmux
 alias tmn='tmux new -s $(basename $(pwd))'
@@ -19,32 +18,11 @@ alias tmn='tmux new -s $(basename $(pwd))'
 # Less
 alias -g L=less
 
+# Rg
+alias -g ag=rg
+
 # Solidity
 # alias solc='docker exec solc-stable solc'
-
-# Timelog
-export TIMELOG=~/Dropbox/EPFL/LARA/LARA-`date '+%Y-%m'`.timelog
-
-ti() {
-  echo i $(date '+%Y-%m-%d %H:%M:%S') $* | tee -a $TIMELOG
-}
-
-to() {
-  echo o $(date '+%Y-%m-%d %H:%M:%S') | tee -a $TIMELOG
-}
-
-alias tm="hledger -f $TIMELOG register -p 'this month' --depth 1 --empty"
-alias tw="hledger -f $TIMELOG register -p 'this week' --depth 1 --empty"
-alias tt="hledger -f $TIMELOG register -p 'today' --depth 1 --empty"
-
-# Update all dependencies to their latest version
-npm-update-deps() {
-  if [[ $1 == "--dev" ]]; then
-    jq -r '.devDependencies|keys|.[]' package.json | xargs -I% npm install %@latest --save-dev
-  else
-    jq -r '.dependencies|keys|.[]' package.json | xargs -I% npm install %@latest --save
-  fi
-}
 
 # Git
 alias gpf='git push --force-with-lease'
@@ -156,15 +134,18 @@ function setjdk() {
  }
 
 function mirror-site() {
-  wget \
-     --recursive \
-     --no-clobber \
+  nice wget \
+     --mirror \
+     --no-verbose \
+     --execute robots=off \
      --page-requisites \
-     --html-extension \
+     --adjust-extension \
      --convert-links \
-     --domains $1 \
+     --span-hosts \
      --no-parent \
-     $2
+     --warc-file "$1" \
+     --domains "$1" \
+     "$2"
 }
 
 alias ghci='stack ghci --ghci-options "-interactive-print=Text.Pretty.Simple.pPrint" --package pretty-simple'

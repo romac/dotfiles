@@ -24,7 +24,8 @@
 
   # amend a commit
   amend = commit --amend
-  a = amend
+  amd = commit --amend --date=now --no-edit
+  a = commit --amend
 
   # remove files from index
   unstage = reset HEAD
@@ -43,6 +44,10 @@
   publish = !legit publish \"$@\"
   graft = !legit graft \"$@\"
   up = "!git remote update -p; git merge --ff-only @{u}"
+
+  log-fancy = "!git -c color.diff=off -c pager.log='fancydiff stdin --pager=less' log $@"
+  show-fancy = "!git -c color.diff=off -c pager.show='fancydiff stdin --pager=less' show $@"
+  diff-fancy = "!git -c color.diff=off -c pager.diff='fancydiff stdin --pager=less' diff $@"
 
 [diff]
   renames = copy
@@ -104,3 +109,10 @@
 
 [transfer]
 	fsckobjects = true
+
+[fetch]
+	fsckobjects = true
+
+[receive]
+	fsckobjects = true
+
