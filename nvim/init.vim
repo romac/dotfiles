@@ -13,9 +13,11 @@ Plug 'vim-airline/vim-airline'
 " Text manipulation
 Plug 'vim-scripts/Align'
 Plug 'tpope/vim-commentary'
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'tpope/vim-surround'
+Plug 'luochen1990/rainbow'
+Plug 'sbdchd/neoformat'
 
 " Search
 Plug 'ctrlpvim/ctrlp.vim'
@@ -23,7 +25,7 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'vim-scripts/gitignore'
 let g:rg_highlight = 1
 
-" Autocomplete	
+" Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Language support
@@ -37,21 +39,40 @@ Plug 'tpope/vim-fugitive'
 Plug 'int3/vim-extradite'
 Plug 'sgur/vim-lazygutter'
 
+" Idris
+Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
+
+" SMT-LIB
+Plug 'bohlender/vim-smt2'
+
 " Haskell
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim', 'for': 'haskell' }
-Plug 'nbouscal/vim-stylish-haskell', { 'for': 'haskell' }
+" Plug 'nbouscal/vim-stylish-haskell', { 'for': 'haskell' }
+
+" Dhall
+Plug 'vmchale/dhall-vim', { 'for': 'dhall' }
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 let g:rustfmt_autosave = 1
 let g:rustfmt_command = 'rustup run stable rustfmt'
 
+" TOML
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+
+" Swift
+Plug 'keith/swift.vim'
+
 " Coq
-Plug 'whonore/Coqtail', { 'for': 'coq' } 
+Plug 'whonore/Coqtail', { 'for': 'coq' }
+Plug 'let-def/vimbufsync'
 
 " Scala
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+
+" Kotlin
+Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 
 " Nix
 Plug 'LnL7/vim-nix', { 'for': 'nix' }
@@ -80,7 +101,7 @@ noremap ,, ,
 nnoremap <space> za
 
 " }}}
- 
+
 " Colors and Fonts {{{
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -161,13 +182,13 @@ set noerrorbells
 set vb t_vb=
 
 " Force redraw
-map <silent> <leader>r :redraw!<CR>
+map <silent> <leader>R :redraw!<CR>
 
 " Turn mouse mode on
-nnoremap <leader>ma :set mouse=a<cr>
+" nnoremap <leader>ma :set mouse=a<cr>
 
 " Turn mouse mode off
-nnoremap <leader>mo :set mouse=<cr>
+" nnoremap <leader>mo :set mouse=<cr>
 
 " Default to mouse mode on
 set mouse=a
@@ -184,12 +205,27 @@ set mouse=a
 set nobackup
 set nowb
 set noswapfile
+set undofile
+set undodir=~/.config/nvim/undodir
+
 
 " Open file prompt with current path
 nmap <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 
 " Show undo tree
 nmap <silent> <leader>u :GundoToggle<CR>
+
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+
+map <leader>m :call RenameFile()<cr>
 
 " CtrlP settings
 nnoremap <silent> <Leader><space> :CtrlP<CR>
@@ -209,8 +245,10 @@ if executable('fd')
 endif
 
 " Search for word under the cursor in the entire project
-" (requires the silver searcher (ag) plugin)
-nmap <Leader>s :Rg <C-R><C-W><CR>
+nmap <Leader>S :Rg <C-R><C-W><CR>
+
+" Toggle Rg
+nmap <Leader>r :Rg<space>
 
 " Execute current file
 nmap <leader>x :!./%<cr>
@@ -265,6 +303,11 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-k> <c-w>k
 nnoremap <c-j> <c-w>j
 nnoremap <c-l> <c-w>l
+
+" Terminal mappings
+
+tnoremap <Esc> <C-\><C-n>
+tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
 tnoremap <c-h> <c-\><c-n><c-w>h
 tnoremap <c-k> <c-\><c-n><c-w>k
@@ -422,11 +465,11 @@ let g:LanguageClient_serverCommands = {
 
 " \ 'scala': ['node', expand('~/.bin/sbt-server-stdio.js')],
 
-nnoremap <F6> :call LanguageClient_contextMenu()<CR>
+nnoremap <F1> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " Or map each action separately
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " }}}
 
@@ -435,6 +478,26 @@ augroup filetypedetect
 au bufreadpost,filereadpost *.class silent %!cfr %
 au bufreadpost,filereadpost *.class silent normal gg=G
 au bufread,bufnewfile *.class setfiletype class
+augroup END
+
+" Neoformat
+let g:neoformat_enabled_haskell = ['brittany']
+
+let g:neoformat_enabled_scala = ['scalafmt']
+let g:neoformat_scala_scalafmt = {
+  \ 'exe': 'scalafmt-native',
+  \ 'args': ['--stdin'],
+  \ 'stdin': 1,
+  \ }
+
+let g:neoformat_enabled_swift = ['swiftformat']
+
+augroup fmt
+  autocmd!
+
+  autocmd BufWritePre *.rs Neoformat
+  autocmd BufWritePre *.js Neoformat
+  autocmd BufWritePre *.swift Neoformat
 augroup END
 
 " Deoplete
