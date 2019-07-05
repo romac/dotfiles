@@ -29,10 +29,13 @@ let g:rg_highlight = 1
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Language support
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': './install.sh'
-    \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': './install.sh'
+"     \ }
+
+" ALE
+Plug 'w0rp/ale'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -44,6 +47,9 @@ Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 
 " SMT-LIB
 Plug 'bohlender/vim-smt2'
+
+" Nginx
+Plug 'chr4/nginx.vim'
 
 " Haskell
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
@@ -60,6 +66,9 @@ let g:rustfmt_command = 'rustup run stable rustfmt'
 
 " TOML
 Plug 'cespare/vim-toml', { 'for': 'toml' }
+augroup filetypedetect
+au bufread,bufnewfile *.toml setfiletype toml
+augroup END
 
 " Swift
 Plug 'keith/swift.vim'
@@ -69,13 +78,18 @@ Plug 'whonore/Coqtail', { 'for': 'coq' }
 Plug 'let-def/vimbufsync'
 
 " Scala
-Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+Plug 'derekwyatt/vim-scala', { 'for': ['scala', 'sbt'] }
+
+" Flix
+Plug '/Users/romac/Code/vim-flix', { 'for': 'flix' }
 
 " Kotlin
 Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 
 " Nix
 Plug 'LnL7/vim-nix', { 'for': 'nix' }
+
+Plug 'ap/vim-css-color', { 'for': 'css' }
 
 call plug#end()
 
@@ -129,7 +143,7 @@ let g:airline_powerline_fonts = 1
 " VIM user interface {{{
 
 " Set 7 lines to the cursor - when moving vertically using j/k
-set so=4
+set so=7
 
 " Turn on the WiLd menu
 set wildmenu
@@ -252,6 +266,9 @@ nmap <Leader>r :Rg<space>
 
 " Execute current file
 nmap <leader>x :!./%<cr>
+
+" Show quickfix window
+:nmap <leader>q :lop<cr>
 
 " }}}
 
@@ -475,10 +492,24 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 
 " Java decompiler
 augroup filetypedetect
-au bufreadpost,filereadpost *.class silent %!cfr %
-au bufreadpost,filereadpost *.class silent normal gg=G
-au bufread,bufnewfile *.class setfiletype class
+au BufReadPost,FileReadPost *.class silent %!cfr %
+au BufReadPost,FileReadPost *.class silent normal gg=G
+au BufRead,BufNewFile       *.class setfiletype java
 augroup END
+
+" Browse ZIP files
+au BufRead,BufNewFile *.jar,*.war,*.ear,*.sar,*.rar set filetype=zip
+
+" ALE
+let g:ale_sign_error = "✗"
+let g:ale_sign_warning = "⚠"
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'rust': ['rls'],
+\}
+
+nmap <leader>l :lopen<CR>
 
 " Neoformat
 let g:neoformat_enabled_haskell = ['brittany']
