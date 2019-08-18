@@ -7,7 +7,9 @@ alias -g v=nvim
 alias -g n=nvim
 
 # exa
-alias -g ls=exa
+alias ls=exa
+alias l=exa
+alias la='exa -la'
 
 # Scala
 alias scala='scala -Dscala.color'
@@ -151,4 +153,17 @@ function mirror-site() {
 alias ghci='stack ghci --ghci-options "-interactive-print=Text.Pretty.Simple.pPrint" --package pretty-simple'
 
 alias ghci-core="stack ghci --ghci-options '-ddump-simpl -dsuppress-idinfo -dsuppress-coercions -dsuppress-type-applications -dsuppress-uniques -dsuppress-module-prefixes'"
+
+function gen-pkcs8-ec256() {
+  /usr/local/Cellar/openssl/1.0.2s/bin/openssl genpkey -algorithm EC \
+    -pkeyopt ec_paramgen_curve:P-256 \
+    -pkeyopt ec_param_enc:named_curve | \
+  /usr/local/Cellar/openssl/1.0.2s/bin/openssl pkcs8 -topk8 -nocrypt -outform der > "$1"
+}
+
+function read-pkcs8-public-key() {
+  openssl pkey -pubout -inform der -outform der \
+    -in "$1" \
+    -out "$2"
+}
 
