@@ -382,12 +382,75 @@ let g:tagbar_autofocus = 1
 
 " Coc {{{
 
+" Use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
 " Use <Tab> and <S-Tab> to navigate the completion list:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Use <cr> to confirm completion
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` for navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Remap for do codeAction of current line
+nmap <leader>ac <Plug>(coc-codeaction)
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" Don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" Always show signcolumns
+set signcolumn=yes
+
+" Some server have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
 
 " Highlight comments in JSON
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -485,24 +548,6 @@ map <leader>ap :Align
 
 " }}}
 
-" Language Server {{{
-
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-
-let g:LanguageClient_serverCommands = {
-    \ 'haskell': ['hie-wrapper', '--lsp'],
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ }
-
-nnoremap <F1> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-" Or map each action separately
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-
-" }}}
-
 " Java decompiler
 augroup filetypedetect
 au BufReadPost,FileReadPost *.class silent %!cfr %
@@ -527,6 +572,10 @@ let g:ale_linters = {}
 nmap <leader>l :lopen<CR>
 
 " Neoformat
+
+" Remap for do action format
+nnoremap <silent> F :Neoformat<CR>
+
 let g:neoformat_enabled_haskell = ['brittany']
 
 let g:neoformat_enabled_scala = ['scalafmt']
