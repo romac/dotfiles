@@ -56,6 +56,10 @@ Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim', 'for': 'haskell' }
 " Plug 'nbouscal/vim-stylish-haskell', { 'for': 'haskell' }
 
+" PureScript
+Plug 'raichoo/purescript-vim', { 'for': 'purescript' }
+Plug 'frigoeu/psc-ide-vim', { 'for': 'purescript' }
+
 " Dhall
 Plug 'vmchale/dhall-vim', { 'for': 'dhall' }
 
@@ -71,7 +75,7 @@ au bufread,bufnewfile *.toml setfiletype toml
 augroup END
 
 " Swift
-Plug 'keith/swift.vim'
+Plug 'keith/swift.vim', { 'for': 'swift' }
 
 " Coq
 Plug 'whonore/Coqtail', { 'for': 'coq' }
@@ -89,7 +93,10 @@ Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 " Nix
 Plug 'LnL7/vim-nix', { 'for': 'nix' }
 
+" HTML & CSS
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
 Plug 'ap/vim-css-color', { 'for': 'css' }
+let g:user_emmet_leader_key=','
 
 call plug#end()
 
