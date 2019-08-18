@@ -15,3 +15,5 @@ bin/joe
 bin/meteor
 
 bin/protoc
+bin/jsonld-util
+bin/scalafmt-native
