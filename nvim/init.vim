@@ -25,17 +25,11 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'vim-scripts/gitignore'
 let g:rg_highlight = 1
 
-" Autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" Language support
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': './install.sh'
-"     \ }
-
 " ALE
 Plug 'w0rp/ale'
+
+" Coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -83,6 +77,7 @@ Plug 'let-def/vimbufsync'
 
 " Scala
 Plug 'derekwyatt/vim-scala', { 'for': ['scala', 'sbt'] }
+au BufRead,BufNewFile *.sbt set filetype=scala
 
 " Flix
 Plug '/Users/romac/Code/vim-flix', { 'for': 'flix' }
@@ -228,7 +223,6 @@ set nowb
 set noswapfile
 set undofile
 set undodir=~/.config/nvim/undodir
-
 
 " Open file prompt with current path
 nmap <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
@@ -386,6 +380,20 @@ let g:tagbar_autofocus = 1
 
 " }}}
 
+" Coc {{{
+
+" Use <Tab> and <S-Tab> to navigate the completion list:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Use <cr> to confirm completion
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Highlight comments in JSON
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" }}}
+
 " Status line {{{
 
 " Always show the status line
@@ -487,8 +495,6 @@ let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ }
 
-" \ 'scala': ['node', expand('~/.bin/sbt-server-stdio.js')],
-
 nnoremap <F1> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " Or map each action separately
@@ -511,10 +517,12 @@ au BufRead,BufNewFile *.jar,*.war,*.ear,*.sar,*.rar set filetype=zip
 let g:ale_sign_error = "✗"
 let g:ale_sign_warning = "⚠"
 
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'rust': ['rls'],
-\}
+let g:ale_linters = {}
+
+" let g:ale_linters = {
+" \   'javascript': ['eslint'],
+" \   'rust': ['rls'],
+" \}
 
 nmap <leader>l :lopen<CR>
 
@@ -537,17 +545,4 @@ augroup fmt
   autocmd BufWritePre *.js Neoformat
   autocmd BufWritePre *.swift Neoformat
 augroup END
-
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-
-inoremap <silent><expr> <TAB>
-\ pumvisible() ? "\<C-n>" :
-\ <SID>check_back_space() ? "\<TAB>" :
-\ deoplete#mappings#manual_complete()
-function! s:check_back_space() abort "{{{
-let col = col('.') - 1
-return !col || getline('.')[col - 1]  =~ '\s'
-endfunction "}}}
-
 
