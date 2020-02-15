@@ -17,3 +17,4 @@ bin/meteor
 bin/protoc
 bin/jsonld-util
 bin/scalafmt-native
+bin/scalafmt

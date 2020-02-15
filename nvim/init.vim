@@ -5,6 +5,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Colorschemes
 Plug 'w0ng/vim-hybrid'
+Plug 'lifepillar/vim-solarized8'
 
 " IDE
 Plug 'scrooloose/nerdtree'
@@ -17,6 +18,13 @@ Plug 'tpope/vim-commentary'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'tpope/vim-surround'
 Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+\  'separately': {
+\    'html': 0,
+\  }
+\}
+
 Plug 'sbdchd/neoformat'
 
 " Search
@@ -26,7 +34,7 @@ Plug 'vim-scripts/gitignore'
 let g:rg_highlight = 1
 
 " ALE
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " Coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -92,6 +100,9 @@ Plug 'LnL7/vim-nix', { 'for': 'nix' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
 Plug 'ap/vim-css-color', { 'for': 'css' }
 let g:user_emmet_leader_key=','
+
+" ZZ
+Plug 'aep/zz', { 'rtp': 'zz.vim', 'for': 'zz' }
 
 call plug#end()
 
@@ -424,6 +435,8 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocCommand<cr>
 " Find symbol of current document
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
@@ -434,6 +447,28 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" Fix current diagnostic 
+nnoremap <silent> <space>x  :<C-u>CocFix<CR>
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Used to expand decorations in worksheets
+nmap <Leader>ws <Plug>(coc-metals-expand-decoration)
+
+" Toggle panel with Tree Views
+nnoremap <silent> <space>t :<C-u>CocCommand metals.tvp<CR>
+" Toggle Tree View 'metalsBuild'
+nnoremap <silent> <space>tb :<C-u>CocCommand metals.tvp metalsBuild<CR>
+" Toggle Tree View 'metalsCompile'
+nnoremap <silent> <space>tc :<C-u>CocCommand metals.tvp metalsCompile<CR>
+" Reveal current current class (trait or object) in Tree View 'metalsBuild'
+nnoremap <silent> <space>tf :<C-u>CocCommand metals.revealInTreeView metalsBuild<CR>
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
 
 " Smaller updatetime for CursorHold & CursorHoldI
 set updatetime=300
@@ -557,19 +592,6 @@ augroup END
 
 " Browse ZIP files
 au BufRead,BufNewFile *.jar,*.war,*.ear,*.sar,*.rar set filetype=zip
-
-" ALE
-let g:ale_sign_error = "✗"
-let g:ale_sign_warning = "⚠"
-
-let g:ale_linters = {}
-
-" let g:ale_linters = {
-" \   'javascript': ['eslint'],
-" \   'rust': ['rls'],
-" \}
-
-nmap <leader>l :lopen<CR>
 
 " Neoformat
 

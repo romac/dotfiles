@@ -23,6 +23,7 @@
   pom = push origin master
   graph = log --oneline --graph
   changes = log --oneline --reverse
+  recent-branches = for-each-ref --sort=committerdate refs/heads/ --format='%(color: red)%(committerdate:short) %(color: cyan)%(refname:short)'
 
   # amend a commit
   amend = commit --amend
@@ -34,7 +35,8 @@
   # uncommit the last commit, leaving the files in precommitted state
   uncommit = reset --soft HEAD^
 
-  lg = log --color --decorate --graph --pretty --abbrev-commit --oneline
+  ; lg = log --color --decorate --graph --pretty --abbrev-commit --oneline
+  lg = log --graph --decorate --pretty=format:'%Cred%h%Creset -%C(ul green)%d%Creset %s %C(yellow)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
   switch = !legit switch \"$@\"
   branches = !legit branches

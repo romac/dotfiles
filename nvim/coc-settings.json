@@ -1,32 +1,65 @@
 {
-  // Rust Analyzer
   "languageserver": {
-    "rust": {
-      "command": "ra_lsp_server",
-      "filetypes": ["rust"],
-      "rootPatterns": ["Cargo.toml"]
-    },
-    // Haskell
+
+    // Rust Analyzer (unused, see coc-rust-analyzer)
+    // "rust": {
+    //   "command": "ra_lsp_server",
+    //   "filetypes": ["rust"],
+    //   "rootPatterns": ["Cargo.toml"]
+    // },
+
+    // Haskell: ghcide
     "haskell": {
-      "command": "hie-wrapper",
-      "rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
-      "filetypes": ["hs", "lhs", "haskell"],
+      "command": "ghcide",
+      "args": [
+        "--lsp"
+      ],
+      "rootPatterns": [
+        ".stack.yaml",
+        ".hie-bios",
+        "BUILD.bazel",
+        "cabal.config",
+        "package.yaml"
+      ],
+      "filetypes": [
+        "hs",
+        "lhs",
+        "haskell"
+      ],
       "initializationOptions": {
-        "languageServerHaskell": {}
+        "languageServerHaskell": {
+          "hlintOn": true,
+          "maxNumberOfProblems": 10,
+          "completionSnippetsOn": true
+        }
       }
     },
-    // Scala
-    "metals": {
-      "command": "metals-vim",
-      "rootPatterns": ["build.sbt"],
-      "filetypes": ["scala", "sbt"]
-    },
+
+    // Haskell: haskell-ide-engine
+    // "haskell": {
+    //   "command": "hie-wrapper",
+    //   "rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
+    //   "filetypes": ["hs", "lhs", "haskell"],
+    //   "initializationOptions": {
+    //     "languageServerHaskell": {}
+    //   }
+    // },
+
+    // Scala (unused, see coc-metals)
+    // "metals": {
+    //   "command": "metals-vim",
+    //   "rootPatterns": ["build.sbt"],
+    //   "filetypes": ["scala", "sbt"]
+    // },
+
+    // Purescript
     "purescript": {
       "command": "purescript-language-server",
       "args": ["--stdio"],
       "filetypes": ["purescript"],
       "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall"]
     },
+
     // C / C++ / Objective-C
     "ccls": {
       "command": "ccls",
