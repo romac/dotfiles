@@ -6,9 +6,9 @@ alias -g vim=nvim
 alias -g n=nvim
 
 # exa
-alias ls=exa
-alias l=exa
-alias la='exa -la'
+# alias ls=exa
+# alias l=exa
+# alias la='exa -la'
 
 # Scala
 alias scala='scala -Dscala.color'
@@ -22,23 +22,13 @@ alias -g L=less
 # Rg
 alias -g ag=rg
 
-# Solidity
-# alias solc='docker exec solc-stable solc'
-
 # Git
+alias g='git'
+alias gp='git push'
 alias gpf='git push --force-with-lease'
 
 # tree
 alias tree='tree -C'
-
-# Syntax highlight
-alias -g ccat='pygmentize -g'
-
-# Latexian
-alias latexian='open -a Latexian'
-
-# LÖVE
-alias love='exec /Applications/love.app/Contents/MacOS/love'
 
 # Commands
 alias flushdns='dscacheutil -flushcache'
@@ -47,6 +37,10 @@ alias untgz="tar -xzvf"
 
 # Unformat text
 alias unformat='pbpaste | pbcopy'
+
+# Light theme for bat
+alias lbat='bat --theme "Solarized (light)"'
+
 
 # Shortcuts
 alias h="history"
@@ -112,6 +106,19 @@ alias postgres-stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
 
 # H2
 alias h2browser="java -cp ~/.ivy2/cache/com.h2database/h2/jars/h2-1.3.175.jar org.h2.tools.Server -web"
+
+# Docker
+alias docker-ip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
+
+function docker-psi() {
+  (
+    echo 'CONTAINER ID|IMAGE|COMMAND|CREATED|STATUS|IP|PORTS|NAMES';
+    # truncating Id to 12 chars is docker ps default
+    # truncating StartedAt to 19 gives seconds resolution: "2016-11-15T12:57:56"
+    # space before `{{end}}` intentional, to separate if you have multiple networks with IP(?)
+    docker ps --quiet "$@" | xargs docker inspect --format='{{printf "%.12s" .Id}}|{{.Config.Image}}|{{.Config.Cmd}}|{{printf "%.19s" .State.StartedAt}}|{{.State.Status}}|{{range $net, $conf := .NetworkSettings.Networks}}{{$net}}:{{$conf.IPAddress}} {{end}}|{{.NetworkSettings.Ports}}|{{.Name}}'
+  ) | column -t -s '|'
+}
 
 # Java
 # http://superuser.com/a/568016
