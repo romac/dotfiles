@@ -11,6 +11,9 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 
+" Distraction-free writing
+Plug 'junegunn/goyo.vim'
+
 " Text manipulation
 Plug 'vim-scripts/Align'
 Plug 'tpope/vim-commentary'
@@ -45,7 +48,7 @@ Plug 'int3/vim-extradite'
 Plug 'sgur/vim-lazygutter'
 
 " Idris
-Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
+Plug 'edwinb/idris2-vim', { 'for': 'idris' }
 
 " SMT-LIB
 Plug 'bohlender/vim-smt2'
@@ -67,8 +70,8 @@ Plug 'vmchale/dhall-vim', { 'for': 'dhall' }
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-let g:rustfmt_autosave = 1
-let g:rustfmt_command = 'rustup run stable rustfmt'
+" let g:rustfmt_autosave = 1
+" let g:rustfmt_command = 'rustup run stable rustfmt'
 
 " TOML
 Plug 'cespare/vim-toml', { 'for': 'toml' }
@@ -82,6 +85,10 @@ Plug 'keith/swift.vim', { 'for': 'swift' }
 " Coq
 Plug 'whonore/Coqtail', { 'for': 'coq' }
 Plug 'let-def/vimbufsync'
+
+" TLA+
+" Plug 'hwayne/tla.vim', { 'for': 'tla' }
+Plug 'florentc/vim-tla', { 'for': 'tla' }
 
 " Scala
 Plug 'derekwyatt/vim-scala', { 'for': ['scala', 'sbt'] }
@@ -115,8 +122,8 @@ let mapleader = ","
 let g:mapleader = ","
 
 " Local leader key
-let localleader = "_"
-let g:localleader = "_"
+let localleader = "\\"
+let g:localleader = "\\"
 
 " Leader key timeout
 set tm=2000
@@ -124,8 +131,14 @@ set tm=2000
 " Allow the normal use of "," by pressing it twice
 noremap ,, ,
 
+" Disable folds by default
+set nofoldenable
+
 " Space open/closes folds
 nnoremap <space> za
+
+" I can't type
+command! W :w
 
 " }}}
 
@@ -143,9 +156,14 @@ syntax enable
 " Enable True Color
 set termguicolors
 
-" Colorscheme
-set background=dark
-colorscheme hybrid
+" Background
+if $ITERM_PROFILE == 'Light'
+  set background=light
+  colorscheme solarized8_high
+else
+  set background=dark
+  colorscheme hybrid
+endif
 
 " Highlight current line
 set cursorline
@@ -413,8 +431,15 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Remap for do codeAction of current line
-nmap <leader>ac <Plug>(coc-codeaction)
+" Applying codeAction to the selected region.
+" Example: `<leader>cap` for current paragraph
+xmap <leader>c  <Plug>(coc-codeaction-selected)
+nmap <leader>c  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -590,6 +615,13 @@ au BufReadPost,FileReadPost *.class silent normal gg=G
 au BufRead,BufNewFile       *.class setfiletype java
 augroup END
 
+" TLA+
+augroup tla_conceal
+  autocmd!
+  autocmd VimEnter,ColorScheme *.tla set conceallevel=2
+  autocmd VimEnter,ColorScheme *.tla hi clear Conceal
+augroup END
+
 " Browse ZIP files
 au BufRead,BufNewFile *.jar,*.war,*.ear,*.sar,*.rar set filetype=zip
 
@@ -607,12 +639,19 @@ let g:neoformat_scala_scalafmt = {
   \ 'stdin': 1,
   \ }
 
+let g:neoformat_enabled_rust = []
+" let g:neoformat_rust_rustfmtnightly = {
+"   \ 'exe': 'rustup',
+"   \ 'args': ['run', 'nightly', 'rustfmt'],
+"   \ 'stdin': 1,
+"   \ }
+
 let g:neoformat_enabled_swift = ['swiftformat']
 
 augroup fmt
   autocmd!
 
-  autocmd BufWritePre *.rs Neoformat
+  " autocmd BufWritePre *.rs Neoformat
   autocmd BufWritePre *.js Neoformat
   autocmd BufWritePre *.swift Neoformat
 augroup END

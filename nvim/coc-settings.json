@@ -1,13 +1,17 @@
 {
-  "languageserver": {
+  "coc.preferences.formatOnSaveFiletypes": [
+    "rust"
+  ],
 
+  "rust-analyzer.inlayHints.chainingHints": false,
+
+  "languageserver": {
     // Rust Analyzer (unused, see coc-rust-analyzer)
     // "rust": {
     //   "command": "ra_lsp_server",
     //   "filetypes": ["rust"],
     //   "rootPatterns": ["Cargo.toml"]
     // },
-
     // Haskell: ghcide
     "haskell": {
       "command": "ghcide",
@@ -34,7 +38,6 @@
         }
       }
     },
-
     // Haskell: haskell-ide-engine
     // "haskell": {
     //   "command": "hie-wrapper",
@@ -44,26 +47,36 @@
     //     "languageServerHaskell": {}
     //   }
     // },
-
     // Scala (unused, see coc-metals)
     // "metals": {
     //   "command": "metals-vim",
     //   "rootPatterns": ["build.sbt"],
     //   "filetypes": ["scala", "sbt"]
     // },
-
     // Purescript
     "purescript": {
       "command": "purescript-language-server",
-      "args": ["--stdio"],
-      "filetypes": ["purescript"],
-      "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall"]
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "purescript"
+      ],
+      "rootPatterns": [
+        "bower.json",
+        "psc-package.json",
+        "spago.dhall"
+      ]
     },
-
     // C / C++ / Objective-C
     "ccls": {
       "command": "ccls",
-      "filetypes": ["c", "cpp", "objc", "objcpp"],
+      "filetypes": [
+        "c",
+        "cpp",
+        "objc",
+        "objcpp"
+      ],
       "rootPatterns": [
         ".ccls",
         "compile_commands.json",
@@ -72,6 +85,11 @@
         ".hg/"
       ],
       "initializationOptions": {
+        "clang": {
+          "extraArgs": [
+            "-isystem", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+          ]
+        },
         "cache": {
           "directory": "/tmp/ccls"
         }
