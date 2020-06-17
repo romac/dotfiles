@@ -1,8 +1,10 @@
-
 [user]
-	name = Romain Ruetschi
-	email = romain.ruetschi@gmail.com
-	signingkey = C81484B9
+  name = Romain Ruetschi
+  email = github@romac.me
+  signingkey = 10D510E3
+
+[includeIf "gitdir:~/Informal/"]
+  path = /Users/coromac/.gitconfig.informal
 
 [alias]
   c  = clone
@@ -19,6 +21,7 @@
   rc = rebase --continue
   ra = rebase --abort
   rs = rebase --skip
+  cp = cherry-pick
   up = pull upstream master
   pom = push origin master
   graph = log --oneline --graph
@@ -119,3 +122,5 @@
 [receive]
 	fsckobjects = true
 
+[commit]
+	gpgsign = true
