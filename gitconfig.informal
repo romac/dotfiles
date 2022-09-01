@@ -2,3 +2,7 @@
   name = Romain Ruetschi
   email = romain@informal.systems
   signingkey = 044377FF
+
+[commit]
+  template = ~/.gittemplate.informal
+

@@ -6,9 +6,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Colorschemes
 Plug 'w0ng/vim-hybrid'
 Plug 'lifepillar/vim-solarized8'
+Plug 'cocopon/iceberg.vim'
+Plug 'sainnhe/everforest'
 
 " IDE
 Plug 'scrooloose/nerdtree'
+" Plug 'ms-jpq/chadtree', { 'branch': 'chad', 'do': 'python3 -m chadtree deps' }
 Plug 'vim-airline/vim-airline'
 
 " Distraction-free writing
@@ -20,6 +23,15 @@ Plug 'tpope/vim-commentary'
 " Plug 'majutsushi/tagbar'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'tpope/vim-surround'
+Plug 'sbdchd/neoformat'
+" Plug 'SirVer/ultisnips'
+" let g:UltiSnipsExpandTrigger = "<c-m>"
+
+Plug 'honza/vim-snippets'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 let g:rainbow_conf = {
@@ -27,8 +39,6 @@ let g:rainbow_conf = {
 \    'html': 0,
 \  }
 \}
-
-Plug 'sbdchd/neoformat'
 
 " Search
 Plug 'ctrlpvim/ctrlp.vim'
@@ -46,6 +56,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'int3/vim-extradite'
 Plug 'sgur/vim-lazygutter'
+Plug 'tpope/vim-rhubarb'
 
 " Idris
 Plug 'edwinb/idris2-vim', { 'for': 'idris' }
@@ -70,8 +81,13 @@ Plug 'vmchale/dhall-vim', { 'for': 'dhall' }
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'mhinz/vim-crates'
 " let g:rustfmt_autosave = 1
 " let g:rustfmt_command = 'rustup run stable rustfmt'
+
+if has('nvim')
+  autocmd BufRead Cargo.toml call crates#toggle()
+endif
 
 " TOML
 Plug 'cespare/vim-toml', { 'for': 'toml' }
@@ -110,6 +126,17 @@ let g:user_emmet_leader_key=','
 
 " ZZ
 Plug 'aep/zz', { 'rtp': 'zz.vim', 'for': 'zz' }
+
+" Wiki
+Plug 'lervag/wiki.vim'
+let g:wiki_root = '~/Wiki'
+
+" Pact Smart Contracts
+Plug 'wsdjeg/vim-pact', { 'for': 'pact' }
+
+" Case conversions
+Plug 'tpope/vim-abolish'
+" nicwest/vim-camelsnek
 
 call plug#end()
 
@@ -156,13 +183,19 @@ syntax enable
 " Enable True Color
 set termguicolors
 
+let g:everforest_background = 'hard'
+
 " Background
 if $ITERM_PROFILE == 'Light'
   set background=light
   colorscheme solarized8_high
+  " colorscheme Iceberg
+  " colorscheme everforest
 else
   set background=dark
   colorscheme hybrid
+  " colorscheme Iceberg
+  " colorscheme everforest
 endif
 
 " Highlight current line
@@ -517,6 +550,10 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " }}}
 
+" No EOF newlines in Rust code
+" autocmd FileType rust set noendofline
+" autocmd FileType rust set nofixendofline
+
 " Status line {{{
 
 " Always show the status line
@@ -566,6 +603,24 @@ nmap <leader>sj :rightbelow new<CR>
 
 " }}}
 
+" CHADTree {{{
+
+" Toggle CHADTree
+" nnoremap <leader>f <cmd>CHADopen<cr>
+
+" Start CHADTree and leave the cursor in it.
+" autocmd VimEnter * CHADopen
+
+" let g:chadtree_settings = {}
+" let g:chadtree_settings.theme = {}
+" let g:chadtree_settings.theme.icon_glyph_set = 'ascii'
+" let g:chadtree_settings.theme.text_colour_set = 'nord' " 'nerdtree_syntax_dark'
+" let g:chadtree_settings.keymap = {}
+" let g:chadtree_settings.keymap.primary = ['o', '<enter>']
+" let g:chadtree_settings.keymap.open_sys = []
+
+" }}}
+
 " NERDTree {{{
 
 " Close nerdtree after a file is selected
@@ -590,6 +645,7 @@ nmap <silent> <leader>F <ESC>:NERDTreeToggle<CR>
 " Override ugly default arrows
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeSortOrder = []
 
 " }}}
 
@@ -650,8 +706,6 @@ let g:neoformat_enabled_swift = ['swiftformat']
 
 augroup fmt
   autocmd!
-
-  " autocmd BufWritePre *.rs Neoformat
   autocmd BufWritePre *.js Neoformat
   autocmd BufWritePre *.swift Neoformat
 augroup END

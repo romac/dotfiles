@@ -5,8 +5,11 @@
 alias -g vim=nvim
 alias -g n=nvim
 
+# Cargo
+alias c=cargo
+
 # exa
-# alias ls=exa
+# alias -g ls=exa
 # alias l=exa
 # alias la='exa -la'
 
@@ -21,6 +24,9 @@ alias -g L=less
 
 # Rg
 alias -g ag=rg
+
+# Python
+alias -g p3=python3
 
 # Git
 alias g='git'
@@ -67,7 +73,7 @@ alias top="top -o cpu"
 alias fs="stat -c \"%s bytes\""
 
 # Watch files
-# watch () { path="$1"; shift; /usr/local/bin/fswatch -o "$path" | /usr/bin/xargs -n1 -I{} "$@"; }
+watch () { path="$1"; shift; /usr/local/bin/fswatch -o "$path" | /usr/bin/xargs -n1 -I{} "$@"; }
 
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
@@ -194,3 +200,31 @@ function compress() {
     $@
 }
 
+function rdoc() {
+  open "https://docs.rs/$1"
+}
+
+function listening() {
+    if [ $# -eq 0 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
+}
+
+function sigusr1 {
+  ps aux | rg "$1" | awk '{ print $2 }' | head -n1 | xargs -I{} kill -SIGUSR1 {}
+}
+
+function sighup {
+  ps aux | rg "$1" | awk '{ print $2 }' | head -n1 | xargs -I{} kill -SIGHUP {}
+}
+
+alias hermes='cargo run --'
+
+alias flip="echo \"\n\n\n\n(╯°□°）╯︵ ┻━┻\n\n\n\n\"" 
+
+alias ibc0='RUST_LOG=ibc_proxy::listen=info cargo run -- --port 8220 --proxy http://localhost:26657 --db postgres://tendermint:tendermint@localhost/ibc0'
+alias ibc1='RUST_LOG=ibc_proxy::listen=info cargo run -- --port 8221 --proxy http://localhost:26557 --db postgres://tendermint:tendermint@localhost/ibc1'

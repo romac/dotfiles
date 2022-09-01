@@ -1,17 +1,34 @@
 {
+  // General
+  "coc.preferences.rootPatterns": [".git", "pyrightconfig.json"],
   "coc.preferences.formatOnSaveFiletypes": [
-    "rust"
+    "rust",
+    "python"
   ],
 
-  "rust-analyzer.inlayHints.chainingHints": false,
+  // Rust
+  "rust-analyzer.cargo.buildScripts.enable": false,
+  "rust-analyzer.cargo.features": "all",
+  "rust-analyzer.cargo.autoreload": true,
+  "rust-analyzer.checkOnSave.features": "all",
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.checkOnSave.allTargets": false,
+  "rust-analyzer.lens.enable": false,
+  "rust-analyzer.inlayHints.enable": true,
+  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.diagnostics.disabled": [
+    "unlinked-file",
+    "unresolved-import",
+    "unresolved-extern-crate"
+  ],
+
+  // Python
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Path": "/usr/local/bin/autopep8",
+  "python.pythonPath": "/usr/local/bin/python3",
+  // "python.linting.mypyEnabled": true,
 
   "languageserver": {
-    // Rust Analyzer (unused, see coc-rust-analyzer)
-    // "rust": {
-    //   "command": "ra_lsp_server",
-    //   "filetypes": ["rust"],
-    //   "rootPatterns": ["Cargo.toml"]
-    // },
     // Haskell: ghcide
     "haskell": {
       "command": "ghcide",
@@ -38,6 +55,7 @@
         }
       }
     },
+
     // Haskell: haskell-ide-engine
     // "haskell": {
     //   "command": "hie-wrapper",
@@ -47,12 +65,14 @@
     //     "languageServerHaskell": {}
     //   }
     // },
+
     // Scala (unused, see coc-metals)
     // "metals": {
     //   "command": "metals-vim",
     //   "rootPatterns": ["build.sbt"],
     //   "filetypes": ["scala", "sbt"]
     // },
+
     // Purescript
     "purescript": {
       "command": "purescript-language-server",
@@ -68,6 +88,7 @@
         "spago.dhall"
       ]
     },
+
     // C / C++ / Objective-C
     "ccls": {
       "command": "ccls",

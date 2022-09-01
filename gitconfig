@@ -6,6 +6,9 @@
 [includeIf "gitdir:~/Informal/"]
   path = /Users/coromac/.gitconfig.informal
 
+[includeIf "gitdir:~/Code/@SpinResearch/"]
+  path = /Users/coromac/.gitconfig.spin
+
 [alias]
   c  = clone
   st = status -s
@@ -13,24 +16,39 @@
   cm = commit -m
   ca = commit -am
   co = checkout
+
   w = whatchanged
   b = branch
   a = add
+
   df = diff
   dc = diff --cached
+  dft = difftool
+
   rc = rebase --continue
   ra = rebase --abort
   rs = rebase --skip
-  cp = cherry-pick
-  up = pull upstream master
-  pom = push origin master
-  graph = log --oneline --graph
+
+  mc = merge --continue
+  ma = merge --abort
+  ms = merge --skip
+
+  cp  = cherry-pick
+  cpc = cherry-pick --continue
+  cpa = cherry-pick --abort
+
+  up      = pull upstream master
+  pom     = pull origin master
+  graph   = log --oneline --graph
   changes = log --oneline --reverse
+
+  # list recent branches
   recent-branches = for-each-ref --sort=committerdate refs/heads/ --format='%(color: red)%(committerdate:short) %(color: cyan)%(refname:short)'
+  rb              = recent-branches
 
   # amend a commit
   amend = commit --amend
-  amd = commit --amend --date=now --no-edit
+  amd   = commit --amend --date=now --no-edit
 
   # remove files from index
   unstage = reset HEAD
@@ -38,25 +56,31 @@
   # uncommit the last commit, leaving the files in precommitted state
   uncommit = reset --soft HEAD^
 
-  ; lg = log --color --decorate --graph --pretty --abbrev-commit --oneline
-  lg = log --graph --decorate --pretty=format:'%Cred%h%Creset -%C(ul green)%d%Creset %s %C(yellow)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-
-  switch = !legit switch \"$@\"
-  branches = !legit branches
-  sprout = !legit sprout \"$@\"
-  unpublish = !legit unpublish \"$@\"
-  harvest = !legit harvest \"$@\"
-  sync = !legit sync \"$@\"
-  publish = !legit publish \"$@\"
-  graft = !legit graft \"$@\"
+  # update remote
   remote-up = "!git remote update -p; git merge --ff-only @{u}"
 
-  log-fancy = "!git -c color.diff=off -c pager.log='fancydiff stdin --pager=less' log $@"
-  show-fancy = "!git -c color.diff=off -c pager.show='fancydiff stdin --pager=less' show $@"
-  diff-fancy = "!git -c color.diff=off -c pager.diff='fancydiff stdin --pager=less' diff $@"
+  # conflicts
+  conflicts = "!git st | rg '^UU'"
+
+  # log
+  lg = log --decorate --pretty=format:'%Cred%h%Creset -%C(ul green)%d%Creset %s %C(yellow)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lgg = lg --graph
+
+  # fix branch upstream
+  fix-upstream="!git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)"
 
 [diff]
+  tool = difftastic
   renames = copy
+
+[difftool]
+  prompt = false
+
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+  difftool = true
 
 [color]
   diff = auto
@@ -74,7 +98,7 @@
   autosetuprebase = always
 
 [core]
-  pager = less --tabs=4 -XRS 
+  pager = less --tabs=4 -XRS
   ; pager = diff-so-fancy | less --tabs=4 -RFX
   excludesfile = ~/.gitignore
   editor = /usr/local/bin/nvim
@@ -105,22 +129,22 @@
   smudge = git-media-smudge %f
 
 [ghi]
-	token = !security find-internet-password -a romac -s github.com -l 'ghi token' -w
+  token = !security find-internet-password -a romac -s github.com -l 'ghi token' -w
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
-	process = git-lfs filter-process
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+  process = git-lfs filter-process
 
 [transfer]
-	fsckobjects = true
+  fsckobjects = true
 
 [fetch]
-	fsckobjects = true
+  fsckobjects = true
 
 [receive]
-	fsckobjects = true
+  fsckobjects = true
 
 [commit]
-	gpgsign = true
+  gpgsign = true
