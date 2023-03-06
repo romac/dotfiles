@@ -1,13 +1,14 @@
 [user]
   name = Romain Ruetschi
   email = github@romac.me
-  signingkey = 10D510E3
+  signingkey = /Users/romac/.ssh/id_ed25519_github_signing.pub
+
 
 [includeIf "gitdir:~/Informal/"]
-  path = /Users/coromac/.gitconfig.informal
+  path = /Users/romac/.dotfiles/gitconfig.informal
 
 [includeIf "gitdir:~/Code/@SpinResearch/"]
-  path = /Users/coromac/.gitconfig.spin
+  path = /Users/romac/.dotfiles/gitconfig.spin
 
 [alias]
   c  = clone
@@ -63,7 +64,7 @@
   conflicts = "!git st | rg '^UU'"
 
   # log
-  lg = log --decorate --pretty=format:'%Cred%h%Creset -%C(ul green)%d%Creset %s %C(yellow)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lg = log --decorate --pretty=format:'%C(auto) %h - %d %s %C(green)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   lgg = lg --graph
 
   # fix branch upstream
@@ -101,7 +102,7 @@
   pager = less --tabs=4 -XRS
   ; pager = diff-so-fancy | less --tabs=4 -RFX
   excludesfile = ~/.gitignore
-  editor = /usr/local/bin/nvim
+  editor = /opt/homebrew/bin/nvim
   autocrlf = input
   ; whitespace = -blank-at-eof
 
@@ -148,3 +149,8 @@
 
 [commit]
   gpgsign = true
+
+[gpg]
+  format = ssh
+[init]
+	defaultBranch = main

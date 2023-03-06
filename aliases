@@ -2,16 +2,16 @@
 # forked from https://github.com/mathiasbynens/dotfiles
 
 # Neovim
-alias -g vim=nvim
 alias -g n=nvim
 
 # Cargo
 alias c=cargo
 
 # exa
-# alias -g ls=exa
-# alias l=exa
-# alias la='exa -la'
+alias ls=exa
+alias l=exa
+alias ll='exa -l'
+alias la='exa -la'
 
 # Scala
 alias scala='scala -Dscala.color'
@@ -24,6 +24,9 @@ alias -g L=less
 
 # Rg
 alias -g ag=rg
+
+# Tree Grepper
+alias -g tg=tree-grepper
 
 # Python
 alias -g p3=python3
@@ -162,7 +165,7 @@ function mirror-site() {
      "$2"
 }
 
-alias ghci='stack ghci --ghci-options "-interactive-print=Text.Pretty.Simple.pPrint" --package pretty-simple'
+alias ghci-pretty='stack ghci --ghci-options "-interactive-print=Text.Pretty.Simple.pPrint" --package pretty-simple'
 
 alias ghci-core="stack ghci --ghci-options '-ddump-simpl -dsuppress-idinfo -dsuppress-coercions -dsuppress-type-applications -dsuppress-uniques -dsuppress-module-prefixes'"
 

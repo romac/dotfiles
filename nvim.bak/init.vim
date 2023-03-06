@@ -3,6 +3,9 @@
 
 call plug#begin('~/.local/share/nvim/plugged')
 
+" Support
+Plug 'nvim-lua/plenary.nvim' " For Telescope
+
 " Colorschemes
 Plug 'w0ng/vim-hybrid'
 Plug 'lifepillar/vim-solarized8'
@@ -10,12 +13,16 @@ Plug 'cocopon/iceberg.vim'
 Plug 'sainnhe/everforest'
 
 " IDE
+Plug 'vim-scripts/gitignore'
 Plug 'scrooloose/nerdtree'
 " Plug 'ms-jpq/chadtree', { 'branch': 'chad', 'do': 'python3 -m chadtree deps' }
 Plug 'vim-airline/vim-airline'
 
 " Distraction-free writing
 Plug 'junegunn/goyo.vim'
+
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " Text manipulation
 Plug 'vim-scripts/Align'
@@ -26,8 +33,10 @@ Plug 'tpope/vim-surround'
 Plug 'sbdchd/neoformat'
 " Plug 'SirVer/ultisnips'
 " let g:UltiSnipsExpandTrigger = "<c-m>"
-
 Plug 'honza/vim-snippets'
+
+" GitHub Copilot
+Plug 'github/copilot.vim'
 
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
@@ -41,10 +50,11 @@ let g:rainbow_conf = {
 \}
 
 " Search
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jremmen/vim-ripgrep'
-Plug 'vim-scripts/gitignore'
-let g:rg_highlight = 1
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'jremmen/vim-ripgrep'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+
 
 " ALE
 " Plug 'w0rp/ale'
@@ -72,12 +82,18 @@ Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim', 'for': 'haskell' }
 " Plug 'nbouscal/vim-stylish-haskell', { 'for': 'haskell' }
 
+" Unison
+Plug 'unisonweb/unison', { 'branch': 'trunk', 'rtp': 'editor-support/vim' }
+
 " PureScript
 Plug 'raichoo/purescript-vim', { 'for': 'purescript' }
 Plug 'frigoeu/psc-ide-vim', { 'for': 'purescript' }
 
 " Dhall
 Plug 'vmchale/dhall-vim', { 'for': 'dhall' }
+
+" ooc
+Plug 'fasterthanlime/ooc.vim'
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -89,11 +105,26 @@ if has('nvim')
   autocmd BufRead Cargo.toml call crates#toggle()
 endif
 
+" Haskell
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+
 " TOML
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 augroup filetypedetect
 au bufread,bufnewfile *.toml setfiletype toml
 augroup END
+
+" Quint
+" augroup syntax
+" au! BufNewFile,BufReadPost *.qnt
+" au  BufNewFile,BufReadPost *.qnt so ~/.config/nvim/syntax/quint.vim
+" augroup END
 
 " Swift
 Plug 'keith/swift.vim', { 'for': 'swift' }
@@ -304,28 +335,34 @@ endfunction
 
 map <leader>m :call RenameFile()<cr>
 
-" CtrlP settings
-nnoremap <silent> <Leader><space> :CtrlP<CR>
-let g:ctrlp_max_files = 0
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
+" " CtrlP settings
+" nnoremap <silent> <Leader><space> :CtrlP<CR>
+" let g:ctrlp_max_files = 0
+" let g:ctrlp_show_hidden = 1
+" let g:ctrlp_switch_buffer = 0
+" let g:ctrlp_working_path_mode = 0
 
-let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](.git)$',
-  \ 'file': '\v\.(class)$',
-  \ }
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir': '\v[\/](.git)$',
+"   \ 'file': '\v\.(class)$',
+"   \ }
 
-if executable('fd')
-  let g:ctrlp_user_command = 'fd --type f --color=never "" %s'
-  let g:ctrlp_use_caching = 0
-endif
+" if executable('fd')
+"   let g:ctrlp_user_command = 'fd --type f --color=never "" %s'
+"   let g:ctrlp_use_caching = 0
+" endif
+
+
+" Rg {{{
+" let g:rg_highlight = 1
 
 " Search for word under the cursor in the entire project
-nmap <Leader>S :Rg <C-R><C-W><CR>
+" nmap <Leader>S :Rg <C-R><C-W><CR>
 
 " Toggle Rg
-nmap <Leader>r :Rg<space>
+" nmap <Leader>r :Rg<space>
+
+" }}}
 
 " Execute current file
 nmap <leader>x :!./%<cr>
@@ -346,9 +383,9 @@ set expandtab
 " Be smart when using tabs ;)
 set smarttab
 
-" 1 tab == 2 spaces
-set shiftwidth=2
-set tabstop=2
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
@@ -434,7 +471,7 @@ nnoremap <leader>bn :bn<cr>
 noremap <leader>bd :Bd<cr>
 
 " fuzzy find buffers
-noremap <leader>b<space> :CtrlPBuffer<cr>
+" noremap <leader>b<space> :CtrlPBuffer<cr>
 
 " Toggle Tagbar, and focus it
 nmap <leader>= :TagbarToggle<CR>
@@ -444,15 +481,29 @@ let g:tagbar_autofocus = 1
 
 " Coc {{{
 
+" Fix completion background color
+autocmd VimEnter,ColorScheme * hi! link CocMenuSel PMenuSel
+autocmd VimEnter,ColorScheme * hi! link CocSearch Identifier
+
 " Use <c-space> for trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <Tab> and <S-Tab> to navigate the completion list:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+function! CheckBackSpace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Insert <tab> when previous text is space, refresh completion if not.
+inoremap <silent><expr> <TAB>
+\ coc#pum#visible() ? coc#pum#next(1):
+\ CheckBackSpace() ? "\<Tab>" :
+\ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Use <cr> to confirm completion
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[c` and `]c` for navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -505,7 +556,7 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-" Fix current diagnostic 
+" Fix current diagnostic
 nnoremap <silent> <space>x  :<C-u>CocFix<CR>
 
 " Remap for do codeAction of current line
@@ -603,6 +654,15 @@ nmap <leader>sj :rightbelow new<CR>
 
 " }}}
 
+
+" Telescope {{{
+" Find files using Telescope command-line sugar.
+nnoremap <leader>p <cmd>Telescope find_files<cr>
+nnoremap <leader>g <cmd>Telescope live_grep<cr>
+nnoremap <leader>S <cmd>Telescope grep_string<cr>
+nnoremap <leader>b <cmd>Telescope buffers<cr>
+nnoremap <leader>h <cmd>Telescope help_tags<cr>
+
 " CHADTree {{{
 
 " Toggle CHADTree
@@ -686,7 +746,7 @@ au BufRead,BufNewFile *.jar,*.war,*.ear,*.sar,*.rar set filetype=zip
 " Remap for do action format
 nnoremap <silent> F :Neoformat<CR>
 
-let g:neoformat_enabled_haskell = ['brittany']
+" let g:neoformat_enabled_haskell = ['stylish-haskell']
 
 let g:neoformat_enabled_scala = ['scalafmt']
 let g:neoformat_scala_scalafmt = {
@@ -708,5 +768,7 @@ augroup fmt
   autocmd!
   autocmd BufWritePre *.js Neoformat
   autocmd BufWritePre *.swift Neoformat
+  autocmd BufWritePre *.hs Neoformat
 augroup END
 
+autocmd Filetype haskell setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2

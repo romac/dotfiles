@@ -1,3 +1,0 @@
-tmux split-window -h
-tmux send-keys -t 1 "clear" C-m
-tmux select-pane -t 1

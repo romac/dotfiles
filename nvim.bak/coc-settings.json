@@ -1,10 +1,14 @@
 {
   // General
-  "coc.preferences.rootPatterns": [".git", "pyrightconfig.json"],
-  "coc.preferences.formatOnSaveFiletypes": [
-    "rust",
-    "python"
-  ],
+  "workspace.rootPatterns": [".git"],
+
+  "[rust][go][haskell][scala]": {
+      "coc.preferences.formatOnSave": true,
+  },
+
+  "suggest.pumFloatConfig": {
+    // "winblend": 50
+  },
 
   // Rust
   "rust-analyzer.cargo.buildScripts.enable": false,
@@ -12,9 +16,13 @@
   "rust-analyzer.cargo.autoreload": true,
   "rust-analyzer.checkOnSave.features": "all",
   "rust-analyzer.checkOnSave.command": "clippy",
-  "rust-analyzer.checkOnSave.allTargets": false,
+  "rust-analyzer.checkOnSave.allTargets": true,
   "rust-analyzer.lens.enable": false,
-  "rust-analyzer.inlayHints.enable": true,
+  "rust-analyzer.inlayHints.chainingHints.enable": false,
+  "rust-analyzer.inlayHints.parameterHints.enable": false,
+  "rust-analyzer.inlayHints.closingBraceHints.enable": false,
+  "rust-analyzer.inlayHints.typeHints.enable": false,
+  "rust-analyzer.inlayHints.typeHints.hideNamedConstructor": false,
   "rust-analyzer.procMacro.enable": true,
   "rust-analyzer.diagnostics.disabled": [
     "unlinked-file",
@@ -22,56 +30,33 @@
     "unresolved-extern-crate"
   ],
 
-  // Python
-  "python.formatting.provider": "autopep8",
-  "python.formatting.autopep8Path": "/usr/local/bin/autopep8",
-  "python.pythonPath": "/usr/local/bin/python3",
-  // "python.linting.mypyEnabled": true,
-
   "languageserver": {
-    // Haskell: ghcide
+
+    // Haskell
     "haskell": {
-      "command": "ghcide",
-      "args": [
-        "--lsp"
-      ],
-      "rootPatterns": [
-        ".stack.yaml",
-        ".hie-bios",
-        "BUILD.bazel",
-        "cabal.config",
-        "package.yaml"
-      ],
-      "filetypes": [
-        "hs",
-        "lhs",
-        "haskell"
-      ],
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+      "filetypes": ["hs", "lhs", "haskell", "lhaskell"],
       "initializationOptions": {
-        "languageServerHaskell": {
-          "hlintOn": true,
-          "maxNumberOfProblems": 10,
-          "completionSnippetsOn": true
+          "languageServerHaskell": {
+            "hlintOn": true,
+            "maxNumberOfProblems": 10,
+            "completionSnippetsOn": false
+          }
+      },
+      "settings": {
+        "haskell": {
+          "checkParents": "CheckOnSave",
+          "checkProject": true,
+          "maxCompletions": 10,
+          "formattingProvider": "stylish-haskell",
+          "plugin": {
+            "hlint": { "globalOn": true }
+          }
         }
       }
     },
-
-    // Haskell: haskell-ide-engine
-    // "haskell": {
-    //   "command": "hie-wrapper",
-    //   "rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
-    //   "filetypes": ["hs", "lhs", "haskell"],
-    //   "initializationOptions": {
-    //     "languageServerHaskell": {}
-    //   }
-    // },
-
-    // Scala (unused, see coc-metals)
-    // "metals": {
-    //   "command": "metals-vim",
-    //   "rootPatterns": ["build.sbt"],
-    //   "filetypes": ["scala", "sbt"]
-    // },
 
     // Purescript
     "purescript": {
