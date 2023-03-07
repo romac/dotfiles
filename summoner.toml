@@ -1,6 +1,0 @@
-stack = true
-owner = "romac"
-fullName = "Romain Ruetschi"
-email = "romain.ruetschi@gmail.com"
-license = "BSD3"
-ghcVersions = ["8.6.3"]
