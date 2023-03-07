@@ -217,14 +217,14 @@ set termguicolors
 let g:everforest_background = 'hard'
 
 " Background
-if $ITERM_PROFILE == 'Light'
-  set background=light
-  colorscheme solarized8_high
+if $DARK_MODE == 'on'
+  set background=dark
+  colorscheme hybrid
   " colorscheme Iceberg
   " colorscheme everforest
 else
-  set background=dark
-  colorscheme hybrid
+  set background=light
+  colorscheme solarized8_high
   " colorscheme Iceberg
   " colorscheme everforest
 endif
