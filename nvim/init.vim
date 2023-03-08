@@ -11,12 +11,22 @@ Plug 'w0ng/vim-hybrid'
 Plug 'lifepillar/vim-solarized8'
 Plug 'cocopon/iceberg.vim'
 Plug 'sainnhe/everforest'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " IDE
 Plug 'vim-scripts/gitignore'
 Plug 'scrooloose/nerdtree'
 " Plug 'ms-jpq/chadtree', { 'branch': 'chad', 'do': 'python3 -m chadtree deps' }
 Plug 'vim-airline/vim-airline'
+
+" UI
+Plug 'rcarriga/nvim-notify'
+Plug 'folke/noice.nvim'
+Plug 'MunifTanjim/nui.nvim'
+" lua require("noice").setup()
+
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Distraction-free writing
 Plug 'junegunn/goyo.vim'
@@ -219,6 +229,7 @@ let g:everforest_background = 'hard'
 " Dark mode by default
 set background=dark
 colorscheme Iceberg
+" colorscheme tokyonight-night
 
 " Background
 if $DARK_MODE != 'on'
@@ -275,7 +286,7 @@ set hlsearch
 set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw
+" set lazyredraw
 
 " For regular expressions turn magic on
 set magic
