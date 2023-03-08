@@ -71,17 +71,15 @@
   fix-upstream="!git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)"
 
 [diff]
-  tool = difftastic
-  renames = copy
-
+  tool = kitty
+  guitool = kitty.gui
 [difftool]
   prompt = false
-
-[difftool "difftastic"]
-  cmd = difft "$LOCAL" "$REMOTE"
-
-[pager]
-  difftool = true
+  trustExitCode = true
+[difftool "kitty"]
+  cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+  cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 
 [color]
   diff = auto
@@ -99,12 +97,30 @@
   autosetuprebase = always
 
 [core]
-  pager = less --tabs=4 -XRS
+  pager = delta
+  ; pager = less --tabs=4 -XRS
   ; pager = diff-so-fancy | less --tabs=4 -RFX
   excludesfile = ~/.gitignore
   editor = /opt/homebrew/bin/nvim
   autocrlf = input
   ; whitespace = -blank-at-eof
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    line-numbers = true
+    side-by-side = true
+    decorations = true
+    hyperlinks = true
+    syntax-theme = Dracula
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
 
 [github]
   user = romac
