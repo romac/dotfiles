@@ -15,6 +15,7 @@ alias la='exa -la'
 
 # kitty
 alias icat='kitty +kitten icat'
+alias hg='kitty +kitten hyperlinked_grep'
 
 # Less
 alias -g L=less
