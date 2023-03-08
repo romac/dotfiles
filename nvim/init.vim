@@ -232,7 +232,7 @@ colorscheme Iceberg
 " colorscheme tokyonight-night
 
 " Background
-if $DARK_MODE != 'on'
+if $DARK_MODE == 'off'
   set background=light
   colorscheme solarized8_high
   " colorscheme Iceberg
