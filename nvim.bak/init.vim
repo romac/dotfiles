@@ -416,6 +416,7 @@ nnoremap E $
 nnoremap j gj
 nnoremap k gk
 
+" Move from pane to pane
 nnoremap <c-h> <c-w>h
 nnoremap <c-k> <c-w>k
 nnoremap <c-j> <c-w>j
