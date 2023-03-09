@@ -1,0 +1,35 @@
+#
+# Defines environment variables.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Ensure that a non-login, non-interactive shell has a defined environment.
+if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprofile"
+fi
+
+# Rust
+export RUST_BACKTRACE=1
+# export RUSTC_WRAPPER=sccache
+
+if [[ -s "$HOME/.cargo/env" ]]; then
+    source "$HOME/.cargo/env"
+fi
+
+# Go
+export GOPATH="$HOME/.go"
+export GOBIN="$HOME/.go/bin"
+
+# Java via Coursier
+export JAVA_HOME="/Users/romac/Library/Caches/Coursier/arc/https/github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java19-darwin-aarch64-22.3.1.tar.gz/graalvm-ce-java19-22.3.1/Contents/Home"
+
+# ghcup
+if [[ -s "$HOME/.ghcup/env" ]]; then
+    source "$HOME/.ghcup/env"
+fi
+
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+  source $HOME/.nix-profile/etc/profile.d/nix.sh;
+fi # added by Nix installer

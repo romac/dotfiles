@@ -1,0 +1,35 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+fpath+=~/.zfunc
+
+# load the appropriate kitty theme
+kitty_reload() {
+    export DARK_MODE="$(dark-mode status)"
+
+    # check if kitty is active
+    if [[ -n "$KITTY_PID" ]]; then
+        # set dark theme
+        if [[ "$DARK_MODE" == "on" ]]; then
+            kitty @ set-colors --all --configured "$HOME/.config/kitty/theme-dark.conf"
+        else
+            kitty @ set-colors --all --configured "$HOME/.config/kitty/theme-light.conf"
+        fi
+    fi
+}
+
+# check if kitty is running
+if [[ -n "$KITTY_PID" ]]; then
+    kitty_reload
+fi
