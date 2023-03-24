@@ -29,7 +29,7 @@ kitty_reload() {
     fi
 }
 
-# check if kitty is running
-if [[ -n "$KITTY_PID" ]]; then
+# check if kitty is running but we are not in neovim
+if [[ -n "$KITTY_PID" && -z "$NVIM" ]]; then
     kitty_reload
 fi

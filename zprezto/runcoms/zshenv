@@ -10,6 +10,9 @@ if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; t
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+# Override TERM
+export TERM="xterm-256color"
+
 # Rust
 export RUST_BACKTRACE=1
 # export RUSTC_WRAPPER=sccache
@@ -33,3 +36,12 @@ fi
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
   source $HOME/.nix-profile/etc/profile.d/nix.sh;
 fi # added by Nix installer
+
+# GitHub Copilot
+# eval "$(github-copilot-cli alias -- "$0")"
+
+# zoxide
+eval "$(zoxide init zsh)"
+
+# Aliases
+source "$HOME/.aliases"
