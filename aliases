@@ -202,6 +202,10 @@ function rdoc() {
   open "https://docs.rs/$1"
 }
 
+function sdoc() {
+  open "https://std.rs/$1"
+}
+
 function listening() {
     if [ $# -eq 0 ]; then
         sudo lsof -iTCP -sTCP:LISTEN -n -P
@@ -224,5 +228,12 @@ alias hermes='cargo run --'
 
 alias flip="echo \"\n\n\n\n(╯°□°）╯︵ ┻━┻\n\n\n\n\"" 
 
-alias ibc0='RUST_LOG=ibc_proxy::listen=info cargo run -- --port 8220 --proxy http://localhost:26657 --db postgres://tendermint:tendermint@localhost/ibc0'
-alias ibc1='RUST_LOG=ibc_proxy::listen=info cargo run -- --port 8221 --proxy http://localhost:26557 --db postgres://tendermint:tendermint@localhost/ibc1'
+# alias ibc0='RUST_LOG=ibc_proxy::listen=info cargo run -- --port 8220 --proxy http://localhost:26657 --db postgres://tendermint:tendermint@localhost/ibc0'
+# alias ibc1='RUST_LOG=ibc_proxy::listen=info cargo run -- --port 8221 --proxy http://localhost:26557 --db postgres://tendermint:tendermint@localhost/ibc1'
+
+function gpt-summary() {
+    COMMIT_MSG_FILE=$(mktemp /tmp/gpt-commit-msg.XXXXXX)
+    gptcommit prepare-commit-msg --commit-msg-file "$COMMIT_MSG_FILE" --commit-source ''
+    cat "$COMMIT_MSG_FILE"
+    rm -f "$COMMIT_MSG_FILE"
+}
