@@ -14,6 +14,9 @@ fi
 
 fpath+=~/.zfunc
 
+# Support for starship zprezto theme
+setopt prompt_subst interactive_comments
+
 # load the appropriate kitty theme
 kitty_reload() {
     export DARK_MODE="$(dark-mode status)"
