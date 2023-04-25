@@ -31,6 +31,10 @@ alias g='git'
 alias gp='git push'
 alias gpf='git push --force-with-lease'
 
+function git-rm-pruned() {
+  awk '{ gsub(/origin\//, "", $3); print $3 }' | xargs git branch -D
+}
+
 # tree
 alias tree='tree -C'
 
