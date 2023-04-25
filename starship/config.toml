@@ -62,6 +62,8 @@ disabled = false
 
 [status]
 disabled = false
+format = '[$symbol \($status\)]($style) '
+symbol = '✘'
 
 [[battery.display]]
 threshold = 100
