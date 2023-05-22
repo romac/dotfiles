@@ -30,6 +30,7 @@ alias -g p3=python3
 alias g='git'
 alias gp='git push'
 alias gpf='git push --force-with-lease'
+alias prune-branches='git remote prune origin | awk ''{ gsub(/origin\//, "", $3); print $3 }'' | xargs -I BRANCH git branch -D BRANCH'
 
 # tree
 alias tree='tree -C'
