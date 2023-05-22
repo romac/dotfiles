@@ -72,3 +72,6 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 # gm
 # source "$HOME/.gm/bin/shell-support"
+
+# Added by OrbStack: command-line tools and integration
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
