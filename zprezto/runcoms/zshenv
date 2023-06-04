@@ -33,9 +33,10 @@ if [[ -s "$HOME/.ghcup/env" ]]; then
     source "$HOME/.ghcup/env"
 fi
 
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
-  source $HOME/.nix-profile/etc/profile.d/nix.sh;
-fi # added by Nix installer
+# Nix
+if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh;
+fi
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -46,7 +47,7 @@ source "$HOME/.aliases"
 # GitHub Copilot
 # eval "$(github-copilot-cli alias -- "$0")"
 
-copilot_what-the-shell () {
+  copilot_what-the-shell () {
     TMPFILE=$(mktemp);
     trap 'rm -f $TMPFILE' EXIT;
     if /opt/homebrew/bin/github-copilot-cli what-the-shell "$@" --shellout $TMPFILE; then
