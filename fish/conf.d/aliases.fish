@@ -265,4 +265,4 @@ function preview_fzf
   fzf --preview='bat --style numbers,changes --color=always {} | head -n $LINES'
 end
 
-alias ls? preview_fzf
+alias ls! preview_fzf
