@@ -26,3 +26,40 @@ function _fzf_uninstall --on-event fzf_uninstall
     echo "You may need to manually remove fzf_configure_bindings from your config.fish if you were using custom key bindings."
     set_color normal
 end
+
+# set -x FZF_COMPLETION_OPTS '--border --info=inline'
+#
+# set -x FZF_CTRL_T_OPTS "\
+#   --preview 'bat -n --color=always {}'
+#   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+#
+# set -x FZF_CTRL_R_OPTS "\
+#   --preview 'echo {}' --preview-window up:3:hidden:wrap
+#   --bind 'ctrl-/:toggle-preview'
+#   --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+#   --color header:italic
+#   --header 'Press CTRL-Y to copy command into clipboard'"
+
+set fzf_fd_opts '--hidden --follow --exclude ".git"'
+set fzf_preview_dir_cmd 'erd -C force -H -I -L 1 {} | head -200'
+set fzf_preview_file_cmd 'bat -n --color=always {}'
+
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments to fzf.
+# function _fzf_comprun
+#   set command $argv[1]
+#   set argv (string sub -s 2 $argv)
+#
+#   switch $command
+#     case "cd"
+#       fzf --preview 'erd -C force -H -I -L 1 {} | head -200' $argv
+#     case "export" "unset"
+#       fzf --preview "eval 'echo \$'{}" $argv
+#     case "ssh"
+#       fzf --preview 'dog --color=always {}' $argv
+#     case "*"
+#       fzf --preview 'bat -n --color=always {}' $argv
+#   end
+# end
+#
