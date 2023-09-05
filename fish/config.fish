@@ -1,7 +1,11 @@
 if status is-interactive
 
-  # Setup starship
+  # Setup Starship
   starship init fish | source
+
+  # Setup Atuin
+  atuin init fish | source
 end
 
-set -U fish_features qmark-noglob
+# Disable question mark globbing
+# set -U fish_features qmark-noglob
