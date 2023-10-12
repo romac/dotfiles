@@ -58,13 +58,16 @@ $shell"""
 disabled = false
 
 [time]
-disabled = false
+disabled = true
 
 [status]
 disabled = false
 format = '[$symbol \($status\)]($style) '
 symbol = '✘'
 
+[battery]
+disabled = true
+
 [[battery.display]]
-threshold = 100
+threshold = 90
 
