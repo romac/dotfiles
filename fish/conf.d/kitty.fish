@@ -1,5 +1,5 @@
 function kitty-reload
-    set -x DARK_MODE (dark-mode status)
+    set -gx DARK_MODE (dark-mode status)
 
     # check if kitty is active
     if test -n "$KITTY_PID"

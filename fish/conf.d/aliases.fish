@@ -7,11 +7,9 @@ alias n=nvim
 # Cargo
 alias c=cargo
 
-# exa
-alias ls=exa
-alias l=exa
-alias ll='exa -l'
-alias la='exa -la'
+# eza
+alias ls=eza
+alias l=eza
 
 # kitty
 alias icat='kitty +kitten icat'
@@ -61,7 +59,7 @@ alias oo="open ."
 alias tac="tail -r"
 
 function md
-  mkdir -p "$1" && cd "$1"
+  mkdir -p "$argv[1]" && cd "$argv[1]"
 end
 
 # Bundler
@@ -155,7 +153,7 @@ function setjdk
     java -version
 
   function removeFromPath
-    export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
+    export PATH=$(echo $PATH | sed -E -e "s;:$argv[1];;" -e "s;$argv[1]:?;;")
   end
 end
 
@@ -169,9 +167,9 @@ function mirror-site
      --convert-links \
      --span-hosts \
      --no-parent \
-     --warc-file "$1" \
-     --domains "$1" \
-     "$2"
+     --warc-file "$argv[1]" \
+     --domains "$argv[1]" \
+     "$argv[2]"
 end
 
 alias ghci-pretty='stack ghci --ghci-options "-interactive-print=Text.Pretty.Simple.pPrint" --package pretty-simple'
@@ -200,11 +198,11 @@ function compress
 end
 
 function rdoc
-  open "https://docs.rs/$1"
+  open "https://docs.rs/$argv[1]"
 end
 
 function sdoc
-  open "https://std.rs/$1"
+  open "https://std.rs/$argv[1]"
 end
 
 function listening
@@ -219,11 +217,11 @@ function listening
 end
 
 function sigusr1
-  ps aux | rg "$1" | awk '{ print $2 }' | head -n1 | xargs -I{} kill -SIGUSR1 {}
+  ps aux | rg "$argv[1]" | awk '{ print $2 }' | head -n1 | xargs -I{} kill -SIGUSR1 {}
 end
 
 function sighup
-  ps aux | rg "$1" | awk '{ print $2 }' | head -n1 | xargs -I{} kill -SIGHUP {}
+  ps aux | rg "$argv[1]" | awk '{ print $2 }' | head -n1 | xargs -I{} kill -SIGHUP {}
 end
 
 alias hermes='cargo run --'
@@ -256,8 +254,8 @@ function dexec
 
     # Command was given so use that 
     if test (count $argv) -eq 1
-      echo "docker exec -it $result $1"
-      docker exec -it "$result" "$1"
+      echo "docker exec -it $result $argv[1]"
+      docker exec -it "$result" "$argv[1]"
     end
   end
 
