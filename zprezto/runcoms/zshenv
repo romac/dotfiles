@@ -25,8 +25,9 @@ fi
 export GOPATH="$HOME/.go"
 export GOBIN="$HOME/.go/bin"
 
-# Java via Coursier
-export JAVA_HOME="/Users/romac/Library/Caches/Coursier/arc/https/github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java19-darwin-aarch64-22.3.1.tar.gz/graalvm-ce-java19-22.3.1/Contents/Home"
+# >>> JVM installed by coursier >>>
+export JAVA_HOME="/Users/romac/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin17-binaries/releases/download/jdk-17%252B35/OpenJDK17-jdk_aarch64_mac_hotspot_17_35.tar.gz/jdk-17+35/Contents/Home"
+# <<< JVM installed by coursier <<<
 
 # ghcup
 if [[ -s "$HOME/.ghcup/env" ]]; then
@@ -39,7 +40,7 @@ if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
 fi
 
 # zoxide
-eval "$(zoxide init zsh)"
+eval "$(/opt/homebrew/bin/zoxide init zsh)"
 
 # Aliases
 source "$HOME/.aliases"

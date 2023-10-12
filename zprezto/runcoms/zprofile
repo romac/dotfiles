@@ -54,6 +54,7 @@ path=(
   "$HOME/.cargo/bin"
   "$GOBIN"
   "$JAVA_HOME/bin"
+  "$HOME/.bun/bin"
   "$HOME/Library/Application Support/Coursier/bin"
   "$HOME/.gm/bin"
   "$HOME/.local/bin"
@@ -73,5 +74,8 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 # gm
 # source "$HOME/.gm/bin/shell-support"
 
-# Added by OrbStack: command-line tools and integration
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+# OrbStack
+source $HOME/.orbstack/shell/init.zsh 2>/dev/null || :
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
