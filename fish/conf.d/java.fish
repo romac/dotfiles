@@ -1,1 +1,1 @@
-set JAVA_HOME "$HOME/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin17-binaries/releases/download/jdk-17%252B35/OpenJDK17-jdk_aarch64_mac_hotspot_17_35.tar.gz/jdk-17+35/Contents/Home"
+export JAVA_HOME="$HOME/Library/Caches/Coursier/arc/https/github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.1/graalvm-community-jdk-21.0.1_macos-aarch64_bin.tar.gz/graalvm-community-openjdk-21.0.1+12.1/Contents/Home"
