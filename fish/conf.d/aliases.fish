@@ -264,3 +264,8 @@ function preview_fzf
 end
 
 alias ls! preview_fzf
+
+function pimount
+  sudo mkdir /Volumes/Pi
+  sudo mount -t nfs -o resvport,rw 192.168.1.43:/media/hideo /Volumes/Pi
+end
