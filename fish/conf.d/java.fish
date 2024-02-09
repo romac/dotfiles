@@ -1,3 +1,3 @@
 # >>> JVM installed by coursier >>>
-set -gx JAVA_HOME "/Users/romac/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.22%252B7/OpenJDK11U-jdk_aarch64_mac_hotspot_11.0.22_7.tar.gz/jdk-11.0.22+7/Contents/Home"
+set -gx JAVA_HOME "/Users/romac/Library/Caches/Coursier/arc/https/github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java17-darwin-aarch64-22.3.1.tar.gz/graalvm-ce-java17-22.3.1/Contents/Home"
 # <<< JVM installed by coursier <<<

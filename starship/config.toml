@@ -19,23 +19,6 @@ $git_status\
 $hg_branch\
 $pijul_channel\
 $docker_context\
-$package\
-$c\
-$cmake\
-$deno\
-$golang\
-$haskell\
-$java\
-$lua\
-$nodejs\
-$python\
-$red\
-$ruby\
-$rust\
-$scala\
-$swift\
-$vagrant\
-$buf\
 $nix_shell\
 $env_var\
 $custom\
@@ -44,6 +27,25 @@ $cmd_duration\
 $line_break\
 $status\
 $character"""
+
+# format
+# $package\
+# $c\
+# $cmake\
+# $deno\
+# $golang\
+# $haskell\
+# $java\
+# $lua\
+# $nodejs\
+# $python\
+# $red\
+# $ruby\
+# $rust\
+# $scala\
+# $swift\
+# $vagrant\
+# $buf\
 
 right_format = """
 $memory_usage\
