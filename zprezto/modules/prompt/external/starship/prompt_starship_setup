@@ -1,4 +1,0 @@
-prompt_powerline_setup() {
-}
-
-prompt_powerline_setup "$@"
