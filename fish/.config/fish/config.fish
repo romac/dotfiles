@@ -14,7 +14,7 @@ fish_add_path -a "$HOME/.local/bin"
 fish_add_path -a "/opt/homebrew/bin"
 
 # Private env variables
-source "$HOME/.dotfiles/private.env"
+source "$HOME/.dotfiles/env/private.env"
 
 # function __fish_complete_path --description "Complete using path"
 #     set -l target

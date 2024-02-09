@@ -1,0 +1,156 @@
+[user]
+  name = Romain Ruetschi
+  email = github@romac.me
+  signingkey = /Users/romac/.ssh/id_ed25519_github_signing.pub
+
+
+[includeIf "gitdir:~/Informal/"]
+  path = /Users/romac/.gitconfig.informal
+
+[includeIf "gitdir:~/Code/@SpinResearch/"]
+  path = /Users/romac/.gitconfig.spin
+
+[alias]
+  c  = clone
+  st = status -s
+  ci = commit
+  cm = commit -m
+  ca = commit -am
+  co = checkout
+
+  w = whatchanged
+  b = branch
+  a = add
+
+  df = diff
+  dc = diff --cached
+  dft = difftool
+
+  rc = rebase --continue
+  ra = rebase --abort
+  rs = rebase --skip
+
+  mc = merge --continue
+  ma = merge --abort
+  ms = merge --skip
+
+  cp  = cherry-pick
+  cpc = cherry-pick --continue
+  cpa = cherry-pick --abort
+
+  up      = pull upstream master
+  pom     = pull origin master
+  graph   = log --oneline --graph
+  changes = log --oneline --reverse
+
+  # list recent branches
+  recent-branches = for-each-ref --sort=committerdate refs/heads/ --format='%(color: red)%(committerdate:short) %(color: cyan)%(refname:short)'
+  rb              = recent-branches
+
+  # amend a commit
+  amend = commit --amend
+  amd   = commit --amend --date=now --no-edit
+
+  # remove files from index
+  unstage = reset HEAD
+
+  # uncommit the last commit, leaving the files in precommitted state
+  uncommit = reset --soft HEAD^
+
+  # update remote
+  remote-up = "!git remote update -p; git merge --ff-only @{u}"
+
+  # conflicts
+  conflicts = "!git st | rg '^UU'"
+
+  # log
+  lg = log --decorate --pretty=format:'%C(auto) %h - %d %s %C(green)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lgg = lg --graph
+
+  # fix branch upstream
+  fix-upstream="!git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)"
+
+[diff]
+  tool = difftastic
+  renames = copy
+
+[difftool]
+  prompt = false
+
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+  difftool = true
+
+[color]
+  diff = auto
+  interactive = auto
+  status = auto
+  branch = auto
+
+[apply]
+  whitespace = fix
+
+[merge]
+   stat = true
+
+[branch]
+  autosetuprebase = always
+
+[core]
+  pager = less --tabs=4 -XRS
+  ; pager = diff-so-fancy | less --tabs=4 -RFX
+  excludesfile = ~/.gitignore
+  editor = /opt/homebrew/bin/nvim
+  autocrlf = input
+  ; whitespace = -blank-at-eof
+
+[github]
+  user = romac
+  password = !security 2>&1 >/dev/null find-generic-password -gs github.password | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
+
+[help]
+  autocorrect = 0
+
+[credential]
+  helper = osxkeychain
+
+[git-up "bundler"]
+  check = true
+
+[push]
+  default = current
+
+[pull]
+  rebase = true
+
+[filter "media"]
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
+
+[ghi]
+  token = !security find-internet-password -a romac -s github.com -l 'ghi token' -w
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+  process = git-lfs filter-process
+
+[transfer]
+  fsckobjects = true
+
+[fetch]
+  fsckobjects = true
+
+[receive]
+  fsckobjects = true
+
+[commit]
+  gpgsign = true
+
+[gpg]
+  format = ssh
+[init]
+	defaultBranch = main

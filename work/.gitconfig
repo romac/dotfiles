@@ -1,14 +1,7 @@
 [user]
   name = Romain Ruetschi
-  email = github@romac.me
-  signingkey = /Users/romac/.ssh/id_ed25519_github_signing.pub
-
-
-[includeIf "gitdir:~/Informal/"]
-  path = /Users/romac/.dotfiles/gitconfig.informal
-
-[includeIf "gitdir:~/Code/@SpinResearch/"]
-  path = /Users/romac/.dotfiles/gitconfig.spin
+  email = 106849+romac@users.noreply.github.com
+  signingkey = /Users/romac/.ssh/id_ed25519_informal_github_signing.pub
 
 [alias]
   c  = clone
@@ -17,6 +10,7 @@
   cm = commit -m
   ca = commit -am
   co = checkout
+  s  = switch
 
   w = whatchanged
   b = branch
@@ -68,7 +62,11 @@
   lgg = lg --graph
 
   # fix branch upstream
-  fix-upstream="!git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)"
+  fix-upstream = "!git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)"
+
+  # push to a forked repo
+  push-fork = !git push $(git config --get branch.$(git symbolic-ref HEAD --short).pushRemote) +@:$(git config --get branch.$(git symbolic-ref HEAD --short).merge | awk -F / '{print $NF}')
+
 
 [diff]
   tool = difftastic
@@ -152,5 +150,6 @@
 
 [gpg]
   format = ssh
+
 [init]
 	defaultBranch = main

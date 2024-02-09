@@ -1,2 +1,2 @@
-bin
-private.env
+/bin
+/env/private.env
