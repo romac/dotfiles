@@ -272,3 +272,8 @@ function preview_fzf() {
 }
 
 alias 'ls!'='preview_fzf'
+
+function narrow_menubar() {
+  defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 6
+  defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6
+}
