@@ -1,7 +1,8 @@
-[user]
-  name = Romain Ruetschi
-  email = 106849+romac@users.noreply.github.com
-  signingkey = /Users/romac/.ssh/id_ed25519_informal_github_signing.pub
+[includeIf "gitdir:/"]
+  path = ~/.personal.gitconfig
+
+[includeIf "gitdir:/Users/romac/Informal/"]
+  path = ~/.informal.gitconfig
 
 [alias]
   c  = clone
@@ -153,3 +154,7 @@
 
 [init]
 	defaultBranch = main
+
+[rerere]
+	enabled = true
+	autoUpdate = true

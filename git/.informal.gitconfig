@@ -1,0 +1,5 @@
+[user]
+  name = Romain Ruetschi
+  email = romain@informal.systems
+  signingkey = /Users/romac/.ssh/id_ed25519_informal_github_signing.pub
+
