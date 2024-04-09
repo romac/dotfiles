@@ -12,3 +12,8 @@ function __copilot_gh-assist
     gh copilot suggest -t gh $argv
 end
 alias 'gh!'='__copilot_gh-assist'
+
+function __copilot-explain
+    gh copilot explain "$argv"
+end
+alias 'explain!'='__copilot-explain'
