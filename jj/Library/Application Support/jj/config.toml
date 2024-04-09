@@ -1,0 +1,9 @@
+[ui]
+default-command = "log"
+
+[user]
+name = "Romain Ruetschi"
+email = "github@romac.me"
+
+[snapshot]
+max-new-file-size = "64MiB"
