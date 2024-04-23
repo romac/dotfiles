@@ -259,6 +259,8 @@ function dexec
     end
   end
 
+alias confetti 'open raycast://confetti'
+
 function preview_fzf
   fzf --preview='bat --style numbers,changes --color=always {} | head -n $LINES'
 end
@@ -268,4 +270,9 @@ alias ls! preview_fzf
 function pimount
   sudo mkdir /Volumes/Pi
   sudo mount -t nfs -o resvport,rw pi.local:/media/hideo /Volumes/Pi
+end
+
+function narrow_menubar
+  defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 6
+  defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6
 end
