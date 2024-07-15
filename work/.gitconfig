@@ -1,5 +1,7 @@
-[includeIf "gitdir:/"]
-  path = ~/.personal.gitconfig
+[user]
+  name = Romain Ruetschi
+  email = github@romac.me
+  signingkey = /Users/romac/.ssh/id_ed25519_github_signing.pub
 
 [includeIf "gitdir:/Users/romac/Informal/"]
   path = ~/.informal.gitconfig
@@ -158,3 +160,6 @@
 [rerere]
 	enabled = true
 	autoUpdate = true
+
+[rebase]
+	updateRefs = true
