@@ -267,6 +267,8 @@ function dexec() {
     fi
 }
 
+alias 'confetti'='open raycast://confetti'
+
 function preview_fzf() {
   fzf --preview='bat --style numbers,changes --color=always {} | head -n $LINES'
 }
