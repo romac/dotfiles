@@ -48,7 +48,7 @@ local function apply(config)
 			mods = "CMD",
 			action = wt.action.SpawnCommandInNewTab({
 				cwd = wt.home_dir,
-				args = { "nvim", wt.config_file },
+				args = { "nvim", wt.config_dir },
 			}),
 		},
 

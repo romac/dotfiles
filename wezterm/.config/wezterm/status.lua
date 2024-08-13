@@ -11,7 +11,7 @@ end
 local appearance = require("appearance")
 
 local function update_status(window, _)
-	local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
+	local SOLID_LEFT_ARROW = wt.nerdfonts.pl_right_hard_divider
 	local segments = segments_for_right_status(window)
 
 	local color_scheme = window:effective_config().resolved_palette
