@@ -18,7 +18,7 @@ end
 
 local function apply(config)
 	config.leader = {
-		key = "a",
+		key = "z",
 		mods = "CTRL",
 		timeout_milliseconds = 1000,
 	}

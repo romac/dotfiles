@@ -8,6 +8,8 @@ local modules = {
 	"status",
 }
 
+config.quit_when_all_windows_are_closed = false
+
 config.set_environment_variables = {
 	PATH = "/opt/homebrew/bin:" .. os.getenv("PATH"),
 }
