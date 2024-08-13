@@ -1,5 +1,10 @@
 local wt = require("wezterm")
 
+local catppuccin = {
+	dark = "Catppuccin Mocha",
+	light = "Catppuccin Latte",
+}
+
 local function scheme_for_appearance(theme)
 	local appearance = require("appearance")
 	if appearance.is_dark() then
@@ -62,6 +67,15 @@ local function format_tab_title(themes)
 	end
 end
 
+wt.on("window-config-reloaded", function(window, _pane)
+	local overrides = window:get_config_overrides() or {}
+	local scheme = scheme_for_appearance(catppuccin)
+	if overrides.color_scheme ~= scheme then
+		overrides.color_scheme = scheme
+		window:set_config_overrides(overrides)
+	end
+end)
+
 local function apply(config)
 	config.font = wt.font("JetBrains Mono")
 	config.font_size = 14
@@ -72,10 +86,7 @@ local function apply(config)
 	config.adjust_window_size_when_changing_font_size = false
 
 	config.color_scheme_dirs = { wt.config_dir .. "/themes" }
-	config.color_scheme = scheme_for_appearance({
-		dark = "Catppuccin Mocha",
-		light = "Catppuccin Latte",
-	})
+	config.color_scheme = scheme_for_appearance(catppuccin)
 
 	config.window_frame = {
 		font = wt.font("JetBrains Mono"),
