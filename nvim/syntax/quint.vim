@@ -1,1 +1,0 @@
-/Users/romac/Informal/Code/quint/editor-plugins/vim/quint.vim
