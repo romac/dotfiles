@@ -163,3 +163,5 @@
 
 [rebase]
 	updateRefs = true
+[submodule]
+	recurse = true
