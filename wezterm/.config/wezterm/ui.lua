@@ -104,12 +104,7 @@ local function apply(config)
 	wt.on("format-tab-title", format_tab_title(themes))
 
 	config.window_decorations = "RESIZE"
-	config.window_padding = {
-		left = "1cell",
-		right = "1cell",
-		top = 0,
-		bottom = 0,
-	}
+	config.window_padding = { left = "1cell", right = 0, top = 0, bottom = 0 }
 
 	config.initial_cols = 400
 	config.initial_rows = 400

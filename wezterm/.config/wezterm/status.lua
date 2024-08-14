@@ -55,8 +55,19 @@ local function update_status(window, _)
 	window:set_right_status(wt.format(elements))
 end
 
+local function toggle_scrollbar(window, pane)
+	local overrides = window:get_config_overrides() or {}
+	local dimensions = pane:get_dimensions()
+
+	overrides.enable_scroll_bar = dimensions.scrollback_rows > dimensions.viewport_rows
+			and not pane:is_alt_screen_active()
+
+	window:set_config_overrides(overrides)
+end
+
 return {
 	apply = function()
 		wt.on("update-status", update_status)
+		wt.on("update-status", toggle_scrollbar)
 	end,
 }

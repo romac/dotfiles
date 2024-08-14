@@ -1,5 +1,6 @@
 local wt = require("wezterm")
 local projects = require("projects")
+-- local layouts = require("layouts")
 
 local function move_pane(key, direction)
 	return {
@@ -33,24 +34,38 @@ local function apply(config)
 		-- Split panes
 		{
 			key = "Enter",
-			mods = "CMD",
+			mods = "SUPER",
 			action = wt.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 		},
 		{
 			key = "Enter",
-			mods = "CMD|SHIFT",
+			mods = "SUPER|SHIFT",
 			action = wt.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 		},
 
 		-- Edit settings
 		{
 			key = ",",
-			mods = "CMD",
+			mods = "SUPER",
 			action = wt.action.SpawnCommandInNewTab({
 				cwd = wt.home_dir,
-				args = { "nvim", wt.config_dir },
+				args = { os.getenv("SHELL"), "-c", "nvim " .. wt.shell_quote_arg(wt.config_dir) },
 			}),
 		},
+
+		-- Zoom pane
+		{
+			key = "z",
+			mods = "LEADER",
+			action = wt.action.TogglePaneZoomState,
+		},
+
+		-- Layouts
+		-- {
+		-- 	key = "l",
+		-- 	mods = "LEADER",
+		-- 	action = layouts.choose_layout(),
+		-- },
 
 		-- Projects
 		{
@@ -80,18 +95,18 @@ local function apply(config)
 		-- Clear scrollback
 		{
 			key = "k",
-			mods = "CMD|SHIFT",
+			mods = "SUPER",
 			action = wt.action.Multiple({
 				wt.action.ClearScrollback("ScrollbackAndViewport"),
 				wt.action.SendKey({ key = "L", mods = "CTRL" }),
 			}),
 		},
 
-		-- Ctrl-A
+		-- Ctrl-Z
 		{
-			key = "a",
+			key = "z",
 			mods = "LEADER|CTRL",
-			action = wt.action.SendKey({ key = "a", mods = "CTRL" }),
+			action = wt.action.SendKey({ key = "z", mods = "CTRL" }),
 		},
 	}
 
