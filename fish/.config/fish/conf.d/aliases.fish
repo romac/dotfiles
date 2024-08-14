@@ -135,28 +135,6 @@ function docker-psi
   end | column -t -s '|'
 end
 
-# Java
-# http://superuser.com/a/568016
-
-alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d[,_]" | cut -d , -f 1 | colrm 1 4 | grep -v Home | sort | uniq'
-
-function setjdk
-    if test (count $argv) -ne 0
-        removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
-        if test -n "$JAVA_HOME"
-            removeFromPath $JAVA_HOME
-        end
-        set -x JAVA_HOME (/usr/libexec/java_home -v $argv)
-        set -x PATH $JAVA_HOME/bin $PATH
-    end
-    echo "JAVA_HOME set to $JAVA_HOME"
-    java -version
-
-  function removeFromPath
-    export PATH=$(echo $PATH | sed -E -e "s;:$argv[1];;" -e "s;$argv[1]:?;;")
-  end
-end
-
 function mirror-site
   nice wget \
      --mirror \
@@ -206,14 +184,11 @@ function sdoc
 end
 
 function listening
-  switch (count $argv)
-      case 0
-          sudo lsof -iTCP -sTCP:LISTEN -n -P
-      case 1
-          sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $argv[1]
-      case '*'
-          echo "Usage: listening [pattern]"
-  end
+sudo lsof -iTCP -sTCP:LISTEN -n -P |
+  awk 'NR>1 {print $9, $1, $2}' |
+  sed 's/.*://' |
+  while read port process pid; echo "Port $port: $(ps -p $pid -o command= | sed 's/^-//') (PID: $pid)"; end |
+  sort -h
 end
 
 function sigusr1
