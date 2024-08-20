@@ -6,8 +6,10 @@ local modules = {
 	"ui",
 	"keys",
 	"status",
+	"balance",
 }
 
+config.front_end = "OpenGL"
 config.quit_when_all_windows_are_closed = false
 
 config.set_environment_variables = {

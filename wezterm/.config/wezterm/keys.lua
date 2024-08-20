@@ -2,6 +2,8 @@ local wt = require("wezterm")
 local projects = require("projects")
 -- local layouts = require("layouts")
 
+local module = {}
+
 local function move_pane(key, direction)
 	return {
 		key = key,
@@ -17,7 +19,7 @@ local function resize_pane(key, direction)
 	}
 end
 
-local function apply(config)
+function module.apply(config)
 	config.leader = {
 		key = "z",
 		mods = "CTRL",
@@ -51,6 +53,18 @@ local function apply(config)
 				cwd = wt.home_dir,
 				args = { os.getenv("SHELL"), "-c", "nvim " .. wt.shell_quote_arg(wt.config_dir) },
 			}),
+		},
+
+		-- Move tabs
+		{
+			key = "LeftArrow",
+			mods = "SUPER|ALT",
+			action = wt.action.MoveTabRelative(-1),
+		},
+		{
+			key = "RightArrow",
+			mods = "SUPER|ALT",
+			action = wt.action.MoveTabRelative(1),
 		},
 
 		-- Zoom pane
@@ -120,4 +134,4 @@ local function apply(config)
 	}
 end
 
-return { apply = apply }
+return module

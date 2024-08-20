@@ -1,5 +1,7 @@
 local wt = require("wezterm")
 
+local module = {}
+
 local catppuccin = {
 	dark = "Catppuccin Mocha",
 	light = "Catppuccin Latte",
@@ -14,7 +16,7 @@ local function scheme_for_appearance(theme)
 	end
 end
 
-function tab_title(tab_info)
+local function tab_title(tab_info)
 	local title = tab_info.tab_title
 	if title and #title > 0 then
 		return title
@@ -76,7 +78,7 @@ wt.on("window-config-reloaded", function(window, _pane)
 	end
 end)
 
-local function apply(config)
+function module.apply(config)
 	config.font = wt.font("JetBrains Mono")
 	config.font_size = 14
 	config.line_height = 1.2
@@ -110,4 +112,4 @@ local function apply(config)
 	config.initial_rows = 400
 end
 
-return { apply = apply }
+return module

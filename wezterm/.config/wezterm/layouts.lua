@@ -1,6 +1,6 @@
 local wt = require("wezterm")
 
-local M = {}
+local module = {}
 
 local function layouts()
 	return {
@@ -9,7 +9,7 @@ local function layouts()
 	}
 end
 
-function M.choose_layout()
+function module.choose_layout()
 	return wt.action.InputSelector({
 		title = "Layouts",
 		choices = layouts(),
@@ -38,4 +38,4 @@ function M.choose_layout()
 	})
 end
 
-return M
+return module
