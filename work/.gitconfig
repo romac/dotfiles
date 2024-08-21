@@ -6,6 +6,116 @@
 [includeIf "gitdir:/Users/romac/Informal/"]
   path = ~/.informal.gitconfig
 
+
+[core]
+  ; pager = less --tabs=4 -XRS
+  pager = delta
+  excludesfile = ~/.gitignore
+  editor = /opt/homebrew/bin/nvim
+  autocrlf = input
+  ; whitespace = -blank-at-eof
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+
+[delta]
+  navigate = true
+  line-numbers = true
+  features = decorations
+  hyperlinks = true
+  theme = Catppuccin Mocha
+  syntax-theme = Catppuccin Mocha
+
+[diff]
+  tool = difftastic
+  renames = copy
+  colorMoved = default
+
+[difftool]
+  prompt = false
+
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+  difftool = true
+
+[color]
+  diff = auto
+  interactive = auto
+  status = auto
+  branch = auto
+
+[apply]
+  whitespace = fix
+
+[merge]
+  stat = true
+  conflictstyle = diff3
+
+[branch]
+  autosetuprebase = always
+
+[help]
+  autocorrect = 0
+
+[credential]
+  helper = osxkeychain
+
+[git-up "bundler"]
+  check = true
+
+[push]
+  default = current
+
+[pull]
+  rebase = true
+
+[filter "media"]
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
+
+[ghi]
+  token = !security find-internet-password -a romac -s github.com -l 'ghi token' -w
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+  process = git-lfs filter-process
+
+[transfer]
+  fsckobjects = true
+
+[fetch]
+  fsckobjects = true
+
+[receive]
+  fsckobjects = true
+
+[commit]
+  gpgsign = true
+
+[gpg]
+  format = ssh
+
+[init]
+	defaultBranch = main
+
+[rerere]
+	enabled = true
+	autoUpdate = true
+
+[rebase]
+	updateRefs = true
+
+[submodule]
+	recurse = true
+
+[github]
+  user = romac
+  password = !security 2>&1 >/dev/null find-generic-password -gs github.password | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
+
 [alias]
   c  = clone
   st = status -s
@@ -69,99 +179,3 @@
 
   # push to a forked repo
   push-fork = !git push $(git config --get branch.$(git symbolic-ref HEAD --short).pushRemote) +@:$(git config --get branch.$(git symbolic-ref HEAD --short).merge | awk -F / '{print $NF}')
-
-
-[diff]
-  tool = difftastic
-  renames = copy
-
-[difftool]
-  prompt = false
-
-[difftool "difftastic"]
-  cmd = difft "$LOCAL" "$REMOTE"
-
-[pager]
-  difftool = true
-
-[color]
-  diff = auto
-  interactive = auto
-  status = auto
-  branch = auto
-
-[apply]
-  whitespace = fix
-
-[merge]
-   stat = true
-
-[branch]
-  autosetuprebase = always
-
-[core]
-  pager = less --tabs=4 -XRS
-  ; pager = diff-so-fancy | less --tabs=4 -RFX
-  excludesfile = ~/.gitignore
-  editor = /opt/homebrew/bin/nvim
-  autocrlf = input
-  ; whitespace = -blank-at-eof
-
-[github]
-  user = romac
-  password = !security 2>&1 >/dev/null find-generic-password -gs github.password | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
-
-[help]
-  autocorrect = 0
-
-[credential]
-  helper = osxkeychain
-
-[git-up "bundler"]
-  check = true
-
-[push]
-  default = current
-
-[pull]
-  rebase = true
-
-[filter "media"]
-  clean = git-media-clean %f
-  smudge = git-media-smudge %f
-
-[ghi]
-  token = !security find-internet-password -a romac -s github.com -l 'ghi token' -w
-
-[filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  required = true
-  process = git-lfs filter-process
-
-[transfer]
-  fsckobjects = true
-
-[fetch]
-  fsckobjects = true
-
-[receive]
-  fsckobjects = true
-
-[commit]
-  gpgsign = true
-
-[gpg]
-  format = ssh
-
-[init]
-	defaultBranch = main
-
-[rerere]
-	enabled = true
-	autoUpdate = true
-
-[rebase]
-	updateRefs = true
-[submodule]
-	recurse = true
