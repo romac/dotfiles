@@ -6,7 +6,6 @@
 [includeIf "gitdir:/Users/romac/Informal/"]
   path = ~/.informal.gitconfig
 
-
 [core]
   ; pager = less --tabs=4 -XRS
   pager = delta
