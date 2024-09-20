@@ -202,7 +202,7 @@ end
 alias hermes='cargo run --'
 alias chainpulse='~/.cargo/target/chainpulse'
 
-alias flip="echo \"\n\n\n\n(╯°□°）╯︵ ┻━┻\n\n\n\n\"" 
+alias flip="echo \"\n\n\n\n(╯°□°）╯︵ ┻━┻\n\n\n\n\""
 
 function gpt-summary
   set COMMIT_MSG_FILE $(mktemp /tmp/gpt-commit-msg.XXXXXX)
@@ -227,7 +227,7 @@ function dexec
       docker exec -it "$result" /bin/bash
     end
 
-    # Command was given so use that 
+    # Command was given so use that
     if test (count $argv) -eq 1
       echo "docker exec -it $result $argv[1]"
       docker exec -it "$result" "$argv[1]"
@@ -244,7 +244,7 @@ alias ls! preview_fzf
 
 function pimount
   sudo mkdir /Volumes/Pi
-  sudo mount -t nfs -o resvport,rw pi.local:/media/hideo /Volumes/Pi
+  sudo mount -t nfs -o resvport,rw pi.local:/mnt/hideo /Volumes/Pi
 end
 
 function narrow_menubar
