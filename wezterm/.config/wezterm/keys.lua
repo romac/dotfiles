@@ -7,7 +7,7 @@ local module = {}
 local function move_pane(key, direction)
 	return {
 		key = key,
-		mods = "CTRL",
+		mods = "CTRL|SHIFT",
 		action = wt.action.ActivatePaneDirection(direction),
 	}
 end

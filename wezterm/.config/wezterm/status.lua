@@ -61,6 +61,10 @@ local function toggle_scrollbar(window, pane)
 	local overrides = window:get_config_overrides() or {}
 	local dimensions = pane:get_dimensions()
 
+	if not pane then
+		return
+	end
+
 	overrides.enable_scroll_bar = dimensions.scrollback_rows > dimensions.viewport_rows
 		and not pane:is_alt_screen_active()
 
