@@ -123,7 +123,7 @@ function module.apply(config)
 	config.enable_scroll_bar = true
 	config.show_new_tab_button_in_tab_bar = false
 	config.show_tab_index_in_tab_bar = true
-	config.tab_max_width = 24
+	config.tab_max_width = 32
 
 	local themes = wt.color.get_builtin_schemes()
 	wt.on("format-tab-title", format_tab_title(themes))

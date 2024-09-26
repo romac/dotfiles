@@ -23,11 +23,9 @@ end
 local function segments_for_right_status(_window, pane)
 	return {
 		-- window:active_workspace(),
-		current_dir(pane)
-			.. " "
-			.. wt.nerdfonts.md_folder
-			.. " ",
-		wt.strftime("%a %b %-d %H:%M") .. " " .. wt.nerdfonts.md_calendar_clock,
+		{ current_dir(pane), wt.nerdfonts.md_folder },
+		{ os.getenv("USER"), wt.nerdfonts.fa_user },
+		{ wt.strftime("%a %b %-d %H:%M"), wt.nerdfonts.md_calendar_clock },
 		-- wt.hostname(),
 	}
 end
@@ -64,15 +62,22 @@ local function update_status(window, pane)
 
 	for i, seg in ipairs(segments) do
 		local is_first = i == 1
+		local is_last = i == #segments
+		local suffix = "  "
 
 		if is_first then
 			table.insert(elements, { Background = { Color = tabbar_bg } })
 		end
+
+		if is_last then
+			suffix = " "
+		end
+
 		table.insert(elements, { Foreground = { Color = gradient[i] } })
 		table.insert(elements, { Text = SOLID_LEFT_ARROW })
 		table.insert(elements, { Foreground = { Color = fg } })
 		table.insert(elements, { Background = { Color = gradient[i] } })
-		table.insert(elements, { Text = " " .. seg .. " " })
+		table.insert(elements, { Text = " " .. seg[1] .. " " .. seg[2] .. suffix })
 	end
 
 	window:set_right_status(wt.format(elements))
@@ -92,7 +97,9 @@ local function toggle_scrollbar(window, pane)
 	window:set_config_overrides(overrides)
 end
 
-function module.apply(_config)
+function module.apply(config)
+	config.status_update_interval = 1000
+
 	wt.on("update-status", update_status)
 	wt.on("update-status", toggle_scrollbar)
 end
