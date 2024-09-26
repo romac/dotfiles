@@ -2,19 +2,41 @@ local wt = require("wezterm")
 
 local module = {}
 
-local function segments_for_right_status(window)
+local function current_dir(pane)
+	local cwd = pane:get_current_working_dir()
+	if cwd then
+		if type(cwd) == "userdata" then
+			local path = cwd.path:gsub(os.getenv("HOME"), "~")
+			if string.len(path) > 32 then
+				cwd = ".." .. string.sub(path, -32, -1)
+			else
+				cwd = path
+			end
+		end
+	else
+		cwd = ""
+	end
+
+	return cwd
+end
+
+local function segments_for_right_status(_window, pane)
 	return {
-		window:active_workspace(),
-		wt.strftime("%a %b %-d %H:%M"),
-		wt.hostname(),
+		-- window:active_workspace(),
+		current_dir(pane)
+			.. " "
+			.. wt.nerdfonts.md_folder
+			.. " ",
+		wt.strftime("%a %b %-d %H:%M") .. " " .. wt.nerdfonts.md_calendar_clock,
+		-- wt.hostname(),
 	}
 end
 
 local appearance = require("appearance")
 
-local function update_status(window, _)
+local function update_status(window, pane)
 	local SOLID_LEFT_ARROW = wt.nerdfonts.pl_right_hard_divider
-	local segments = segments_for_right_status(window)
+	local segments = segments_for_right_status(window, pane)
 
 	local color_scheme = window:effective_config().resolved_palette
 	local bg = wt.color.parse(color_scheme.background)
@@ -48,7 +70,6 @@ local function update_status(window, _)
 		end
 		table.insert(elements, { Foreground = { Color = gradient[i] } })
 		table.insert(elements, { Text = SOLID_LEFT_ARROW })
-
 		table.insert(elements, { Foreground = { Color = fg } })
 		table.insert(elements, { Background = { Color = gradient[i] } })
 		table.insert(elements, { Text = " " .. seg .. " " })

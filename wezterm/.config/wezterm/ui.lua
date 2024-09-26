@@ -16,17 +16,22 @@ local function scheme_for_appearance(theme)
 	end
 end
 
+local function basename(string)
+	return string:gsub("(.*[/\\])(.*)", "%2")
+end
+
 local function tab_title(tab_info)
 	local title = tab_info.tab_title
 	if title and #title > 0 then
 		return title
+	else
+		-- return basename(tostring(tab_info.active_pane.current_working_dir))
+		return basename(tab_info.active_pane.title)
 	end
-	return tab_info.active_pane.title
 end
 
 local function format_tab_title(themes)
-	local SOLID_LEFT_ARROW = wt.nerdfonts.pl_right_hard_divider
-	local SOLID_RIGHT_ARROW = wt.nerdfonts.pl_left_hard_divider
+	-- local SOLID_RIGHT_ARROW = wt.nerdfonts.pl_left_hard_divider
 
 	return function(tab, _tabs, _panes, config, hover, max_width)
 		local theme = themes[config.color_scheme]
@@ -34,10 +39,12 @@ local function format_tab_title(themes)
 		local edge_background = theme.tab_bar.background
 		local background = theme.tab_bar.inactive_tab.bg_color
 		local foreground = theme.tab_bar.inactive_tab.fg_color
+		local right_arrow = ""
 
 		if tab.is_active then
 			background = theme.tab_bar.active_tab.bg_color
 			foreground = theme.tab_bar.active_tab.fg_color
+			-- right_arrow = SOLID_RIGHT_ARROW
 		elseif hover then
 			background = theme.tab_bar.inactive_tab_hover.bg_color
 			foreground = theme.tab_bar.inactive_tab_hover.fg_color
@@ -46,25 +53,36 @@ local function format_tab_title(themes)
 		local edge_foreground = background
 
 		local title = tab_title(tab)
-		title = wt.truncate_right(title, max_width - 4)
 
-		local left_arrow = SOLID_LEFT_ARROW
 		local prefix = " "
 		if tab.tab_index == 0 then
-			left_arrow = ""
 			prefix = "  "
 		end
 
+		local icon = wt.nerdfonts.dev_terminal
+		if string.find(title, "^nvim:") then
+			title = title:gsub("^nvim: ", "")
+			icon = wt.nerdfonts.md_file_document_edit
+		end
+
+		title = wt.truncate_right(title, max_width - 4)
+
+		local pane = tab.active_pane
+		if pane.is_zoomed then
+			icon = wt.nerdfonts.cod_zoom_in .. " " .. icon
+		end
+
+		if pane.title:find("^Copy mode:") then
+			icon = wt.nerdfonts.md_content_copy .. " " .. icon
+		end
+
 		return {
-			{ Background = { Color = edge_background } },
-			{ Foreground = { Color = edge_foreground } },
-			{ Text = left_arrow },
 			{ Background = { Color = background } },
 			{ Foreground = { Color = foreground } },
-			{ Text = prefix .. title .. " " },
+			{ Text = prefix .. icon .. "  " .. title .. " " },
 			{ Background = { Color = edge_background } },
 			{ Foreground = { Color = edge_foreground } },
-			{ Text = SOLID_RIGHT_ARROW },
+			{ Text = right_arrow },
 		}
 	end
 end
