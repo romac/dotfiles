@@ -31,9 +31,9 @@ local function tab_title(tab_info)
 end
 
 local function format_tab_title(themes)
-	-- local SOLID_RIGHT_ARROW = wt.nerdfonts.pl_left_hard_divider
+	local SOLID_RIGHT_ARROW = wt.nerdfonts.pl_left_hard_divider
 
-	return function(tab, _tabs, _panes, config, hover, max_width)
+	return function(tab, tabs, _panes, config, hover, max_width)
 		local theme = themes[config.color_scheme]
 
 		local edge_background = theme.tab_bar.background
@@ -48,6 +48,11 @@ local function format_tab_title(themes)
 		elseif hover then
 			background = theme.tab_bar.inactive_tab_hover.bg_color
 			foreground = theme.tab_bar.inactive_tab_hover.fg_color
+		end
+
+		local is_last = tab.tab_index == #tabs - 1
+		if is_last then
+			right_arrow = SOLID_RIGHT_ARROW
 		end
 
 		local edge_foreground = background
