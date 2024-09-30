@@ -26,7 +26,7 @@ local function segments_for_right_status(_window, pane)
 		{ current_dir(pane), wt.nerdfonts.md_folder },
 		{ os.getenv("USER"), wt.nerdfonts.fa_user },
 		{ wt.strftime("%a %b %-d %H:%M"), wt.nerdfonts.md_calendar_clock },
-		-- wt.hostname(),
+		-- { wt.hostname(),                  wt.nerdfonts.pl_hostname },
 	}
 end
 
@@ -63,12 +63,12 @@ local function update_status(window, pane)
 	for i, seg in ipairs(segments) do
 		local is_first = i == 1
 		local is_last = i == #segments
-		local suffix = "  "
 
 		if is_first then
 			table.insert(elements, { Background = { Color = tabbar_bg } })
 		end
 
+		local suffix = "  "
 		if is_last then
 			suffix = " "
 		end

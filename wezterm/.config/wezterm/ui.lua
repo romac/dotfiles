@@ -59,11 +59,6 @@ local function format_tab_title(themes)
 
 		local title = tab_title(tab)
 
-		local prefix = " "
-		if tab.tab_index == 0 then
-			prefix = "  "
-		end
-
 		local icon = wt.nerdfonts.dev_terminal
 		if string.find(title, "^nvim:") then
 			title = title:gsub("^nvim: ", "")
@@ -84,7 +79,7 @@ local function format_tab_title(themes)
 		return {
 			{ Background = { Color = background } },
 			{ Foreground = { Color = foreground } },
-			{ Text = prefix .. icon .. "  " .. title .. " " },
+			{ Text = " " .. icon .. "  " .. title .. " " },
 			{ Background = { Color = edge_background } },
 			{ Foreground = { Color = edge_foreground } },
 			{ Text = right_arrow },
