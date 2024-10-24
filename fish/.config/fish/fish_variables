@@ -1,12 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR __fish_initialized:3400
-SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
-SETUVAR _fisher_patrickf1_2F_fzf_2E_fish_files:\x7e/\x2econfig/fish/functions/_fzf_configure_bindings_help\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_extract_var_info\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_preview_changed_file\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_preview_file\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_report_diff_type\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_report_file_type\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_directory\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_git_log\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_git_status\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_history\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_processes\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_variables\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_wrapper\x2efish\x1e\x7e/\x2econfig/fish/functions/fzf_configure_bindings\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/fzf\x2efish\x1e\x7e/\x2econfig/fish/completions/fzf_configure_bindings\x2efish
-SETUVAR _fisher_plugins:jorgebucaran/fisher\x1epatrickf1/fzf\x2efish\x1ez11i/github\x2dcopilot\x2dcli\x2efish
-SETUVAR _fisher_upgraded_to_4_4:\x1d
-SETUVAR _fisher_z11i_2F_github_2D_copilot_2D_cli_2E_fish_files:\x7e/\x2econfig/fish/conf\x2ed/github\x2dcopilot\x2dcli\x2efish
-SETUVAR fish_color_autosuggestion:555\x1ebrblack
+SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:blue
 SETUVAR fish_color_comment:red
@@ -28,12 +23,11 @@ SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrbl
 SETUVAR fish_color_status:red
 SETUVAR fish_color_user:brgreen
 SETUVAR fish_color_valid_path:\x2d\x2dunderline
-SETUVAR fish_features:qmark\x2dnoglob
 SETUVAR fish_greeting:\x1d
 SETUVAR fish_key_bindings:fish_default_key_bindings
 SETUVAR fish_pager_color_completion:normal
-SETUVAR fish_pager_color_description:B3A06D\x1eyellow\x1e\x2di
+SETUVAR fish_pager_color_description:yellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/Users/romac/\x2eghcup/bin\x1e/Users/romac/\x2ecabal/bin\x1e/Users/romac/\x2ego/bin\x1e/Users/romac/\x2ebin\x1e/Users/romac/\x2ecargo/bin\x1e/Users/romac/Library/Caches/Coursier/arc/https/github\x2ecom/graalvm/graalvm\x2dce\x2dbuilds/releases/download/jdk\x2d21\x2e0\x2e2/graalvm\x2dcommunity\x2djdk\x2d21\x2e0\x2e2_macos\x2daarch64_bin\x2etar\x2egz/graalvm\x2dcommunity\x2dopenjdk\x2d21\x2e0\x2e2\x2b13\x2e1/Contents/Home/bin\x1e/Users/romac/Library/Application\x20Support/Coursier/bin\x1e/Users/romac/\x2egm/bin\x1e/Users/romac/\x2elocal/bin\x1e/opt/homebrew/bin
+SETUVAR fish_user_paths:/Users/romac/\x2eghcup/bin\x1e/Users/romac/\x2ecabal/bin\x1e/Users/romac/\x2ego/bin\x1e/Users/romac/Library/Caches/Coursier/arc/https/github\x2ecom/graalvm/graalvm\x2dce\x2dbuilds/releases/download/jdk\x2d23\x2e0\x2e1/graalvm\x2dcommunity\x2djdk\x2d23\x2e0\x2e1_macos\x2daarch64_bin\x2etar\x2egz/graalvm\x2dcommunity\x2dopenjdk\x2d23\x2e0\x2e1\x2b11\x2e1/Contents/Home/bin\x1e/Users/romac/\x2ebin\x1e/Users/romac/\x2ecargo/bin\x1e/Users/romac/Library/Application\x20Support/Coursier/bin\x1e/Users/romac/\x2egm/bin\x1e/Users/romac/\x2elocal/bin\x1e/opt/homebrew/bin
